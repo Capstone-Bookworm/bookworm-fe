@@ -1,6 +1,7 @@
 import React from 'react';
 import './App.css';
 import { Routes, Route, useLocation } from 'react-router-dom'
+import Login from '../Login/Login';
 
 interface Location {
   pathname: string,
@@ -16,7 +17,7 @@ function App() {
     <div>
       {location.pathname !== '/' && <h1>Header</h1>}
       <Routes>
-        <Route path='/'/>
+        <Route path='/' element={<Login/>}/>
         <Route path='/home'/>
         <Route path='/details' />
         <Route path='/myaccount' />
