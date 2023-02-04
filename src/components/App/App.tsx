@@ -1,6 +1,7 @@
 import React from 'react';
 import './App.css';
 import { Routes, Route, useLocation } from 'react-router-dom'
+import Navbar from '../Navbar/Navbar';
 
 interface Location {
   pathname: string,
@@ -14,7 +15,7 @@ function App() {
   let location: Location = useLocation()
   return (
     <div>
-      {location.pathname !== '/' && <h1>Header</h1>}
+      {location.pathname !== '/' && <Navbar />}
       <Routes>
         <Route path='/'/>
         <Route path='/home'/>
