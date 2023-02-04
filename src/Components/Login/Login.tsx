@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { Link, NavLink } from 'react-router-dom'
 import './Login.css'
 
 const Login = () => {
@@ -6,14 +7,11 @@ const Login = () => {
   const [username, setUsername] = useState('')
 
   const verifyLogin = () => {
-    console.log(email);
-    console.log(username);
-    
   }
 
   return (
     <section className='login-page'>
-      <h1>BookWorm</h1>
+      <h1>Welcome to Book Worm</h1>
       <div className='login-container'>
         <h2>Login/ Create Account</h2>
         <input 
@@ -28,7 +26,9 @@ const Login = () => {
           value={username}
           onChange={event => setUsername(event.target.value)}
           />
-        <button className='login-btn' onClick={verifyLogin}>Login</button>
+        <Link to={'/home'}>
+         <button className='login-btn' onClick={verifyLogin}>Login</button>
+        </Link>
       </div>
     </section>
   )
