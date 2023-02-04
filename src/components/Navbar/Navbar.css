@@ -15,26 +15,19 @@
 li {
   list-style: none;
 }
-/*  
 
-.navBar {
-  position: relative;
+nav {
+  margin: 2rem;
 }
 
-.navBar button {
-  position: fixed;
-  left: 40px;
-  top: 40px;
-  z-index: 10;
-  cursor: pointer;
+ul.showMenu {
+  border: 3px solid black;
 }
 
 .menuNav {
   overflow-y: scroll;
-  list-style: none;
   position: fixed;
   top: 0;
-  background: darkcyan;
   left: 0;
   bottom: 0;
   height: 100vh;
@@ -46,19 +39,8 @@ li {
 
 .menuNav.showMenu {
   width: 100%;
-}
-
-a {
-  display: block;
-  padding: 10px 40px;
-  text-decoration: none;
-  color: #3fffd2;
-  text-transform: uppercase;
-  font-weight: bold;
-}
+} 
 
 .menuNav li:first-child {
   margin-top: 7rem;
 }
-
-*/
