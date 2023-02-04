@@ -1,6 +1,7 @@
 .navbar {
   display: flex;
   justify-content: space-between;
+  border-bottom: 1px solid black;
 }
 
 .header {
@@ -21,7 +22,7 @@ nav {
 }
 
 ul.showMenu {
-  border: 3px solid black;
+  border: 1px solid black;
 }
 
 .menuNav {
@@ -43,4 +44,13 @@ ul.showMenu {
 
 .menuNav li:first-child {
   margin-top: 7rem;
+}
+
+ul.menuNav.menuNav.showMenu {
+  height: 6vh;
+  list-style: none;
+  width: 7vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
 }

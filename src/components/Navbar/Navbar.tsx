@@ -21,7 +21,6 @@ const Navbar = () => {
         <img src='#' alt='Logo' className='logo'/>
         <h1 className='title'>Bookworm</h1>
       </section>
-      <br />
       <nav>
       <button onClick={handleClick}>{navbarOpen ? <RxCross2 /> : <RxHamburgerMenu />}</button>
         <ul className={`menuNav ${navbarOpen ? "showMenu" : ""}`}>
