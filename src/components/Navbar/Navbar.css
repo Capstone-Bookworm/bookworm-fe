@@ -46,7 +46,7 @@ nav {
 ul.menuNav.menuNav.showMenu {
   height: 10vh;
   list-style: none;
-  width: 7vw;
+  width: 10vw;
   display: flex;
   flex-direction: column;
   align-content: center;
