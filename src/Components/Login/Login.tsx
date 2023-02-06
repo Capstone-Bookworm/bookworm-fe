@@ -1,12 +1,32 @@
-import { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom'
+import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import './Login.css'
+import { useQuery, gql } from '@apollo/client'
 
 interface User {
   userName: string,
   emailAddress: string,
   location: string
 }
+
+const ALL_USERS = gql `
+  query AllUsers {
+    users {
+      userName
+      emailAddress
+      location
+    }
+  }
+`
+
+const ALL_BOOKS = gql `
+  query AllBooks {
+    books {
+      id
+      imageUrl
+    }
+  }
+`
 
 const Login = () => {
   const [email, setEmail] = useState('')
@@ -15,17 +35,13 @@ const Login = () => {
   const [activeAccount, setAccount] = useState(true)
   const [allUsers, setUsers] = useState([{userName: "Josh", emailAddress: "test", location: "Denver"}])
 
-  // useEffect(() => {
-  //   const ALL_USERS = gql `
-  //   query AllUsers {
-  //     users {
-  //       userName
-  //       emailAddress
-  //       location
-  //     }
-  //   }
-  //   `
-  // }, [])
+  let navigate = useNavigate()
+
+  // const { data, loading, error } = useQuery(ALL_USERS)
+  const { data, loading, error } = useQuery(ALL_BOOKS)
+
+  console.log("Endpoint", error)
+  
 
   const verifyLogin = () => {
      let noUser = allUsers.map(user => {
@@ -33,6 +49,7 @@ const Login = () => {
         setAccount(false)
       } else {
         setAccount(true)
+        navigate("/home")      
       }
       
      })
@@ -76,10 +93,8 @@ const Login = () => {
           value={userLocation}
           onChange={event => setUserLocation(event.target.value)}
           />}
-        {/* <Link to={'/home'}> */}
          {activeAccount === true && <button className='login-btn' onClick={verifyLogin}>Login</button>}
          {activeAccount === false && <button className='login-btn' onClick={createUser}>Create Account</button>}
-        {/* </Link> */}
       </div>
     </section>
   )
