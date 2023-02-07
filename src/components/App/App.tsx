@@ -22,7 +22,7 @@ function App() {
       <Routes>
       <Route path='/' element={<Login/>}/>
         <Route path='/details' />
-        <Route path='/dashboard' />
+        <Route path='/dashboard/mybooks' />
         <Route path='/add-book' />
       </Routes>
     </div>

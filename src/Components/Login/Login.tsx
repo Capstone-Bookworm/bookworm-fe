@@ -19,14 +19,14 @@ const ALL_USERS = gql `
   }
 `
 
-const ALL_BOOKS = gql `
-  query AllBooks {
-    books {
-      id
-      imageUrl
-    }
-  }
-`
+// const ALL_BOOKS = gql `
+//   query AllBooks {
+//     books {
+//       id
+//       imageUrl
+//     }
+//   }
+// `
 
 const Login = () => {
   const [email, setEmail] = useState('')
@@ -37,12 +37,10 @@ const Login = () => {
 
   let navigate = useNavigate()
 
-  // const { data, loading, error } = useQuery(ALL_USERS)
-  const { data, loading, error } = useQuery(ALL_BOOKS, {
-    fetchPolicy: "no-cache"
-  })
+  const { data, loading, error } = useQuery(ALL_USERS)
+  // const { data, loading, error } = useQuery(ALL_BOOKS)
 
-  console.log("Endpoint", error)
+  console.log("data from users in Login.tsx", data)
   
 
   const verifyLogin = () => {
