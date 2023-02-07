@@ -1,44 +1,43 @@
 version: 2.1
 orbs:
-  node: circleci/node@5.1.0
-  cypress: cypress-io/cypress@2.2.0
-  heroku: circleci/heroku@1.2.6
+   node: circleci/node@5.1.0
+   cypress: cypress-io/cypress@2.2.0
+   heroku: circleci/heroku@1.2.6
+
 jobs:
   build:
-    executor: node/default
+    docker:
+      - image: circleci/node:14.15.1
     steps:
       - checkout
-      - node/install-packages: 
-          pkg-manager: npm
-      - run : 
-          name : Run build
-          command: npm run build 
-      - persist_to_workspace:
-          root: ~/bookworm-fe
-          paths:
-            - .
+      - run:
+          command: npm ci
+      - run:
+          name: Run build
+          command: npm run build
   deploy-heroku:
     executor: heroku/default
     steps:
       - checkout
       - heroku/install
       - heroku/deploy-via-git
+
 workflows:
-    test:
-      jobs:
-        - build
-        - cypress/run:
-            group: 'all tests' # name this group "all tests" on the dashboard
-            start: 'npm start' # start server before running tests
-            wait-on: 'http://localhost:3000'
-            record: true # records results to the cypress dashboard
-            parallel: true
-            parallelism: 10 # runs tests in parallel for efficiency
-        - deploy-heroku:
-            requires:
-              - cypress/run
-              - build
-            filters:
-              branches:
-                only:
+  build-test-deploy:
+    jobs:
+      - build
+      - cypress/run:
+          group: all tests
+          start: npm start
+          wait-on: "http://localhost:3000"
+          record: true
+          parallel: true
+          parallelism: 10
+      - deploy-heroku:
+          requires:
+            - build
+            - cypress/run
+          filters:
+            branches:
+              only:
                 - main
