@@ -27,6 +27,8 @@ workflows:
     jobs:
       - build
       - cypress/run:
+          requires:
+            - build
           group: all tests
           start: npm start
           wait-on: "http://localhost:3000"
