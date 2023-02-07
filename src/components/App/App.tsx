@@ -21,7 +21,7 @@ function App() {
         <Route path='/'/>
         <Route path='/home' element={<Home />}/>
         <Route path='/details' />
-        <Route path='/myaccount' />
+        <Route path='/mydashboard' />
         <Route path='/add-book' />
       </Routes>
     </div>

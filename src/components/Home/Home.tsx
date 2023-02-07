@@ -3,6 +3,26 @@ import Book from '../Book/Book'
 import './Home.css'
 import { RxCaretRight, RxCaretLeft } from "react-icons/rx"
 
+// const SEARCH_BOOKS = gql`
+//   mutation searchBooks {
+//     searchBooks (limit: 10) {
+//       title
+//       imageURL
+//       ISBN
+//       author
+//       pageCount
+//       summary
+//     }
+//   }`
+
+// const BOOKS_DATA = gql `
+// {
+//     booksData {
+//       id 
+//       imageURL
+//   }
+// }`
+
 const books: {id: number, imageURL: string}[] = [
   { 
       "id": 1,
@@ -20,8 +40,11 @@ const books: {id: number, imageURL: string}[] = [
 
 const Home: React.FC = () => {
   const [bookData, setBookData] = useState(books)
+  // const [bookData, setBookData] = useState(BOOKS_DATA)
   const [searchBook, setSearchBook] = useState('')
   const style = { fontSize: "5em", cursor: 'pointer' }
+  // const { loading, error, data } = useQuery(SEARCH_BOOKS)
+  // const { loading, error, data } = useQuery(BOOKS_DATA)
 
   const bookList: JSX.Element[] = bookData.map((book: any) => {
     return (
@@ -32,6 +55,16 @@ const Home: React.FC = () => {
       />
     )
   })
+
+  const handleClick = () => {
+    // setBookData(data)
+    setSearchBook('')
+  }
+
+  // const randomizeBooks = () => {
+  //   //will need to refetch 5 more books and switch it out for another if user clicks either arrow
+  // }
+
   return(
     <div className='homepage-container'>
       <h2>Home page</h2>
@@ -43,12 +76,12 @@ const Home: React.FC = () => {
           onChange={event => setSearchBook(event.target.value)}
         />
         {/* <h2>{searchBook}</h2> */}
-        <button type='button'>SEARCH</button>
+        <button type='button' onClick={handleClick}>SEARCH</button>
       </form>
       <div className='book-container'>
-      <RxCaretLeft style={style}/>
+      <RxCaretLeft style={style} id='left-arrow'/>
         {bookList}
-      <RxCaretRight style={style}/>
+      <RxCaretRight style={style} id='right-arrow'/>
       </div>
     </div>
   )
