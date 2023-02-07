@@ -3,6 +3,7 @@ import './App.css';
 import { Routes, Route, useLocation } from 'react-router-dom'
 import Navbar from '../Navbar/Navbar';
 import Login from '../Login/Login';
+import AddBook from '../AddBook/AddBook';
 
 
 interface Location {
@@ -21,7 +22,7 @@ function App() {
       <Route path='/' element={<Login/>}/>
         <Route path='/details' />
         <Route path='/myaccount' />
-        <Route path='/add-book' />
+        <Route path='/add-book' element={<AddBook/>} />
       </Routes>
     </div>
   );
