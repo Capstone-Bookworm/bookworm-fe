@@ -23,19 +23,32 @@ import { RxCaretRight, RxCaretLeft } from "react-icons/rx"
 //   }
 // }`
 
-const books: {id: number, imageURL: string}[] = [
+const books: {id: number, title: string, imageURL: string}[] = [
   { 
       "id": 1,
+      "title": "Crying In H Mart",
       "imageURL": "http://books.google.com/books/content?id=30UlEAAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api"
   }, 
   {
       "id": 2,
+      "title": "A Food Adventurer's Guide",
       "imageURL": "http://books.google.com/books/content?id=YcUZEAAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api"
   },
   {
       "id": 3,
+      "title": "Good Intentions",
       "imageURL" : "http://books.google.com/books/content?id=jhwqEAAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api"
-  }
+  }, 
+  {
+    "id": 4,
+    "title": "A Food Adventurer's Guide",
+    "imageURL": "http://books.google.com/books/content?id=YcUZEAAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api"
+},
+{
+    "id": 5,
+    "title": "Good Intentions",
+    "imageURL" : "http://books.google.com/books/content?id=jhwqEAAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api"
+}
 ]
 
 const Home: React.FC = () => {
@@ -43,21 +56,24 @@ const Home: React.FC = () => {
   // const [bookData, setBookData] = useState(BOOKS_DATA)
   const [searchBook, setSearchBook] = useState('')
   const style = { fontSize: "5em", cursor: 'pointer' }
-  // const { loading, error, data } = useQuery(SEARCH_BOOKS)
   // const { loading, error, data } = useQuery(BOOKS_DATA)
-
+  
   const bookList: JSX.Element[] = bookData.map((book: any) => {
     return (
       <Book
-        key={book.id}
-        id={book.id}
-        imageURL={book.imageURL}
+      key={book.id}
+      id={book.id}
+      title={book.title}
+      imageURL={book.imageURL}
       />
-    )
-  })
-
-  const handleClick = () => {
+      )
+    })
+    
+    const handleClick = () => {
+    // const { loading, error, data } = useQuery(SEARCH_BOOKS)
     // setBookData(data)
+    const filterSearch = books.filter(book => book.title.toLowerCase().includes(searchBook.toLowerCase()))
+    setBookData(filterSearch)
     setSearchBook('')
   }
 
