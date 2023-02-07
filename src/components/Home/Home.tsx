@@ -93,7 +93,6 @@ const Home: React.FC = () => {
           placeholder='Search by book title...'
           onChange={event => setSearchBook(event.target.value)}
         />
-        {/* <h2>{searchBook}</h2> */}
         <button type='button' onClick={handleClick}>SEARCH</button>
       </form>
       <h2 className='search-message'>{searchMessage}</h2>
