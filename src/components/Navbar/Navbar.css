@@ -2,6 +2,7 @@
   display: flex;
   justify-content: space-between;
   border-bottom: 1px solid black;
+  align-items: center;
 }
 
 .header {
@@ -46,8 +47,25 @@ nav {
 ul.menuNav.menuNav.showMenu {
   height: 10vh;
   list-style: none;
-  width: 10vw;
+  width: max-content;
   display: flex;
   flex-direction: column;
   align-content: center;
+  margin-top: 4.2rem;
+  padding-right: 1rem;
+  border-left: 3px solid black;
+  border-bottom: 3px solid black;
+  border-radius: 0.3rem;
+  box-shadow: -4px 2px 0 grey;
+}
+
+.logo {
+  height: 10vh;
+  margin-left: -3rem;
+}
+
+h1 {
+  font-size: 3rem;
+  padding-left: 1rem;
+  color: rgb(70, 112, 130);
 }
