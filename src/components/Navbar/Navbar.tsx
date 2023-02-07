@@ -19,7 +19,7 @@ const Navbar = () => {
   return(
     <header className='navbar'>
       <section className='header'>
-        <img src='#' alt='Logo' className='logo'/>
+        <img src='https://cdn-icons-png.flaticon.com/512/2789/2789786.png' alt='Logo' className='logo' />
         <h1 className='title'>Bookworm</h1>
       </section>
       <nav>

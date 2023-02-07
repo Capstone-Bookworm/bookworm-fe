@@ -57,3 +57,14 @@ ul.menuNav.menuNav.showMenu {
   border-radius: 0.3rem;
   box-shadow: -4px 2px 0 grey;
 }
+
+.logo {
+  height: 10vh;
+  margin-left: -3rem;
+}
+
+h1 {
+  font-size: 3rem;
+  padding-left: 1rem;
+  color: rgb(70, 112, 130);
+}
