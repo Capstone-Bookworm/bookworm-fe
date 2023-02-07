@@ -19,6 +19,7 @@ function App() {
       {location.pathname !== '/' && <Navbar />}
       <Routes>
       <Route path='/' element={<Login/>}/>
+        <Route path='/home' />
         <Route path='/details' />
         <Route path='/myaccount' />
         <Route path='/add-book' />

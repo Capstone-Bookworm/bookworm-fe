@@ -9,24 +9,45 @@ interface User {
   location: string
 }
 
-const ALL_USERS = gql `
-  query AllUsers {
-    users {
-      userName
-      emailAddress
-      location
-    }
-  }
-`
+// const USER_LOOKUP = gql `
+//   query UserLookup ($id: ID!) {
+//   user (id: $id) {
+//     id
+//     userName
+//     emailAddress
+//     location
+//     availableBooks {
+//       id
+//     }
+//   }
+// }`
 
-const ALL_BOOKS = gql `
-  query AllBooks {
-    books {
-      id
-      imageUrl
-    }
-  }
-`
+// const GET_BOOK = gql`
+//   query GetBook {
+//     book(id: 1) {
+//       title
+//   }
+// `
+
+
+// const ALL_USERS = gql `
+//   query AllUsers {
+//     users (limit: 2) {
+//       userName
+//       emailAddress
+//       location
+//     }
+//   }
+// `
+
+// const ALL_BOOKS = gql `
+//   query AllBooks {
+//     books {
+//       id
+//       imageUrl
+//     }
+//   }
+// `
 
 const Login = () => {
   const [email, setEmail] = useState('')
@@ -37,11 +58,15 @@ const Login = () => {
 
   let navigate = useNavigate()
 
-  // const { data, loading, error } = useQuery(ALL_USERS)
-  const { data, loading, error } = useQuery(ALL_BOOKS)
-
-  console.log("Endpoint", error)
-  
+  // const { data, loading, error, client } = useQuery(ALL_USERS , {
+  //   fetchPolicy: "no-cache" 
+  // });
+  // const { data, loading, error } = useQuery(ALL_BOOKS)
+  // const { data, loading, error } = useQuery(GET_BOOK)
+  // console.log("Endpoint BEFORE", data)
+  // client.resetStore()
+  // console.log("Endpoint", data)
+  // console.log('hey what are you', useQuery(USER_LOOKUP))
 
   const verifyLogin = () => {
      let noUser = allUsers.map(user => {
