@@ -1,5 +1,6 @@
 import React from 'react'
 import './Book.css'
+import { NavLink } from 'react-router-dom'
 
 interface book {
     id: number
@@ -9,7 +10,9 @@ interface book {
 const Book: React.FC<book> = ({ id, imageURL }): JSX.Element => {
   return (
     <div className='book-item'>
-      <img src={imageURL} alt="Book cover" />
+      <NavLink to='/details'>
+        <img src={imageURL} alt="Book cover" />
+      </NavLink>
     </div>
   )
 }
