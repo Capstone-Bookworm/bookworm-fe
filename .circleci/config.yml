@@ -1,34 +1,7 @@
 version: 2.1
 orbs:
-   node: circleci/node@5.1.0
-   heroku: circleci/heroku@1.2.6
-
-jobs:
-  build:
-    docker:
-      - image: circleci/node:14.15.1
-    steps:
-      - checkout
-      - node/install-packages:
-          pkg-manager: npm
-      - run:
-          name: Run build
-          command: npm run build
-  deploy-heroku:
-    executor: heroku/default
-    steps:
-      - checkout
-      - heroku/install
-      - heroku/deploy-via-git
-
+  cypress: cypress-io/cypress@1
 workflows:
-  build-test-deploy:
+  build:
     jobs:
-      - build
-      - deploy-heroku:
-          requires:
-            - build
-          filters:
-            branches:
-              only:
-                - main
+      - cypress/run
