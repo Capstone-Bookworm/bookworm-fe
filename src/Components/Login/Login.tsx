@@ -19,6 +19,63 @@ const ALL_USERS = gql `
   }
 `
 
+const SINGLE_USER = gql `
+  query SingleUser {
+    users(id:2) {
+      id
+      userName
+      emailAddress
+      location
+      availableBooks{
+        id
+        title
+        author
+        imageUrl
+      }
+      pendingRequested {
+        id
+        title
+        author
+        imageUrl
+        borrower {
+          id
+          userName
+          location
+          emailAddress
+        }
+      }
+      pendingReturned {
+        id
+        title
+        imageUrl
+        borrower {
+          id
+          userName
+          location
+          emailAddress
+        }
+      }
+      unavailableBooks {
+        id
+        title
+        imageUrl
+        borrower {
+          id
+          userName
+          location
+          emailAddress
+        }
+      }
+      borrowedBooks {
+        id
+        title
+        author
+        imageUrl
+      }
+    }
+  }
+`
+
 const ALL_BOOKS = gql `
   query AllBooks {
     books {
@@ -37,16 +94,26 @@ const Login = () => {
 
   let navigate = useNavigate()
 
-  // const { data, loading, error } = useQuery(ALL_USERS)
-  const { data, loading, error } = useQuery(ALL_BOOKS)
+  const { data, loading, error } = useQuery(ALL_USERS)
+  // const { data, loading, error } = useQuery(SINGLE_USER)
+  // const { data, loading, error } = useQuery(ALL_BOOKS, {
+  //   fetchPolicy: 'network-only',
+  //   nextFetchPolicy: 'cache-first'
+  // })
 
-  console.log("Endpoint", error)
+  // console.log("Data", data, "Loading", loading, "Error", error)
+  // console.log("What if", ALL_BOOKS);
+  
+   
+  
   
 
   const verifyLogin = () => {
      let noUser = allUsers.map(user => {
       if(user.emailAddress !== email){
-        setAccount(false)
+        return (
+          setAccount(false)
+        )
       } else {
         setAccount(true)
         navigate("/home")      
@@ -58,17 +125,14 @@ const Login = () => {
 
   const createUser = () => {
     let newUser = {userName: username, emailAddress: email, location: userLocation}
-
-    console.log(newUser);
-  
+    setAccount(true)
   }
 
   return (
     <section className='login-page'>
-      <h1>Welcome to Book Worm</h1>
       <div className='login-container'>
-        <h2>Login/ Create Account</h2>
-        {activeAccount === false && <p>Could not find account please create a new one</p>}
+      <h1 className='page-title'>Book Worm</h1>
+      {activeAccount === false && <h3>Cannot find email or username</h3>}
         <input 
           type='email'
           className='email-login' 
@@ -95,6 +159,11 @@ const Login = () => {
           />}
          {activeAccount === true && <button className='login-btn' onClick={verifyLogin}>Login</button>}
          {activeAccount === false && <button className='login-btn' onClick={createUser}>Create Account</button>}
+      </div>
+      <div className='create-acct'>
+        {activeAccount === true && <h3>New?</h3>}
+        {activeAccount === true && <button onClick={() => setAccount(false)}>Create New Account</button>}
+        {activeAccount === false && <button onClick={() => setAccount(true)}>Return to Login</button>}
       </div>
     </section>
   )
