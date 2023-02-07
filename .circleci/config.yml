@@ -26,6 +26,7 @@ jobs:
 workflows:
     test:
       jobs:
+        - build
         - cypress/run:
             group: 'all tests' # name this group "all tests" on the dashboard
             start: 'npm start' # start server before running tests
@@ -33,7 +34,6 @@ workflows:
             record: true # records results to the cypress dashboard
             parallel: true
             parallelism: 10 # runs tests in parallel for efficiency
-        - build
         - deploy-heroku:
             requires:
               - cypress/run
