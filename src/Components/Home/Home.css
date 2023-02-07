@@ -1,0 +1,25 @@
+.book-container {
+  display: flex;
+  justify-content: space-evenly;
+  border: 3px solid black;
+  height: 20rem;
+  align-items: center;
+  width: 75%;
+  box-shadow: 11px 7px 5px grey;
+  border-radius: 1rem;
+}
+
+.homepage-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 2rem;
+}
+
+.form-container {
+  margin: 1rem;
+}
+
+button {
+  cursor: pointer;
+}
