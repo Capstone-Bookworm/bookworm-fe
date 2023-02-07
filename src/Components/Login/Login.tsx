@@ -38,7 +38,9 @@ const Login = () => {
   let navigate = useNavigate()
 
   // const { data, loading, error } = useQuery(ALL_USERS)
-  const { data, loading, error } = useQuery(ALL_BOOKS)
+  const { data, loading, error } = useQuery(ALL_BOOKS, {
+    fetchPolicy: "no-cache"
+  })
 
   console.log("Endpoint", error)
   
