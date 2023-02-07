@@ -5,6 +5,8 @@
   height: 20rem;
   align-items: center;
   width: 75%;
+  box-shadow: 11px 7px 5px grey;
+  border-radius: 1rem;
 }
 
 .homepage-container {
