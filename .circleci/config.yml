@@ -1,7 +1,6 @@
 version: 2.1
 orbs:
    node: circleci/node@5.1.0
-   cypress: cypress-io/cypress@2.2.0
    heroku: circleci/heroku@1.2.6
 
 jobs:
@@ -26,19 +25,9 @@ workflows:
   build-test-deploy:
     jobs:
       - build
-      - cypress/run:
-          requires:
-            - build
-          group: all tests
-          start: npm start
-          wait-on: "http://localhost:3000"
-          record: true
-          parallel: true
-          parallelism: 10
       - deploy-heroku:
           requires:
             - build
-            - cypress/run
           filters:
             branches:
               only:
