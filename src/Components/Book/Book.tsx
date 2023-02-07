@@ -4,8 +4,7 @@ import { NavLink } from 'react-router-dom'
 
 interface book {
     id: number
-    title: string
-    imageURL: string
+    imageUrl: string
 }
 
 // const BOOK_DETAILS = gql `
@@ -23,12 +22,12 @@ interface book {
 //   }
 // }`
 
-const Book: React.FC<book> = ({ id, imageURL }): JSX.Element => {
+const Book: React.FC<book> = ({ id, imageUrl }): JSX.Element => {
 
   return (
     <div className='book-item'>
       <NavLink to='/details'>
-        <img src={imageURL} alt="Book cover" />
+        <img src={imageUrl} alt="Book cover" />
       </NavLink>
     </div>
   )

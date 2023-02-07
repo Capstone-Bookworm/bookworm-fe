@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import Book from '../Book/Book'
 import './Home.css'
 import { RxCaretRight, RxCaretLeft } from "react-icons/rx"
+import { useQuery, gql } from '@apollo/client'
 
 // const SEARCH_BOOKS = gql`
 //   mutation searchBooks {
@@ -15,57 +16,33 @@ import { RxCaretRight, RxCaretLeft } from "react-icons/rx"
 //     }
 //   }`
 
-// const BOOKS_DATA = gql `
-// {
-//     booksData {
-//       id 
-//       imageURL
-//   }
-// }`
+const BOOKS_DATA = gql `
+    query books {
+      books {
+      id 
+      imageUrl
+    }
+}`
 
-const books: {id: number, title: string, imageURL: string}[] = [
-  { 
-      "id": 1,
-      "title": "Crying In H Mart",
-      "imageURL": "http://books.google.com/books/content?id=30UlEAAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api"
-  }, 
-  {
-      "id": 2,
-      "title": "A Food Adventurer's Guide",
-      "imageURL": "http://books.google.com/books/content?id=YcUZEAAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api"
-  },
-  {
-      "id": 3,
-      "title": "Good Intentions",
-      "imageURL" : "http://books.google.com/books/content?id=jhwqEAAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api"
-  }, 
-  {
-    "id": 4,
-    "title": "A Food Adventurer's Guide",
-    "imageURL": "http://books.google.com/books/content?id=YcUZEAAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api"
-},
-{
-    "id": 5,
-    "title": "Good Intentions",
-    "imageURL" : "http://books.google.com/books/content?id=jhwqEAAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api"
+interface book {
+  id: number
+  imageUrl: string
 }
-]
 
 const Home: React.FC = () => {
-  const [bookData, setBookData] = useState(books)
-  // const [bookData, setBookData] = useState(BOOKS_DATA)
-  const [searchBook, setSearchBook] = useState('')
-  const [searchMessage, setSearchMessage] = useState('')
+  const [searchBook, setSearchBook] = useState<string>('')
+  const [limit, setLimit] = useState<number>(5)
+  const [searchMessage, setSearchMessage] = useState<string>('')
   const style = { fontSize: "5em", cursor: 'pointer' }
-  // const { loading, error, data } = useQuery(BOOKS_DATA)
-  
+  const { data } = useQuery(BOOKS_DATA)
+  const [bookData, setBookData] = useState(data.books.slice(5, 10))
+
   const bookList: JSX.Element[] = bookData.map((book: any) => {
     return (
       <Book
       key={book.id}
       id={book.id}
-      title={book.title}
-      imageURL={book.imageURL}
+      imageUrl={book.imageUrl}
       />
       )
     })
@@ -73,15 +50,24 @@ const Home: React.FC = () => {
     const handleClick = () => {
     // const { loading, error, data } = useQuery(SEARCH_BOOKS)
     // setBookData(data)
-    const filterSearch = books.filter(book => book.title.toLowerCase().includes(searchBook.toLowerCase()))
-    setBookData(filterSearch)
+    // const filterSearch = bookData.filter((book: any) => book.title.toLowerCase().includes(searchBook.toLowerCase()))
+    // setBookData(filterSearch)
     setSearchMessage(`Search results for "${searchBook}". Please try a more specific search if your book is not displayed below.`)
     // setSearchBook('')
   }
 
-  // const randomizeBooks = () => {
-  //   //will need to refetch 5 more books and switch it out for another if user clicks either arrow
-  // }
+  const displayMoreBooks = (event: React.MouseEvent<HTMLElement>) => {
+    if(event.currentTarget.id === 'left-arrow'){
+      const x = 5
+      // setBookData(data.books.slice(x-5, x))
+      setBookData(data.books.slice(0, 5))
+    }
+    if(event.currentTarget.id === 'right-arrow'){
+      const x = 10
+      // setBookData(data.books.slice(x-5, x+5))
+      setBookData(data.books.slice(10, 15))
+    } 
+  }
 
   return(
     <div className='homepage-container'>
@@ -96,10 +82,12 @@ const Home: React.FC = () => {
         <button type='button' onClick={handleClick}>SEARCH</button>
       </form>
       <h2 className='search-message'>{searchMessage}</h2>
-      <div className='book-container'>
-      <RxCaretLeft style={style} id='left-arrow'/>
-        {bookList}
-      <RxCaretRight style={style} id='right-arrow'/>
+      <div className={`book-container ${bookData.length > 5 ? "display-search" : ""}`}>
+      <RxCaretLeft style={style} id='left-arrow' onClick={(event: any | React.MouseEvent) => displayMoreBooks(event)}/>
+        <div className={`${bookData.length > 5 ? "display-search book-list" : "original-book-list"}`}>
+          {bookList}
+        </div>
+      <RxCaretRight style={style} id='right-arrow' onClick={(event: any | React.MouseEvent) => displayMoreBooks(event)}/>
       </div>
     </div>
   )
