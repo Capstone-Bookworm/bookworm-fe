@@ -1,4 +1,5 @@
 import React from 'react'
+import './Book.css'
 
 interface book {
     id: number
@@ -6,9 +7,8 @@ interface book {
 }
 
 const Book: React.FC<book> = ({ id, imageURL }): JSX.Element => {
-  console.log('IMAGE', imageURL)
   return (
-    <div>
+    <div className='book-item'>
       <img src={imageURL} alt="Book cover" />
     </div>
   )
