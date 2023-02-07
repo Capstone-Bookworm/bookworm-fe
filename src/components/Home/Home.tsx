@@ -55,6 +55,7 @@ const Home: React.FC = () => {
   const [bookData, setBookData] = useState(books)
   // const [bookData, setBookData] = useState(BOOKS_DATA)
   const [searchBook, setSearchBook] = useState('')
+  const [searchMessage, setSearchMessage] = useState('')
   const style = { fontSize: "5em", cursor: 'pointer' }
   // const { loading, error, data } = useQuery(BOOKS_DATA)
   
@@ -74,7 +75,8 @@ const Home: React.FC = () => {
     // setBookData(data)
     const filterSearch = books.filter(book => book.title.toLowerCase().includes(searchBook.toLowerCase()))
     setBookData(filterSearch)
-    setSearchBook('')
+    setSearchMessage(`Search results for "${searchBook}". Please try a more specific search if your book is not displayed below.`)
+    // setSearchBook('')
   }
 
   // const randomizeBooks = () => {
@@ -94,6 +96,7 @@ const Home: React.FC = () => {
         {/* <h2>{searchBook}</h2> */}
         <button type='button' onClick={handleClick}>SEARCH</button>
       </form>
+      <h2 className='search-message'>{searchMessage}</h2>
       <div className='book-container'>
       <RxCaretLeft style={style} id='left-arrow'/>
         {bookList}
