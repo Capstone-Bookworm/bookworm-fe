@@ -25,10 +25,14 @@
   border-radius: 5px;
   cursor: pointer;
   border: none;
+  background-color: white;
+  font-size: large;
+  color: blue;
+  height: 4vh;
 }
 
 .login-btn:hover {
-  background-color: black;
+  background-color: blue;
   color: white;
 }
 

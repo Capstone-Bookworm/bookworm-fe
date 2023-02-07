@@ -5,10 +5,9 @@ import App from './Components/App/App';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter } from 'react-router-dom';
 import { ApolloProvider, ApolloClient, InMemoryCache } from "@apollo/client";
-import { gql } from '@apollo/client';
 
 const client = new ApolloClient({
-  uri: "https://6fd168b2-d698-498e-91e5-29866384a6bd.mock.pstmn.io/graphql",
+  uri: "https://bookworm-be.herokuapp.com/graphql",
   cache: new InMemoryCache()
 })
 
