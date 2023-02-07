@@ -9,8 +9,8 @@ jobs:
       - image: circleci/node:14.15.1
     steps:
       - checkout
-      - run:
-          command: npm ci
+      - node/install-packages:
+          pkg-manager: npm
       - run:
           name: Run build
           command: npm run build
