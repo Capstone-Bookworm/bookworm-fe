@@ -52,7 +52,7 @@ ul.menuNav.menuNav.showMenu {
   flex-direction: column;
   align-content: center;
   margin-top: 4.2rem;
-  padding-right: 1rem;
+  padding: 0 1rem 1rem 1rem;
   border-left: 3px solid black;
   border-bottom: 3px solid black;
   border-radius: 0.3rem;
