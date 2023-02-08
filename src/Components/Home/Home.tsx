@@ -59,19 +59,6 @@ const Home: React.FC = () => {
       setSearchBook('')
   }
 
-  const displayMoreBooks = (event: React.MouseEvent<HTMLElement>) => {
-    if(event.currentTarget.id === 'left-arrow'){
-      const x = 5
-      // setBookData(data.books.slice(x-5, x))
-      setBookData(data.books.slice(0, 5))
-    }
-    if(event.currentTarget.id === 'right-arrow'){
-      const x = 10
-      // setBookData(data.books.slice(x-5, x+5))
-      setBookData(data.books.slice(10, 15))
-    } 
-  }
-
   return(
     <div className='homepage-container'>
       <h2>Home page</h2>
@@ -86,11 +73,11 @@ const Home: React.FC = () => {
       </form>
       <h2 className='search-message'>{searchMessage}</h2>
       {loading ? <h2 className='loading-message'>Loading...</h2> : <div className={`book-container ${bookData.length > 5 ? "display-search" : ""}`}>
-      <RxCaretLeft style={style} id='left-arrow' onClick={(event: any | React.MouseEvent) => displayMoreBooks(event)}/>
+      <RxCaretLeft style={style} id='left-arrow' />
         <div className={`${bookData.length > 5 ? "display-search book-list" : "original-book-list"}`}>
           {bookList}
         </div>
-      <RxCaretRight style={style} id='right-arrow' onClick={(event: any | React.MouseEvent) => displayMoreBooks(event)}/>
+      <RxCaretRight style={style} id='right-arrow' />
       </div>}
     </div>
   )

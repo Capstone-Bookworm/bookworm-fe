@@ -13,15 +13,18 @@ interface Location {
   state: null,
   key: string
 }
+
+
 function App() {
   let location: Location = useLocation()
+
   return (
     <div>
       {location.pathname !== '/' && <Navbar />}
       <Routes>
       <Route path='/' element={<Login/>}/>
         <Route path='/home' element={<Home />} />
-        <Route path='/details/:id' element={<BookDetails />}/>
+        <Route path='/details/:id' element={<BookDetails key={location.key}/>}/>
         <Route path='/mydashboard' />
         <Route path='/add-book' />
       </Routes>
