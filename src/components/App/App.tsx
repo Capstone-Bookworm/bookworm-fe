@@ -51,6 +51,7 @@ function App() {
         <Route path='/dashboard' element={<Dashboard />}/>
         <Route path='/my-borrowed-books'/>
         <Route path='/add-book' />
+        <Route path='/pending-requests' />
       </Routes>
     </div>
   );

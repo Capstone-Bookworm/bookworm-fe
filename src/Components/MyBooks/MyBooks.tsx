@@ -13,24 +13,39 @@ const MY_BOOKS = gql `
           author
           imageUrl
         }
+        unavailableBooks {
+          id
+          title
+          author
+          imageUrl
+        }
     }
   }
 `
 
+interface UserBook {
+  id: number,
+  title: string,
+  author: string,
+  imageUrl: string
+}
+
 const MyBooks = () => {
   
   const { loading, error, data } = useQuery(MY_BOOKS)
-  const [ library, setLibrary ] = useState([])
+  const [ availLibrary, setAvailLibrary ] = useState([])
+  const [ unavailLibrary, setUnavailLibrary ] = useState([])
 
   console.log(data?.user.availableBooks)
   
   useEffect(() => {
     if(data){
-      setLibrary(data.user.availableBooks)
-    console.log('hi')}
+      setAvailLibrary(data.user.availableBooks)
+      setUnavailLibrary(data.user.unavailableBooks)
+  }
   }, [data])
 
-  const getLibrary = () => {
+  const getLibrary = (library:UserBook[], availability: boolean) => {
     if(!loading) {
       return library.map((book:any)=> {
        return <LibraryBook 
@@ -39,6 +54,7 @@ const MyBooks = () => {
            title={book.title}
            author={book.author}
            imageUrl={book.imageUrl}
+           availability={availability}
          />
      })
     }
@@ -46,7 +62,8 @@ const MyBooks = () => {
 
   return (
     <div>
-      {getLibrary()}
+      {getLibrary(availLibrary, true)}
+      {getLibrary(unavailLibrary, false)}
     </div>
   )
 }
