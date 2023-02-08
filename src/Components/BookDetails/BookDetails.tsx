@@ -36,7 +36,7 @@ const BookDetails = () => {
 
   return(
     <div>
-      {detailsQuery.loading && <h3>Loading...</h3>}
+      {detailsQuery.loading && <h3 id='loading'>Loading...</h3>}
       {!detailsQuery.loading && 
       <div className='details-container'>
         <img src={bookDetails?.imageUrl} alt='image of book cover'/>

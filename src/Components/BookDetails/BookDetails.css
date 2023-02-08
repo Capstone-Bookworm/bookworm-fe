@@ -36,3 +36,8 @@ img {
   background-color: blue;
   color: white;
 }
+
+#loading {
+  font-size: 3rem;
+  margin-right: 2rem;
+}
