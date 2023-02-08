@@ -30,10 +30,17 @@ const Home: React.FC = () => {
   const [searchBook, setSearchBook] = useState<string>('')
   const [searchMessage, setSearchMessage] = useState<string>('')
   const style = { fontSize: "5em", cursor: 'pointer' }
-  const { data } = useQuery(BOOKS_DATA)
-  const [bookData, setBookData] = useState(data.books)
+  const { loading, data } = useQuery(BOOKS_DATA)
+  const [bookData, setBookData] = useState([])
 
-  const bookList: JSX.Element[] = bookData.map((book: any) => {
+  useEffect(() => {
+    if(data) {
+      setBookData(data.books)
+      console.log('IT WORKED!')
+    }
+  }, [data])
+
+  const bookList: JSX.Element[] = bookData?.map((book: any) => {
     return (
       <Book
       key={book.id}
@@ -78,13 +85,13 @@ const Home: React.FC = () => {
         <button type='button' onClick={() => searchBooks()}>SEARCH</button>
       </form>
       <h2 className='search-message'>{searchMessage}</h2>
-      <div className={`book-container ${bookData.length > 5 ? "display-search" : ""}`}>
+      {loading ? <h2 className='loading-message'>Loading...</h2> : <div className={`book-container ${bookData.length > 5 ? "display-search" : ""}`}>
       <RxCaretLeft style={style} id='left-arrow' onClick={(event: any | React.MouseEvent) => displayMoreBooks(event)}/>
         <div className={`${bookData.length > 5 ? "display-search book-list" : "original-book-list"}`}>
           {bookList}
         </div>
       <RxCaretRight style={style} id='right-arrow' onClick={(event: any | React.MouseEvent) => displayMoreBooks(event)}/>
-      </div>
+      </div>}
     </div>
   )
 }
