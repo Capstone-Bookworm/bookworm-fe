@@ -24,12 +24,26 @@ const BookDetails = () => {
   const detailsQuery = useQuery(BOOK_DETAILS, {
     variables: { id: id }
   })
-  const [bookDetails, setBookDetails] = useState(detailsQuery.data.book)
-  console.log('BOOK DETAILS', bookDetails)
-  
+  const { loading } = useQuery(BOOK_DETAILS)
+  const [bookDetails, setBookDetails] = useState(detailsQuery)
+  console.log('DETAILS QUERY', bookDetails)
+
   return(
     <div>
-      <h3>Hi this is the book details page.</h3>
+      {loading && <h3>Loading...</h3>} 
+      {!loading && <div>
+      <h4>{bookDetails.data.title}</h4>
+      <p>{bookDetails.data.summary}</p>
+      <h5>{bookDetails.data.author}</h5>
+      <h5>{bookDetails.data.pageCount}</h5>
+      <select>
+        <option>Choose a borrower...</option>
+        {bookDetails.data.users.map((user: any) => {
+          return(
+            <option>{user.userName}</option>)
+        })}
+      </select>
+      </div>}
     </div>
   )
 }
