@@ -22,7 +22,13 @@ const [allBooks, setBooks] = useState(searchResults)
       {allBooks.map((book: Book) => {
       return (
         <div className='book-card'>
-          <img src={book.imageUrl} alt={`image of ${book.title}`}></img>
+          <img className='book-image' src={book.imageUrl} alt={`image of ${book.title}`}></img>
+          <div className='image-overlay'>
+            <p>Isbn: {book.isbn}</p>
+            <p>Title: {book.title}</p>
+            <p>Author: {book.author}</p>
+            <p>Page Count: {book.pageCount}</p>
+          </div>
           <button className='add-btn'>Add to Library</button>
         </div>
       )
