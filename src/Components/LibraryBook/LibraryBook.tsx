@@ -8,7 +8,7 @@ interface UserBook {
 }
 
 const LibraryBook = (props: UserBook) => {
-
+  console.log(props)
   return(
     <div>
       <h1>{props.title}</h1>

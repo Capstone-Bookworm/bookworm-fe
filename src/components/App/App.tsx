@@ -4,6 +4,7 @@ import { Routes, Route, useLocation } from 'react-router-dom'
 import Navbar from '../Navbar/Navbar';
 import Login from '../Login/Login';
 import Dashboard from '../Dashboard/Dashboard'
+import DashboardMenu from '../DashboardMenu/DashboardMenu'
 import { useQuery, gql } from '@apollo/client';
 
 
@@ -34,14 +35,22 @@ function App() {
   const {loading, error, data } = useQuery(ALL_USERS)
   // console.log(data)
   let location: Location = useLocation()
+
+  const getDashboardDisplay = () => {
+    if(location.pathname === '/dashboard/my-borrowed-books' || location.pathname === '/dashboard' || location.pathname === '/dashboard/add-book') {
+      return <DashboardMenu />
+    }
+  }
   return (
     <div>
       {location.pathname !== '/' && <Navbar />}
+      {getDashboardDisplay()}
       <Routes>
       <Route path='/' element={<Login/>}/>
         <Route path='/details' />
         <Route path='/dashboard' element={<Dashboard />}/>
-        <Route path='/add-book'/>
+        <Route path='/my-borrowed-books'/>
+        <Route path='/add-book' />
       </Routes>
     </div>
   );

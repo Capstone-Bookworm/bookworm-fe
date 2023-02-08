@@ -17,13 +17,12 @@ const MY_BOOKS = gql `
   }
 `
 
-
 const MyBooks = () => {
   
   const { loading, error, data } = useQuery(MY_BOOKS)
   const [ library, setLibrary ] = useState([])
 
-  console.log(data.user.availableBooks)
+  console.log(data?.user.availableBooks)
   
   useEffect(() => {
     if(data){
