@@ -16,29 +16,42 @@
 }
 
 .search-form {
+  margin-top: 40px;
   height: 20vh;
   width: 100vw;
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  border: solid 2px black;
+  box-shadow: 3px 3px 3px maroon;
 }
 
 .search-header {
   margin-right: 15px;
+  font-size: x-large;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  color: maroon;
+}
+
+.search-input {
+  font-size: x-large;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  color: maroon;
+  border-color: maroon;
 }
 
 .search-button {
   border: none;
   border-radius: 3px;
   background-color: white;
-  color: blue;
+  color: maroon;
   cursor: pointer;
   margin-left: 15px;
+  font-size: x-large;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
 .search-button:hover {
-  background-color: blue;
+  background-color: maroon;
   color: white;
 }

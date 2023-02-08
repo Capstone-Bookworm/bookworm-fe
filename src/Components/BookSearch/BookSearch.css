@@ -1,5 +1,4 @@
 .book-card-container {
-  border: solid 1px black;
   height: 150vh;
   width: 100vw;
   display: flex;
@@ -19,11 +18,16 @@
 }
 
 .add-btn {
-  margin-top: 15px;
+  position: relative;
+  cursor: pointer;
 }
 
 .book-image {
+  position: absolute;
   display: block;
+  height: 100%;
+  width: 100%;
+  box-shadow: 3px 3px 3px black;
 }
 
 .image-overlay {
