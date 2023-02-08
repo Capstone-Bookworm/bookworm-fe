@@ -52,6 +52,8 @@ const BookDetails = () => {
               <option>{user.userName}</option>)
             })}
         </select>
+        <br />
+        <button id='borrow-btn'>Borrow Book</button>
         </div>
       </div>}
     </div>

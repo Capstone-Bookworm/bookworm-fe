@@ -20,3 +20,19 @@ img {
 #title {
   font-size: 2rem;
 }
+
+#borrow-btn {
+  border-radius: 5px;
+  margin-top: .5rem;
+  cursor: pointer;
+  border: none;
+  background-color: white;
+  font-size: large;
+  color: blue;
+  height: 4vh;
+}
+
+#borrow-btn:hover {
+  background-color: blue;
+  color: white;
+}
