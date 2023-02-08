@@ -38,7 +38,7 @@ function App() {
   let location: Location = useLocation()
 
   const getDashboardDisplay = () => {
-    if(location.pathname === '/dashboard/my-borrowed-books' || location.pathname === '/dashboard' || location.pathname === '/dashboard/add-book') {
+    if(location.pathname === '/dashboard/my-borrowed-books' || location.pathname === '/dashboard' || location.pathname === '/dashboard/add-book' || location.pathname === '/dashboard/pending-requests') {
       return <DashboardMenu />
     }
   }

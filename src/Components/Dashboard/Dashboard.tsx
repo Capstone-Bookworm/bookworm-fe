@@ -1,7 +1,3 @@
-import React, { useEffect } from "react";
-import { useQuery, gql } from '@apollo/client'
-import { NavLink, useLocation, Routes, Route } from "react-router-dom";
-import DashboardMenu from '../DashboardMenu/DashboardMenu'
 import MyBooks from '../MyBooks/MyBooks'
 
 interface Location {
@@ -14,7 +10,6 @@ interface Location {
 
 
 const Dashboard = () => {
-  let location: Location = useLocation()
   return (
     <div>
       <MyBooks />
