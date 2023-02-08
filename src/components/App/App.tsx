@@ -6,6 +6,7 @@ import Login from '../Login/Login';
 import Dashboard from '../Dashboard/Dashboard'
 import DashboardMenu from '../DashboardMenu/DashboardMenu'
 import { useQuery, gql } from '@apollo/client';
+import PendingRequests from '../PendingRequests/PendingRequests';
 
 
 interface Location {
@@ -49,9 +50,9 @@ function App() {
       <Route path='/' element={<Login/>}/>
         <Route path='/details' />
         <Route path='/dashboard' element={<Dashboard />}/>
-        <Route path='/my-borrowed-books'/>
-        <Route path='/add-book' />
-        <Route path='/pending-requests' />
+        <Route path='/dashboard/my-borrowed-books'/>
+        <Route path='/dashboard/add-book' />
+        <Route path='/dashboard/pending-requests' element={<PendingRequests />}/>
       </Routes>
     </div>
   );
