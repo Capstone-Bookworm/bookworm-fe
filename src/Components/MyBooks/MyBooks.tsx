@@ -19,6 +19,17 @@ const MY_BOOKS = gql `
           author
           imageUrl
         }
+        pendingRequested {
+          id
+          title
+          imageUrl
+          borrower {
+            id
+            userName
+            location
+            emailAddress
+          }
+        }
     }
   }
 `
@@ -35,6 +46,7 @@ const MyBooks = () => {
   const { loading, error, data } = useQuery(MY_BOOKS)
   const [ availLibrary, setAvailLibrary ] = useState([])
   const [ unavailLibrary, setUnavailLibrary ] = useState([])
+  const [ pendingRequests, setPendingRequests ] = useState([])
 
   console.log(data?.user.availableBooks)
   
@@ -42,6 +54,7 @@ const MyBooks = () => {
     if(data){
       setAvailLibrary(data.user.availableBooks)
       setUnavailLibrary(data.user.unavailableBooks)
+      setPendingRequests(data.user.pendingRequested)
   }
   }, [data])
 
@@ -63,6 +76,7 @@ const MyBooks = () => {
   return (
     <div>
       {getLibrary(availLibrary, true)}
+      {getLibrary(pendingRequests, true)}
       {getLibrary(unavailLibrary, false)}
     </div>
   )
