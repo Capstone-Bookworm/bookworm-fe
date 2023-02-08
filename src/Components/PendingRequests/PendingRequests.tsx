@@ -10,6 +10,7 @@ const REQUESTS = gql `
       pendingRequested {
         id
         title
+        imageUrl
         borrower {
           id
           userName
@@ -42,6 +43,7 @@ const getRequests = () => {
        key={request.id}
        id={request.id}
        title={request.title}
+       imageUrl={request.imageUrl}
        borrower={request.borrower.userName}
        borrowerId={request.borrower.id}
        borrowerLocation={request.borrower.location}

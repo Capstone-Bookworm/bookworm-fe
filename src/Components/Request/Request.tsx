@@ -1,8 +1,10 @@
 import React from "react";
+import './Request.css'
 
 interface borrower {
   id: number;
   title: string;
+  imageUrl: string;
   borrower: string;
   borrowerId: number;
   borrowerLocation: string;
@@ -10,10 +12,15 @@ interface borrower {
 }
 
 
-const Request = ({ id, title, borrower, borrowerId, borrowerLocation, borrowerEmailAddress} : borrower) => {
+const Request = ({ id, title, borrower, imageUrl, borrowerId, borrowerLocation, borrowerEmailAddress} : borrower) => {
   return (
-    <div>
-      <h2>Requests here</h2>
+    <div className="book-request">
+      <img src={imageUrl}/>
+      <div className="request-info">
+      <h3>{borrower} requested to borrow {title}</h3>
+        <button className="accept-request-btn">Accept</button>
+        <button className="deny-request-btn">Deny</button>
+      </div>
     </div>
   )
 }
