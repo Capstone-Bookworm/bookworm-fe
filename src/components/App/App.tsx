@@ -4,6 +4,7 @@ import { Routes, Route, useLocation } from 'react-router-dom'
 import Navbar from '../Navbar/Navbar';
 import Login from '../Login/Login';
 import Home from '../Home/Home';
+import BookDetails from '../BookDetails/BookDetails';
 
 interface Location {
   pathname: string,
@@ -20,7 +21,7 @@ function App() {
       <Routes>
       <Route path='/' element={<Login/>}/>
         <Route path='/home' element={<Home />} />
-        <Route path='/details' />
+        <Route path='/details/:id' element={<BookDetails />}/>
         <Route path='/mydashboard' />
         <Route path='/add-book' />
       </Routes>
