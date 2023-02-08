@@ -1,0 +1,43 @@
+.details-container {
+  display: flex;
+  margin: 3rem;
+}
+
+img {
+  margin: 1.75rem;
+  height: 30vh;
+}
+
+#pages {
+  font-weight: 200;
+  font-size: 1rem;
+}
+
+#summary {
+  font-size: 1.5rem;
+}
+
+#title {
+  font-size: 2rem;
+}
+
+#borrow-btn {
+  border-radius: 5px;
+  margin-top: .5rem;
+  cursor: pointer;
+  border: none;
+  background-color: white;
+  font-size: large;
+  color: blue;
+  height: 4vh;
+}
+
+#borrow-btn:hover {
+  background-color: blue;
+  color: white;
+}
+
+#loading {
+  font-size: 3rem;
+  margin-right: 2rem;
+}

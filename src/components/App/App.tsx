@@ -3,10 +3,13 @@ import './App.css';
 import { Routes, Route, useLocation } from 'react-router-dom'
 import Navbar from '../Navbar/Navbar';
 import Login from '../Login/Login';
+
 import Dashboard from '../Dashboard/Dashboard'
 import DashboardMenu from '../DashboardMenu/DashboardMenu'
 import { useQuery, gql } from '@apollo/client';
 import PendingRequests from '../PendingRequests/PendingRequests';
+import Home from '../Home/Home';
+import BookDetails from '../BookDetails/BookDetails';
 
 
 interface Location {
@@ -17,24 +20,8 @@ interface Location {
   key: string
 }
 
-const ALL_USERS = gql `
-  query user {
-    user(id:1) {
-        id
-        userName
-        availableBooks {
-          id
-          title
-          author
-          imageUrl
-        }
-    }
-  }
-`
 
 function App() {
-  const {loading, error, data } = useQuery(ALL_USERS)
-  // console.log(data)
   let location: Location = useLocation()
 
   const getDashboardDisplay = () => {
@@ -42,17 +29,19 @@ function App() {
       return <DashboardMenu />
     }
   }
+
   return (
     <div>
       {location.pathname !== '/' && <Navbar />}
       {getDashboardDisplay()}
       <Routes>
-      <Route path='/' element={<Login/>}/>
-        <Route path='/details' />
+        <Route path='/' element={<Login/>}/>
         <Route path='/dashboard' element={<Dashboard />}/>
         <Route path='/dashboard/my-borrowed-books'/>
         <Route path='/dashboard/add-book' />
         <Route path='/dashboard/pending-requests' element={<PendingRequests />}/>
+        <Route path='/home' element={<Home />} />
+        <Route path='/details/:id' element={<BookDetails key={location.key}/>}/>
       </Routes>
     </div>
   );
