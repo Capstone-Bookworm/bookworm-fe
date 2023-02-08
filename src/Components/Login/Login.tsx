@@ -9,24 +9,7 @@ interface User {
   location: string
 }
 
-const ALL_USERS = gql `
-  query AllUsers {
-    users {
-      userName
-      emailAddress
-      location
-    }
-  }
-`
 
-// const ALL_BOOKS = gql `
-//   query AllBooks {
-//     books {
-//       id
-//       imageUrl
-//     }
-//   }
-// `
 
 const Login = () => {
   const [email, setEmail] = useState('')
@@ -36,11 +19,6 @@ const Login = () => {
   const [allUsers, setUsers] = useState([{userName: "Josh", emailAddress: "test", location: "Denver"}])
 
   let navigate = useNavigate()
-
-  const { data, loading, error } = useQuery(ALL_USERS)
-  // const { data, loading, error } = useQuery(ALL_BOOKS)
-
-  console.log("data from users in Login.tsx", data)
   
 
   const verifyLogin = () => {

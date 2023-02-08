@@ -25,7 +25,7 @@ const Navbar = () => {
       <button onClick={handleClick}>{navbarOpen ? <RxCross2 /> : <RxHamburgerMenu />}</button>
         <ul className={`menuNav ${navbarOpen ? "showMenu" : ""}`}>
           <NavLink to='/home'><li onClick={() => closeMenu()}>Home</li></NavLink>
-          <NavLink to='/myaccount'><li onClick={() => closeMenu()}>My Account</li></NavLink>
+          <NavLink to='/dashboard'><li onClick={() => closeMenu()}>My Account</li></NavLink>
           <NavLink to='/'><li onClick={() => closeMenu()}>Logout</li></NavLink>
         </ul>
       </nav>
