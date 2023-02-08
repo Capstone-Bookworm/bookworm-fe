@@ -1,0 +1,22 @@
+.book-card-container {
+  border: solid 1px black;
+  height: 150vh;
+  width: 100vw;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+.book-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  height: 40vh;
+  width: 15vw;
+}
+
+.add-btn {
+  margin-top: 15px;
+}

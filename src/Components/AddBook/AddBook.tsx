@@ -1,25 +1,76 @@
-import { useState } from 'react'
-import { setSyntheticLeadingComments } from 'typescript';
+import { useEffect, useState } from 'react'
 import './AddBook.css'
+import { gql, useQuery } from '@apollo/client'
+import BookSearch from '../BookSearch/BookSearch'
+
+const GOOGLE_BOOKS = gql `
+  query GoogleBooks($title: String!){
+    googleBooks(title: $title) {
+      isbn
+      title
+      author
+      imageUrl
+      summary
+      pageCount
+  }
+}
+`
+
+interface Books {
+  isbn: Number,
+  title: String,
+  author: String,
+  imageUrl: String,
+  summary: String,
+  pageCount: Number
+}
+
+interface Book {
+  isbn: number,
+  title: string,
+  author: string,
+  imageUrl: string,
+  summary: string,
+  pageCount: number
+}
 
 const AddBook = () => {
   const [titleSearch, setTitle] = useState('')
+  const [newTitle, setNewTitle] = useState('')
+  const [allBooks, setBooks] = useState([])
+  const [pageLoading, setLoading] = useState(true)
 
-  console.log(titleSearch)
-  
+  const {data, loading, error} = useQuery(GOOGLE_BOOKS, {
+    variables: { title: newTitle}
+    })
+
+  const handleChange = (event: {target: HTMLInputElement}) => {
+    setTitle(event.target.value)    
+  }
+
+  const handleClick = () => {
+    setNewTitle(titleSearch)
+  }
+
   return (
     <section className='add-book-page'>
-      <form className='search-form'>
+      <div className='search-form'>
+        <h1 className='search-header'>Search For Book by Title: </h1>
         <input
           type='title'
           className='search-input'
           placeholder='Search by Title'
           value={titleSearch}
-          onChange={event => setTitle(event.target.value)}
+          onChange={handleChange}
         />
-      </form>
+        <button className='search-button' onClick={handleClick}>Search</button>
+      </div>
       <div className='books-container'>
-
+      {loading ? (
+        <h1>Loading ...</h1>
+      ) : (
+        data && <BookSearch searchResults={data.googleBooks}/>
+      )}
       </div>
     </section>
   )

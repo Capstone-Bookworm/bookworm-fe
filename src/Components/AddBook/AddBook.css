@@ -7,9 +7,12 @@
 }
 
 .books-container {
-  height: 80vh;
+  height: 150vh;
   width: 100vw;
-  border: solid 3px black;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
 }
 
 .search-form {
@@ -19,4 +22,23 @@
   flex-direction: row;
   align-items: center;
   justify-content: center;
+  border: solid 2px black;
+}
+
+.search-header {
+  margin-right: 15px;
+}
+
+.search-button {
+  border: none;
+  border-radius: 3px;
+  background-color: white;
+  color: blue;
+  cursor: pointer;
+  margin-left: 15px;
+}
+
+.search-button:hover {
+  background-color: blue;
+  color: white;
 }
