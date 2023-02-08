@@ -6,6 +6,7 @@ import { RxHamburgerMenu, RxCross2 } from "react-icons/rx"
 
 const Navbar = () => {
   const [navbarOpen, setNavbarOpen] = useState<boolean>(false)
+  const style = { fontSize: "2em", cursor: 'pointer' }
 
   const handleClick = () => {
     setNavbarOpen(!navbarOpen)
@@ -18,14 +19,16 @@ const Navbar = () => {
   return(
     <header className='navbar'>
       <section className='header'>
-        <img src='#' alt='Logo' className='logo'/>
+        <img src='https://cdn-icons-png.flaticon.com/512/2789/2789786.png' alt='Logo' className='logo' />
         <h1 className='title'>Bookworm</h1>
       </section>
       <nav>
-      <button onClick={handleClick}>{navbarOpen ? <RxCross2 /> : <RxHamburgerMenu />}</button>
+      <button onClick={handleClick}>{navbarOpen ? <RxCross2 style={style}/> : <RxHamburgerMenu style={style}/>}</button>
         <ul className={`menuNav ${navbarOpen ? "showMenu" : ""}`}>
           <NavLink to='/home'><li onClick={() => closeMenu()}>Home</li></NavLink>
-          <NavLink to='/dashboard'><li onClick={() => closeMenu()}>My Account</li></NavLink>
+
+          <NavLink to='/dashboard'><li onClick={() => closeMenu()}>My Dashboard</li></NavLink>
+
           <NavLink to='/'><li onClick={() => closeMenu()}>Logout</li></NavLink>
         </ul>
       </nav>
