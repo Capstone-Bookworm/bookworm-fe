@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useQuery, gql } from '@apollo/client'
 import { useParams } from 'react-router-dom'
+import './BookDetails.css'
 
 const BOOK_DETAILS = gql `
   query BookDetails($id: ID!) {
@@ -35,21 +36,23 @@ const BookDetails = () => {
 
   return(
     <div>
-      <h3>hey gurl</h3>
       {detailsQuery.loading && <h3>Loading...</h3>}
-      {!detailsQuery.loading && <div>
-      <img src={bookDetails?.imageUrl} alt='image of book cover'/>
-      <h4>{bookDetails?.title}</h4>
-      <p>{bookDetails?.summary}</p>
-      <h5>{bookDetails?.author}</h5>
-      <h5>{bookDetails?.pageCount}</h5>
-      <select>
-        <option>Choose a borrower...</option>
-        {bookDetails.users?.map((user: any) => {
-          return(
-            <option>{user.userName}</option>)
-        })}
-      </select>
+      {!detailsQuery.loading && 
+      <div className='details-container'>
+        <img src={bookDetails?.imageUrl} alt='image of book cover'/>
+        <div className='book-info'>
+        <h2 id='title'>{bookDetails?.title} by {bookDetails?.author}</h2>
+        <hr />
+        <p id='summary'>Summary: <br/> {bookDetails?.summary}</p>
+        <h3 id='pages'>{bookDetails?.pageCount} pages</h3>
+        <select>
+          <option>Choose a borrower...</option>
+            {bookDetails.users?.map((user: any) => {
+              return(
+              <option>{user.userName}</option>)
+            })}
+        </select>
+        </div>
       </div>}
     </div>
   )
