@@ -3,12 +3,6 @@ import { useNavigate } from 'react-router-dom'
 import './Login.css'
 import { useQuery, gql } from '@apollo/client'
 
-interface User {
-  userName: string,
-  emailAddress: string,
-  location: string
-}
-
 const ALL_USERS = gql `
   query AllUsers {
     users {
@@ -19,56 +13,61 @@ const ALL_USERS = gql `
   }
 `
 
-const ALL_BOOKS = gql `
-  query AllBooks {
-    books {
-      id
-      imageUrl
-    }
-  }
-`
-
 const Login = () => {
   const [email, setEmail] = useState('')
   const [username, setUsername] = useState('')
   const [userLocation, setUserLocation] = useState('')
   const [activeAccount, setAccount] = useState(true)
-  const [allUsers, setUsers] = useState([{userName: "Josh", emailAddress: "test", location: "Denver"}])
+  const [loginError, setLoginError] = useState(false)
+  const [errorMessage, setErrorMessage] = useState('')
+  const [allUsers, setUsers] = useState([{emailAddress: "joshua@gmail.com", userName: "Joshua", location: "Colorado"}])
 
   let navigate = useNavigate()
 
-  // const { data, loading, error } = useQuery(ALL_USERS)
-  const { data, loading, error } = useQuery(ALL_BOOKS)
-
-  console.log("Endpoint", error)
+  const { data, loading, error } = useQuery(ALL_USERS)
   
-
   const verifyLogin = () => {
      let noUser = allUsers.map(user => {
       if(user.emailAddress !== email){
-        setAccount(false)
+        setLoginError(true)
+        setErrorMessage("Could not find that email please try again")
+        setEmail('')
       } else {
         setAccount(true)
         navigate("/home")      
       }
-      
-     })
-     return noUser
+    }) 
+      return noUser
   }
 
   const createUser = () => {
-    let newUser = {userName: username, emailAddress: email, location: userLocation}
-
-    console.log(newUser);
-  
+    if(username === '') {
+      setLoginError(true)
+      setErrorMessage("Please fill in a username")
+    }
+    if(email === '') {
+      setLoginError(true)
+      setErrorMessage("Please fill in an email")
+    }
+    if(userLocation === '') {
+      setLoginError(true)
+      setErrorMessage("Please fill in a location")
+      console.log("Email: ", email, "Username: ", username);
+      
+    } else {
+      let newUser = {userName: username, emailAddress: email, location: userLocation}
+      setEmail('')
+      setUsername('')
+      setUserLocation('')
+      navigate("/home")
+    } 
   }
 
   return (
     <section className='login-page'>
-      <h1>Welcome to Book Worm</h1>
       <div className='login-container'>
-        <h2>Login/ Create Account</h2>
-        {activeAccount === false && <p>Could not find account please create a new one</p>}
+      <h1 className='page-title'>Book Worm</h1>
+      {loginError === true && <h3>{errorMessage}</h3>}
         <input 
           type='email'
           className='email-login' 
@@ -77,6 +76,7 @@ const Login = () => {
           value={email}
           onChange={event => setEmail(event.target.value)}
         />
+        {activeAccount === false &&
         <input 
           type='text'
           className='username-login' 
@@ -84,8 +84,9 @@ const Login = () => {
           required
           value={username}
           onChange={event => setUsername(event.target.value)}
-          />
-        {activeAccount === false && <input 
+          />}
+        {activeAccount === false && 
+        <input 
           type='text'
           className='location-login' 
           placeholder='Location (City, State)'
@@ -95,6 +96,11 @@ const Login = () => {
           />}
          {activeAccount === true && <button className='login-btn' onClick={verifyLogin}>Login</button>}
          {activeAccount === false && <button className='login-btn' onClick={createUser}>Create Account</button>}
+      </div>
+      <div className='create-acct'>
+        {activeAccount === true && <h3>Don't have an account? </h3>}
+        {activeAccount === true && <button className='login-btn' onClick={() => setAccount(false)}>Create New Account</button>}
+        {activeAccount === false && <button className='login-btn' onClick={() => setAccount(true)}>Return to Login</button>}
       </div>
     </section>
   )
