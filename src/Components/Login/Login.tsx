@@ -47,53 +47,44 @@ const Login = ( { handleSetUser }: { handleSetUser: (user: any) => void}) => {
   const [ activeAccount, setAccount] = useState(true)
   const [ username, setUsername ] = useState('')
   const [ userLocation, setUserLocation ] = useState('')
+  const [ accountToCreate, setAccountToCreate ] = useState('')
 
 
-
-  const {loading, error, data } = useQuery(GET_USER, {
+  const userQuery = useQuery(GET_USER, {
     variables: { emailAddress: login }
+  })
+
+  const createAccountMutation = useQuery(CREATE_USER, {
+
   })
 
   const handleSubmit = (event:any) => {
     event.preventDefault()
-    setLogin(email)
+    if(activeAccount) {
+      setLogin(email)
+    } else {
+      handleNewAccount()
+    }
   }
 
   useEffect(() => {
-    if(data) {
-      handleSetUser(data)
-      console.log(data)
+    if(userQuery.data) {
+      handleSetUser(userQuery.data)
+      console.log(userQuery.data)
     }
-  }, [data])
+  }, [userQuery.data])
 
 
-  // const createUser = () => {
-  //   if(username === '') {
-  //     setLoginError(true)
-  //     setErrorMessage("Please fill in a username")
-  //   }
-  //   if(email === '') {
-  //     setLoginError(true)
-  //     setErrorMessage("Please fill in an email")
-  //   }
-  //   if(userLocation === '') {
-  //     setLoginError(true)
-  //     setErrorMessage("Please fill in a location")
-  //     console.log("Email: ", email, "Username: ", username);
-      
-  //   } else {
-  //     let newUser = {userName: username, emailAddress: email, location: userLocation}
-  //     setEmail('')
-  //     setUsername('')
-  //     setUserLocation('')
-  //     navigate("/home")
-  //   } 
-  // }
+  const handleNewAccount = () => {
+    if (username && email && userLocation) {
+      // set
+    }
+  }
 
   const getError = () => {
-    if(!login && error) {
+    if(!login && userQuery.error) {
       return false
-    } else if (login && error) {
+    } else if (login && userQuery.error) {
       return true
     } else {
       return false
@@ -134,7 +125,7 @@ const Login = ( { handleSetUser }: { handleSetUser: (user: any) => void}) => {
             onChange={event => setUserLocation(event.target.value)}
             />}
           {activeAccount === true && <input type="submit" value="Submit" className='login-btn' />}
-          {activeAccount === false && <button className='login-btn' onClick={createUser}>Create Account</button>}
+          {activeAccount === false && <input type="submit" value="Submit" className='create-account-btn' />}
         </form>
         </div>
         <div className='create-acct'>
