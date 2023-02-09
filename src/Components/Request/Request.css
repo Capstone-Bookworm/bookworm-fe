@@ -1,0 +1,13 @@
+.book-request {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 2%;
+  align-items: center;
+  width: 80%;
+}
+
+.accept-request-btn,
+.deny-request-btn {
+  cursor: pointer;
+  margin: 2%;
+}

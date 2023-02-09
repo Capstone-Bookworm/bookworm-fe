@@ -4,17 +4,6 @@ import './Login.css'
 import { useQuery, useMutation, gql } from '@apollo/client'
 import { verify } from 'crypto'
 
-// const ALL_USERS = gql `
-//   query AllUsers {
-//     users {
-//       userName
-//       emailAddress
-//       location
-//     }
-//   }
-// `
-
-
 const GET_USER = gql `
   query userLogin($emailAddress: String!) {
     userLogin(emailAddress: $emailAddress) {
@@ -48,6 +37,7 @@ const Login = ( { handleSetUser }: { handleSetUser: (user: any) => void}) => {
   const [ username, setUsername ] = useState('')
   const [ userLocation, setUserLocation ] = useState('')
   const [ accountToCreate, setAccountToCreate ] = useState('')
+
 
 
   const userQuery = useQuery(GET_USER, {

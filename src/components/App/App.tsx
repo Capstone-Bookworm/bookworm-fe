@@ -4,6 +4,13 @@ import { Routes, Route, useLocation, useNavigate } from 'react-router-dom'
 import Navbar from '../Navbar/Navbar';
 import Login from '../Login/Login';
 
+import Dashboard from '../Dashboard/Dashboard'
+import DashboardMenu from '../DashboardMenu/DashboardMenu'
+import { useQuery, gql } from '@apollo/client';
+import PendingRequests from '../PendingRequests/PendingRequests';
+import Home from '../Home/Home';
+import BookDetails from '../BookDetails/BookDetails';
+
 
 interface Location {
   pathname: string,
@@ -35,14 +42,25 @@ function App() {
   }, [currentUser])
 
 
+  const getDashboardDisplay = () => {
+    if(location.pathname === '/dashboard/my-borrowed-books' || location.pathname === '/dashboard' || location.pathname === '/dashboard/add-book' || location.pathname === '/dashboard/pending-requests') {
+      return <DashboardMenu />
+    }
+  }
+
+
   return (
     <div>
       {location.pathname !== '/' && <Navbar />}
+      {getDashboardDisplay()}
       <Routes>
-      <Route path='/' element={<Login handleSetUser={handleSetUser}/>}/>
-        <Route path='/details' />
-        <Route path='/myaccount' />
-        <Route path='/add-book' />
+        <Route path='/' element={<Login/>}/>
+        <Route path='/dashboard' element={<Dashboard />}/>
+        <Route path='/dashboard/my-borrowed-books'/>
+        <Route path='/dashboard/add-book' />
+        <Route path='/dashboard/pending-requests' element={<PendingRequests />}/>
+        <Route path='/home' element={<Home />} />
+        <Route path='/details/:id' element={<BookDetails key={location.key}/>}/>
       </Routes>
     </div>
   );
