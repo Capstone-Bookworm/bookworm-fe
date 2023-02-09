@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from "react";
 import { useQuery, gql } from "@apollo/client";
 import LibraryBook from '../LibraryBook/LibraryBook'
+import './MyBooks.css'
 
 const MY_BOOKS = gql `
   query user {
@@ -74,7 +75,7 @@ const MyBooks = () => {
   }
 
   return (
-    <div>
+    <div className="mybooks-container">
       {getLibrary(availLibrary, true)}
       {getLibrary(pendingRequests, true)}
       {getLibrary(unavailLibrary, false)}
