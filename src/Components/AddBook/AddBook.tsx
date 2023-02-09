@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import './AddBook.css'
 import { gql, useQuery } from '@apollo/client'
 import BookSearch from '../BookSearch/BookSearch'
@@ -37,8 +37,6 @@ interface Book {
 const AddBook = () => {
   const [titleSearch, setTitle] = useState('')
   const [newTitle, setNewTitle] = useState('')
-  const [allBooks, setBooks] = useState([])
-  const [pageLoading, setLoading] = useState(true)
 
   const {data, loading, error} = useQuery(GOOGLE_BOOKS, {
     variables: { title: newTitle}
@@ -71,6 +69,7 @@ const AddBook = () => {
       ) : (
         data && <BookSearch searchResults={data.googleBooks}/>
       )}
+      {newTitle === '' && <h1>Search a title above to find a book to add to your library</h1>}
       </div>
     </section>
   )

@@ -40,7 +40,7 @@ function App() {
         <Route path='/' element={<Login/>}/>
         <Route path='/dashboard' element={<Dashboard />}/>
         <Route path='/dashboard/my-borrowed-books'/>
-        <Route path='/dashboard/add-book' />
+        <Route path='/dashboard/add-book' element={<AddBook/>}/>
         <Route path='/dashboard/pending-requests' element={<PendingRequests />}/>
         <Route path='/home' element={<Home />} />
         <Route path='/details/:id' element={<BookDetails key={location.key}/>}/>
