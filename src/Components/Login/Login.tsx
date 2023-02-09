@@ -25,11 +25,28 @@ const GET_USER = gql `
   }
 `
 
+const CREATE_USER = gql `
+  mutation{
+    createUser(input: {
+      userName: "Zuko",
+      emailAddress: "zuko@example.com",
+      location: "Denver"
+  }) { user {
+          id
+          userName
+          emailAddress
+          location
+          }
+     }
+  }
+`
+
 const Login = ( { handleSetUser }: { handleSetUser: (user: any) => void}) => {
   const [ email, setEmail] = useState('')
   const [ login, setLogin ] = useState('')
-  const [ user, setUser] = useState('')
   const [ activeAccount, setAccount] = useState(true)
+  const [ username, setUsername ] = useState('')
+  const [ userLocation, setUserLocation ] = useState('')
 
 
 
@@ -49,24 +66,6 @@ const Login = ( { handleSetUser }: { handleSetUser: (user: any) => void}) => {
     }
   }, [data])
 
-  // const verifyLogin = () => {
-  //   setUsername('joshua@gmail.com')
-  // }
-
-
-  // const verifyLogin = () => {
-  //    let noUser = allUsers.map(user => {
-  //     if(user.emailAddress !== email){
-  //       setLoginError(true)
-  //       setErrorMessage("Could not find that email please try again")
-  //       setEmail('')
-  //     } else {
-  //       setAccount(true)
-  //       navigate("/home")      
-  //     }
-  //   }) 
-  //     return noUser
-  // }
 
   // const createUser = () => {
   //   if(username === '') {
@@ -116,7 +115,7 @@ const Login = ( { handleSetUser }: { handleSetUser: (user: any) => void}) => {
             value={email}
             onChange={event => setEmail(event.target.value)}
           />
-          {/* {activeAccount === false &&
+          {activeAccount === false &&
           <input 
             type='text'
             className='username-login' 
@@ -124,8 +123,8 @@ const Login = ( { handleSetUser }: { handleSetUser: (user: any) => void}) => {
             required
             value={username}
             onChange={event => setUsername(event.target.value)}
-            />} */}
-          {/* {activeAccount === false && 
+            />}
+          {activeAccount === false && 
           <input 
             type='text'
             className='location-login' 
@@ -133,16 +132,16 @@ const Login = ( { handleSetUser }: { handleSetUser: (user: any) => void}) => {
             required
             value={userLocation}
             onChange={event => setUserLocation(event.target.value)}
-            />} */}
+            />}
           {activeAccount === true && <input type="submit" value="Submit" className='login-btn' />}
-          {/* {activeAccount === false && <button className='login-btn' onClick={createUser}>Create Account</button>} */}
+          {activeAccount === false && <button className='login-btn' onClick={createUser}>Create Account</button>}
         </form>
         </div>
-        {/* <div className='create-acct'>
+        <div className='create-acct'>
           {activeAccount === true && <h3>Don't have an account? </h3>}
           {activeAccount === true && <button className='login-btn' onClick={() => setAccount(false)}>Create New Account</button>}
           {activeAccount === false && <button className='login-btn' onClick={() => setAccount(true)}>Return to Login</button>}
-        </div> */}
+        </div>
       </section>
     </main>
   )
