@@ -54,7 +54,7 @@ function App() {
       {location.pathname !== '/' && <Navbar />}
       {getDashboardDisplay()}
       <Routes>
-        <Route path='/' element={<Login/>}/>
+        <Route path='/' element={<Login handleSetUser={handleSetUser}/>}/>
         <Route path='/dashboard' element={<Dashboard />}/>
         <Route path='/dashboard/my-borrowed-books'/>
         <Route path='/dashboard/add-book' />
