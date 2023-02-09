@@ -27,16 +27,14 @@ const GET_USER = gql `
 const Login = () => {
   const [email, setEmail] = useState('')
   const [ login, setLogin ] = useState('')
-  const [username, setUsername] = useState('')
-  const [userLocation, setUserLocation] = useState('')
+  const [user, setUser] = useState('')
   const [activeAccount, setAccount] = useState(true)
-  const [loginError, setLoginError] = useState(false)
-  const [errorMessage, setErrorMessage] = useState('')
-  // const [allUsers, setUsers] = useState([{emailAddress: "joshua@gmail.com", userName: "Joshua", location: "Colorado"}])
+  // const [errorMessage, setErrorMessage] = useState('')
+  // const [ error, setError ] = useState(false)
 
   let navigate = useNavigate()
 
-  const userQuery = useQuery(GET_USER, {
+  const {loading, error, data } = useQuery(GET_USER, {
     variables: { emailAddress: login }
   })
 
@@ -46,11 +44,19 @@ const Login = () => {
   }
 
   useEffect(() => {
-    if(userQuery) {
-      console.log(userQuery.data)
+    if(data) {
+      // setUser(userQuery.data)
+      // setError(false)
+      console.log(data)
     }
-  }, [userQuery])
+  }, [data])
   
+  // useEffect(() => {
+  //   if(userQuery.error) {
+  //       setError(true)
+  //   }
+  // }, [error])
+
   // const verifyLogin = () => {
   //   setUsername('joshua@gmail.com')
   // }
@@ -70,34 +76,44 @@ const Login = () => {
   //     return noUser
   // }
 
-  const createUser = () => {
-    if(username === '') {
-      setLoginError(true)
-      setErrorMessage("Please fill in a username")
-    }
-    if(email === '') {
-      setLoginError(true)
-      setErrorMessage("Please fill in an email")
-    }
-    if(userLocation === '') {
-      setLoginError(true)
-      setErrorMessage("Please fill in a location")
-      console.log("Email: ", email, "Username: ", username);
+  // const createUser = () => {
+  //   if(username === '') {
+  //     setLoginError(true)
+  //     setErrorMessage("Please fill in a username")
+  //   }
+  //   if(email === '') {
+  //     setLoginError(true)
+  //     setErrorMessage("Please fill in an email")
+  //   }
+  //   if(userLocation === '') {
+  //     setLoginError(true)
+  //     setErrorMessage("Please fill in a location")
+  //     console.log("Email: ", email, "Username: ", username);
       
+  //   } else {
+  //     let newUser = {userName: username, emailAddress: email, location: userLocation}
+  //     setEmail('')
+  //     setUsername('')
+  //     setUserLocation('')
+  //     navigate("/home")
+  //   } 
+  // }
+
+  const getError = () => {
+    if(!login && error) {
+      return false
+    } else if (login && error) {
+      return true
     } else {
-      let newUser = {userName: username, emailAddress: email, location: userLocation}
-      setEmail('')
-      setUsername('')
-      setUserLocation('')
-      navigate("/home")
-    } 
+      return false
+    }
   }
 
   return (
     <section className='login-page'>
       <div className='login-container'>
       <h1 className='page-title'>Book Worm</h1>
-      {loginError === true && <h3>{errorMessage}</h3>}
+      {getError() && <h3>We couldn't find your account, please try again</h3>}
       <form onSubmit={event => handleSubmit(event)}>
         <input 
           type='email'
