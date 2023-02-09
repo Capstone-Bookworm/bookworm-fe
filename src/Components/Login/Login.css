@@ -6,26 +6,51 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  background-image: url(../../../public/reading-room.jpg);
 }
 
 .login-container{
-  height: 50vh;
-  width: 50vw;
+  height: 30vh;
+  width: 30vw;
   border: solid 3px black;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-around;
   box-shadow: 3px 3px 3px black;
+  background-color: white;
 }
 
 .login-btn {
   border-radius: 5px;
   cursor: pointer;
   border: none;
+  background-color: white;
+  font-size: large;
+  color: blue;
+  height: 4vh;
 }
 
 .login-btn:hover {
-  background-color: black;
+  background-color: blue;
   color: white;
+}
+
+.page-title {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  color: black;
+  font-size: x-large;
+}
+
+.create-acct {
+  height: 10vh;
+  width: 30vw;
+  border: solid 3px black;
+  box-shadow: 3px 3px 3px black;
+  background-color: white;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  margin-top: 20px;
 }

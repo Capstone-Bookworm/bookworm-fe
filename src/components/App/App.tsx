@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import './App.css';
-import { Routes, Route, useLocation } from 'react-router-dom'
+import { Routes, Route, useLocation, useNavigate } from 'react-router-dom'
 import Navbar from '../Navbar/Navbar';
 import Login from '../Login/Login';
 
@@ -20,9 +20,27 @@ interface Location {
   key: string
 }
 
+interface User {
+  userName: string;
+  location: string;
+  emailAddress: string;
+  __typename: string;
+}
 
 function App() {
   let location: Location = useLocation()
+  const navigate = useNavigate()
+
+  const [ currentUser, setCurrentUser ] = useState([])
+
+  const handleSetUser = (user:any) => {
+    setCurrentUser(user)
+  }
+
+  useEffect(() => {
+    navigate('/home')
+  }, [currentUser])
+
 
   const getDashboardDisplay = () => {
     if(location.pathname === '/dashboard/my-borrowed-books' || location.pathname === '/dashboard' || location.pathname === '/dashboard/add-book' || location.pathname === '/dashboard/pending-requests') {
@@ -30,12 +48,13 @@ function App() {
     }
   }
 
+
   return (
     <div>
       {location.pathname !== '/' && <Navbar />}
       {getDashboardDisplay()}
       <Routes>
-        <Route path='/' element={<Login/>}/>
+        <Route path='/' element={<Login handleSetUser={handleSetUser}/>}/>
         <Route path='/dashboard' element={<Dashboard />}/>
         <Route path='/dashboard/my-borrowed-books'/>
         <Route path='/dashboard/add-book' />
