@@ -14,6 +14,7 @@ import { verify } from 'crypto'
 //   }
 // `
 
+
 const GET_USER = gql `
   query userLogin($emailAddress: String!) {
     userLogin(emailAddress: $emailAddress) {
@@ -24,15 +25,13 @@ const GET_USER = gql `
   }
 `
 
-const Login = () => {
-  const [email, setEmail] = useState('')
+const Login = ( { handleSetUser }: { handleSetUser: (user: any) => void}) => {
+  const [ email, setEmail] = useState('')
   const [ login, setLogin ] = useState('')
-  const [user, setUser] = useState('')
-  const [activeAccount, setAccount] = useState(true)
-  // const [errorMessage, setErrorMessage] = useState('')
-  // const [ error, setError ] = useState(false)
+  const [ user, setUser] = useState('')
+  const [ activeAccount, setAccount] = useState(true)
 
-  let navigate = useNavigate()
+
 
   const {loading, error, data } = useQuery(GET_USER, {
     variables: { emailAddress: login }
@@ -45,17 +44,10 @@ const Login = () => {
 
   useEffect(() => {
     if(data) {
-      // setUser(userQuery.data)
-      // setError(false)
+      handleSetUser(data)
       console.log(data)
     }
   }, [data])
-  
-  // useEffect(() => {
-  //   if(userQuery.error) {
-  //       setError(true)
-  //   }
-  // }, [error])
 
   // const verifyLogin = () => {
   //   setUsername('joshua@gmail.com')
@@ -109,48 +101,50 @@ const Login = () => {
     }
   }
 
-  return (
-    <section className='login-page'>
-      <div className='login-container'>
-      <h1 className='page-title'>Book Worm</h1>
-      {getError() && <h3>We couldn't find your account, please try again</h3>}
-      <form onSubmit={event => handleSubmit(event)}>
-        <input 
-          type='email'
-          className='email-login' 
-          placeholder='Email'
-          required
-          value={email}
-          onChange={event => setEmail(event.target.value)}
-        />
-        {/* {activeAccount === false &&
-        <input 
-          type='text'
-          className='username-login' 
-          placeholder='Username'
-          required
-          value={username}
-          onChange={event => setUsername(event.target.value)}
-          />} */}
-        {/* {activeAccount === false && 
-        <input 
-          type='text'
-          className='location-login' 
-          placeholder='Location (City, State)'
-          required
-          value={userLocation}
-          onChange={event => setUserLocation(event.target.value)}
-          />} */}
-         {activeAccount === true && <input type="submit" value="Submit" className='login-btn' />}
-         {/* {activeAccount === false && <button className='login-btn' onClick={createUser}>Create Account</button>} */}
-      </form>
-      </div>
-      {/* <div className='create-acct'>
-        {activeAccount === true && <h3>Don't have an account? </h3>}
-        {activeAccount === true && <button className='login-btn' onClick={() => setAccount(false)}>Create New Account</button>}
-        {activeAccount === false && <button className='login-btn' onClick={() => setAccount(true)}>Return to Login</button>}
-      </div> */}
-    </section>
+  return ( 
+    <main> 
+      <section className='login-page'>
+        <div className='login-container'>
+        <h1 className='page-title'>Book Worm</h1>
+        {getError() && <h3>We couldn't find your account, please try again</h3>}
+        <form onSubmit={event => handleSubmit(event)}>
+          <input 
+            type='email'
+            className='email-login' 
+            placeholder='Email'
+            required
+            value={email}
+            onChange={event => setEmail(event.target.value)}
+          />
+          {/* {activeAccount === false &&
+          <input 
+            type='text'
+            className='username-login' 
+            placeholder='Username'
+            required
+            value={username}
+            onChange={event => setUsername(event.target.value)}
+            />} */}
+          {/* {activeAccount === false && 
+          <input 
+            type='text'
+            className='location-login' 
+            placeholder='Location (City, State)'
+            required
+            value={userLocation}
+            onChange={event => setUserLocation(event.target.value)}
+            />} */}
+          {activeAccount === true && <input type="submit" value="Submit" className='login-btn' />}
+          {/* {activeAccount === false && <button className='login-btn' onClick={createUser}>Create Account</button>} */}
+        </form>
+        </div>
+        {/* <div className='create-acct'>
+          {activeAccount === true && <h3>Don't have an account? </h3>}
+          {activeAccount === true && <button className='login-btn' onClick={() => setAccount(false)}>Create New Account</button>}
+          {activeAccount === false && <button className='login-btn' onClick={() => setAccount(true)}>Return to Login</button>}
+        </div> */}
+      </section>
+    </main>
   )
 }
 
