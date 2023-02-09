@@ -1,44 +1,74 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import './Login.css'
 import { useQuery, gql } from '@apollo/client'
+import { verify } from 'crypto'
 
-const ALL_USERS = gql `
-  query AllUsers {
-    users {
+// const ALL_USERS = gql `
+//   query AllUsers {
+//     users {
+//       userName
+//       emailAddress
+//       location
+//     }
+//   }
+// `
+
+const GET_USER = gql `
+  query userLogin($emailAddress: String!) {
+    userLogin(emailAddress: $emailAddress) {
       userName
-      emailAddress
       location
-    }
+      emailAddress
+  }
   }
 `
 
 const Login = () => {
   const [email, setEmail] = useState('')
+  const [ login, setLogin ] = useState('')
   const [username, setUsername] = useState('')
   const [userLocation, setUserLocation] = useState('')
   const [activeAccount, setAccount] = useState(true)
   const [loginError, setLoginError] = useState(false)
   const [errorMessage, setErrorMessage] = useState('')
-  const [allUsers, setUsers] = useState([{emailAddress: "joshua@gmail.com", userName: "Joshua", location: "Colorado"}])
+  // const [allUsers, setUsers] = useState([{emailAddress: "joshua@gmail.com", userName: "Joshua", location: "Colorado"}])
 
   let navigate = useNavigate()
 
-  const { data, loading, error } = useQuery(ALL_USERS)
-  
-  const verifyLogin = () => {
-     let noUser = allUsers.map(user => {
-      if(user.emailAddress !== email){
-        setLoginError(true)
-        setErrorMessage("Could not find that email please try again")
-        setEmail('')
-      } else {
-        setAccount(true)
-        navigate("/home")      
-      }
-    }) 
-      return noUser
+  const userQuery = useQuery(GET_USER, {
+    variables: { emailAddress: login }
+  })
+
+  const handleSubmit = (event:any) => {
+    event.preventDefault()
+    setLogin(email)
   }
+
+  useEffect(() => {
+    if(userQuery) {
+      console.log(userQuery.data)
+    }
+  }, [userQuery])
+  
+  // const verifyLogin = () => {
+  //   setUsername('joshua@gmail.com')
+  // }
+
+
+  // const verifyLogin = () => {
+  //    let noUser = allUsers.map(user => {
+  //     if(user.emailAddress !== email){
+  //       setLoginError(true)
+  //       setErrorMessage("Could not find that email please try again")
+  //       setEmail('')
+  //     } else {
+  //       setAccount(true)
+  //       navigate("/home")      
+  //     }
+  //   }) 
+  //     return noUser
+  // }
 
   const createUser = () => {
     if(username === '') {
@@ -68,6 +98,7 @@ const Login = () => {
       <div className='login-container'>
       <h1 className='page-title'>Book Worm</h1>
       {loginError === true && <h3>{errorMessage}</h3>}
+      <form onSubmit={event => handleSubmit(event)}>
         <input 
           type='email'
           className='email-login' 
@@ -76,7 +107,7 @@ const Login = () => {
           value={email}
           onChange={event => setEmail(event.target.value)}
         />
-        {activeAccount === false &&
+        {/* {activeAccount === false &&
         <input 
           type='text'
           className='username-login' 
@@ -84,8 +115,8 @@ const Login = () => {
           required
           value={username}
           onChange={event => setUsername(event.target.value)}
-          />}
-        {activeAccount === false && 
+          />} */}
+        {/* {activeAccount === false && 
         <input 
           type='text'
           className='location-login' 
@@ -93,15 +124,16 @@ const Login = () => {
           required
           value={userLocation}
           onChange={event => setUserLocation(event.target.value)}
-          />}
-         {activeAccount === true && <button className='login-btn' onClick={verifyLogin}>Login</button>}
-         {activeAccount === false && <button className='login-btn' onClick={createUser}>Create Account</button>}
+          />} */}
+         {activeAccount === true && <input type="submit" value="Submit" className='login-btn' />}
+         {/* {activeAccount === false && <button className='login-btn' onClick={createUser}>Create Account</button>} */}
+      </form>
       </div>
-      <div className='create-acct'>
+      {/* <div className='create-acct'>
         {activeAccount === true && <h3>Don't have an account? </h3>}
         {activeAccount === true && <button className='login-btn' onClick={() => setAccount(false)}>Create New Account</button>}
         {activeAccount === false && <button className='login-btn' onClick={() => setAccount(true)}>Return to Login</button>}
-      </div>
+      </div> */}
     </section>
   )
 }
