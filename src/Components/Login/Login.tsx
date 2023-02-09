@@ -3,15 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import './Login.css'
 import { useQuery, gql } from '@apollo/client'
 
-const ALL_USERS = gql `
-  query AllUsers {
-    users {
-      userName
-      emailAddress
-      location
-    }
-  }
-`
+
 
 const Login = () => {
   const [email, setEmail] = useState('')
@@ -23,9 +15,8 @@ const Login = () => {
   const [allUsers, setUsers] = useState([{emailAddress: "joshua@gmail.com", userName: "Joshua", location: "Colorado"}])
 
   let navigate = useNavigate()
-
-  const { data, loading, error } = useQuery(ALL_USERS)
   
+
   const verifyLogin = () => {
      let noUser = allUsers.map(user => {
       if(user.emailAddress !== email){
