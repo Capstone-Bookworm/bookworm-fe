@@ -8,24 +8,25 @@
   justify-content: space-evenly;
 }
 
-.book-card {
-  border: solid 3px black;
+.book-card{
   position: relative;
   display: flex;
   flex-direction: column;
-  justify-content: flex-end;
+  justify-content: center;
+  align-items: center;
   height: 40vh;
   width: 15vw;
 }
 
 .add-btn {
-  position: relative;
+  position:relativegit ;
   cursor: pointer;
+  width: 100%;
 }
 
 .book-image {
-  position: absolute;
   display: block;
+  position: relative;
   height: 100%;
   width: 100%;
   box-shadow: 3px 3px 3px black;
@@ -39,7 +40,7 @@
   height: 100%;
   background: rgba(0, 0, 0, 0.6);
   color: white;
-  display: flex;
+  display: grid;
   flex-direction: column;
   align-items: center;
   justify-content: center;
