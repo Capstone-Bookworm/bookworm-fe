@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import './Login.css'
-import { useQuery, gql } from '@apollo/client'
+import { useQuery, useMutation, gql } from '@apollo/client'
 import { verify } from 'crypto'
 
 // const ALL_USERS = gql `
@@ -26,11 +26,11 @@ const GET_USER = gql `
 `
 
 const CREATE_USER = gql `
-  mutation{
+  mutation createUser ($userName: String!, $emailAddress: String!, $location: String!) {
     createUser(input: {
-      userName: "Zuko",
-      emailAddress: "zuko@example.com",
-      location: "Denver"
+      userName: $userName
+      emailAddress: $emailAddress
+      location: $location
   }) { user {
           id
           userName
@@ -54,9 +54,7 @@ const Login = ( { handleSetUser }: { handleSetUser: (user: any) => void}) => {
     variables: { emailAddress: login }
   })
 
-  const createAccountMutation = useQuery(CREATE_USER, {
-
-  })
+  const [ createAccount ] = useMutation(CREATE_USER)
 
   const handleSubmit = (event:any) => {
     event.preventDefault()
@@ -77,7 +75,14 @@ const Login = ( { handleSetUser }: { handleSetUser: (user: any) => void}) => {
 
   const handleNewAccount = () => {
     if (username && email && userLocation) {
-      // set
+      createAccount({
+        variables: {
+          userName: username,
+          emailAddress: email,
+          location: userLocation,
+        }
+      })
+      setAccount(true)
     }
   }
 
