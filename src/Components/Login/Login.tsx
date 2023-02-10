@@ -10,6 +10,7 @@ const GET_USER = gql `
       userName
       location
       emailAddress
+      id
   }
   }
 `
@@ -37,8 +38,6 @@ const Login = ( { handleSetUser }: { handleSetUser: (user: any) => void}) => {
   const [ username, setUsername ] = useState('')
   const [ userLocation, setUserLocation ] = useState('')
   const [ accountToCreate, setAccountToCreate ] = useState('')
-
-
 
   const userQuery = useQuery(GET_USER, {
     variables: { emailAddress: login }

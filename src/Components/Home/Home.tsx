@@ -40,7 +40,7 @@ const Home: React.FC = () => {
     }
   }, [data])
 
-  const bookList: JSX.Element[] = bookData?.map((book: any) => {
+  const bookList: JSX.Element[] = bookData?.map((book: book) => {
     return (
       <Book
       key={book.id}
