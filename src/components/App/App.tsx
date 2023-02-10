@@ -32,7 +32,7 @@ function App() {
   let location: Location = useLocation()
   const navigate = useNavigate()
 
-  const [ currentUser, setCurrentUser ] = useState(localStorage.cuurentUser)
+  const [ currentUser, setCurrentUser ] = useState(localStorage.currentUser)
 
   const handleSetUser = (user:any) => {
     localStorage.setItem('currentUser', JSON.stringify(user.userLogin))
