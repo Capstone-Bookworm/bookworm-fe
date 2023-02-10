@@ -22,7 +22,6 @@ const REQUESTS = gql `
   }
 `
 
-
 const PendingRequests = () => {
 const { loading, error, data } = useQuery(REQUESTS)
 const [ pendingRequests, setPendingRequests ] = useState([])

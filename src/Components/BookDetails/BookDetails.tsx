@@ -22,12 +22,12 @@ const BOOK_DETAILS = gql `
   }
 `
 const BORROW_BOOK = gql `
-  mutation BorrowBook( $userId: ID!, $bookId: ID!, $borrowerId: ID!, $status: Integer!) {
+  mutation BorrowBook( $userId: ID!, $bookId: Int!, $borrowerId: Int!, $status: Int!) {
     patchUserBook(input: {
       userId: $userId
       bookId: $bookId
-      borrowId: $borrowerId
-      status: 1
+      borrowerId: $borrowerId
+      status: $status
     }) 
     { userBook {
       bookId
@@ -58,7 +58,6 @@ interface currentUser {
 }
 
 const BookDetails: React.FC<currentUser | any> = (props) => {
-  console.log('PROPS ID', props.currentUser.userLogin.id)
   const [ selectedUser, setSelectedUser ] = useState('')
   const { id } = useParams()
 
@@ -82,10 +81,13 @@ const BookDetails: React.FC<currentUser | any> = (props) => {
   }
 
   const borrowBook = () => {
+    console.log('SELECTED USER', typeof selectedUser)
+    console.log('BOOK ID', typeof id)
+    console.log('current user id', typeof props.currentUser.userLogin.id)
     borrowABook({
       variables: {
         userId: selectedUser,
-        bookId: detailsQuery.data.id,
+        bookId: id,
         borrowerId: props.currentUser.userLogin.id,
         status: 1
       }
