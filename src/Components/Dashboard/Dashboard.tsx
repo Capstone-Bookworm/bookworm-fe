@@ -8,7 +8,6 @@ interface Location {
   key: string
 }
 
-
 const Dashboard = () => {
   return (
     <div>

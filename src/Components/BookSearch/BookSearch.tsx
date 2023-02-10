@@ -41,6 +41,7 @@ const ADD_BOOK = gql `
 
 const BookSearch = ({searchResults, currentUser}: Books) => {
 const [allBooks, setBooks] = useState(searchResults)
+const [saveMessage, setSaveMessage] = useState('')
 
 const [ addBook ] = useMutation(ADD_BOOK)
 
@@ -59,7 +60,7 @@ const [ addBook ] = useMutation(ADD_BOOK)
         imageUrl: selectedBook[0].imageUrl
       }
     })
-     
+
   }
 
   return (

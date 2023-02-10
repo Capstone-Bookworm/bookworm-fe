@@ -43,7 +43,7 @@ interface UserBook {
 
 const MyBooks = () => {
   
-  const { loading, error, data } = useQuery(MY_BOOKS)
+  const { loading, error, data, refetch } = useQuery(MY_BOOKS)
   const [ availLibrary, setAvailLibrary ] = useState([])
   const [ unavailLibrary, setUnavailLibrary ] = useState([])
   const [ pendingRequests, setPendingRequests ] = useState([])
@@ -52,6 +52,7 @@ const MyBooks = () => {
   
   useEffect(() => {
     if(data){
+      refetch()
       setAvailLibrary(data.user.availableBooks)
       setUnavailLibrary(data.user.unavailableBooks)
       setPendingRequests(data.user.pendingRequested)
