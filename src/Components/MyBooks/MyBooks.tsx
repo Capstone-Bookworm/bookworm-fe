@@ -47,8 +47,6 @@ const MyBooks = () => {
   const [ availLibrary, setAvailLibrary ] = useState([])
   const [ unavailLibrary, setUnavailLibrary ] = useState([])
   const [ pendingRequests, setPendingRequests ] = useState([])
-
-  console.log(data?.user.availableBooks)
   
   useEffect(() => {
     if(data){
