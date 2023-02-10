@@ -10,6 +10,7 @@ const GET_USER = gql `
       userName
       location
       emailAddress
+      id
   }
   }
 `

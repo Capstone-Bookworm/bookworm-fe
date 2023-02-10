@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { gql, useQuery } from '@apollo/client'
+import { gql, useQuery, useMutation } from '@apollo/client'
 import Request from "../Request/Request";
+import { User } from '../../Interfaces'
 
 const REQUESTS = gql `
   query user {
@@ -22,22 +23,59 @@ const REQUESTS = gql `
   }
 `
 
+const CHANGE_AVAILABLE = gql `
+  mutation patchUserBook ($userId: ID!, $bookId: ID!, $borrowerId: ID!, $status: Int!) {
+    patchUserBook(input: {
+        userId: $userId
+        bookId: $bookId
+        borrowerId:  $borrowerId
+        status: $status
+    }) { userBook {
+            bookId
+            }
+      }
+  }
+`
 
-const PendingRequests = () => {
-const { loading, error, data } = useQuery(REQUESTS)
+
+const PendingRequests = ({ currentUser }: { currentUser: User }) => {
+const { loading, error, data, refetch } = useQuery(REQUESTS)
 const [ pendingRequests, setPendingRequests ] = useState([])
-
+const [ changeAvailability ] = useMutation(CHANGE_AVAILABLE)
 
 useEffect(() => {
   if(data) {
-    console.log(data.user.pendingRequested)
     setPendingRequests(data.user.pendingRequested)
   }
 }, [data])
 
+const denyRequest = (bookId: number, borrowerId: number, status: number) => {
+  changeAvailability({
+    variables: {
+        userId: currentUser.id,
+        bookId: bookId,
+        borrowerId: borrowerId,
+        status: status
+    }
+  })
+  refetch()
+}
+
+const acceptRequest = (bookId: number, borrowerId: number, status: number) => {
+  changeAvailability({
+    variables: {
+      userId: currentUser.id,
+        bookId: bookId,
+        borrowerId: borrowerId,
+        status: status
+    }
+  })
+  refetch()
+}
+
+
 const getRequests = () => {
   if(data) {
-    console.log(pendingRequests)
     return pendingRequests.map((request:any) => {
      return <Request 
        key={request.id}
@@ -48,6 +86,9 @@ const getRequests = () => {
        borrowerId={request.borrower.id}
        borrowerLocation={request.borrower.location}
        borrowerEmailAddress={request.borrower.emailAddress}
+       currentUser={currentUser}
+       denyRequest={denyRequest}
+       acceptRequest={acceptRequest}
      />
      })
   }

@@ -3,7 +3,7 @@ import './App.css';
 import { Routes, Route, useLocation, useNavigate } from 'react-router-dom'
 import Navbar from '../Navbar/Navbar';
 import Login from '../Login/Login';
-
+import { User, Location } from '../../Interfaces'
 import Dashboard from '../Dashboard/Dashboard'
 import DashboardMenu from '../DashboardMenu/DashboardMenu'
 import { useQuery, gql } from '@apollo/client';
@@ -12,33 +12,19 @@ import Home from '../Home/Home';
 import BookDetails from '../BookDetails/BookDetails';
 
 
-interface Location {
-  pathname: string,
-  search: string,
-  hash: string,
-  state: null,
-  key: string
-}
-
-interface User {
-  userName: string;
-  location: string;
-  emailAddress: string;
-  __typename: string;
-}
-
 function App() {
   let location: Location = useLocation()
   const navigate = useNavigate()
 
-  const [ currentUser, setCurrentUser ] = useState([])
+  const [ currentUser, setCurrentUser ] = useState<User>()
 
-  const handleSetUser = (user:any) => {
+  const handleSetUser = (user:User) => {
     setCurrentUser(user)
   }
 
   useEffect(() => {
     navigate('/home')
+    console.log(currentUser)
   }, [currentUser])
 
 
@@ -58,7 +44,7 @@ function App() {
         <Route path='/dashboard' element={<Dashboard />}/>
         <Route path='/dashboard/my-borrowed-books'/>
         <Route path='/dashboard/add-book' />
-        <Route path='/dashboard/pending-requests' element={<PendingRequests />}/>
+        <Route path='/dashboard/pending-requests' element={<PendingRequests currentUser={currentUser!}/>}/>
         <Route path='/home' element={<Home />} />
         <Route path='/details/:id' element={<BookDetails key={location.key}/>}/>
       </Routes>
