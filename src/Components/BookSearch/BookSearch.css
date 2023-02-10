@@ -19,7 +19,6 @@
 }
 
 .add-btn {
-  position:relativegit ;
   cursor: pointer;
   width: 100%;
 }
@@ -51,3 +50,4 @@
 .image-overlay:hover {
   opacity: 1;
 }
+

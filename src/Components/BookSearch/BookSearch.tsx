@@ -4,7 +4,14 @@ import { gql, useMutation } from '@apollo/client'
 
 interface Books {
   searchResults: Book[],
-  currentUser: any
+  currentUser: {
+    userLogin: {
+      emailAddress: string,
+      id: number,
+      userName: string,
+      location: string
+    }
+  }
 }
 
 interface Book {
@@ -74,8 +81,8 @@ const [ addBook ] = useMutation(ADD_BOOK)
             <p>Title: {book.title}</p>
             <p>Author: {book.author}</p>
             <p>Page Count: {book.pageCount}</p>
+            <button className='add-btn' onClick={() => addToLibrary(book.isbn)}>Add to Library</button>
           </div>
-          <button className='add-btn' onClick={() => addToLibrary(book.isbn)}>Add to Library</button>
         </div>
       )
       })}
