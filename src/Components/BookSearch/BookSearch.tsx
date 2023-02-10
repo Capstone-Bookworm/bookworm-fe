@@ -48,6 +48,7 @@ const ADD_BOOK = gql `
 
 const BookSearch = ({searchResults, currentUser}: Books) => {
 const [allBooks, setBooks] = useState(searchResults)
+const [savedBook, setSavedBook] = useState(false)
 const [saveMessage, setSaveMessage] = useState('')
 
 const [ addBook ] = useMutation(ADD_BOOK)
@@ -67,25 +68,29 @@ const [ addBook ] = useMutation(ADD_BOOK)
         imageUrl: selectedBook[0].imageUrl
       }
     })
-
+    setSavedBook(true)
+    setSaveMessage(`Added ${selectedBook[0].title} to ${currentUser.userLogin.userName}'s books`)
   }
 
   return (
-    <div className='book-card-container'>
-      {allBooks.map((book: Book) => {
-      return (
-        <div className='book-card'>
-          <img className='book-image' src={book.imageUrl} alt={`image of ${book.title}`}></img>
-          <div className='image-overlay'>
-            <p>Isbn: {book.isbn}</p>
-            <p>Title: {book.title}</p>
-            <p>Author: {book.author}</p>
-            <p>Page Count: {book.pageCount}</p>
-            <button className='add-btn' onClick={() => addToLibrary(book.isbn)}>Add to Library</button>
+    <div className='book-page-container'>
+      {savedBook && <h2>{saveMessage}</h2>}
+      <div className='book-card-container'>
+        {allBooks.map((book: Book) => {
+        return (
+          <div className='book-card'>
+            <img className='book-image' src={book.imageUrl} alt={`image of ${book.title}`}></img>
+            <div className='image-overlay'>
+              <p>Isbn: {book.isbn}</p>
+              <p>Title: {book.title}</p>
+              <p>Author: {book.author}</p>
+              <p>Page Count: {book.pageCount}</p>
+              <button className='add-btn' onClick={() => addToLibrary(book.isbn)}>Add to Library</button>
+            </div>
           </div>
-        </div>
-      )
-      })}
+        )
+        })}
+      </div>
     </div>
   )
 }
