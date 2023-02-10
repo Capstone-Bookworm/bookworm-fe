@@ -18,13 +18,12 @@ function App() {
 
   const [ currentUser, setCurrentUser ] = useState<User>()
 
-  const handleSetUser = (user:User) => {
-    setCurrentUser(user)
+  const handleSetUser = (user:any) => {
+    setCurrentUser(user.userLogin)
   }
 
   useEffect(() => {
     navigate('/home')
-    console.log(currentUser)
   }, [currentUser])
 
 

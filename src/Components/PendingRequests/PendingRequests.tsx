@@ -24,11 +24,11 @@ const REQUESTS = gql `
 `
 
 const CHANGE_AVAILABLE = gql `
-  mutation patchUserBook ($userId: ID!, $bookId: ID!, $borrowerId: ID!, $status: Int!) {
+  mutation patchUserBook ($userId: String!, $bookId: Int!, $borrowerId: Int!, $status: Int!) {
     patchUserBook(input: {
         userId: $userId
         bookId: $bookId
-        borrowerId:  $borrowerId
+        borrowerId: $borrowerId
         status: $status
     }) { userBook {
             bookId
@@ -49,7 +49,8 @@ useEffect(() => {
   }
 }, [data])
 
-const denyRequest = (bookId: number, borrowerId: number, status: number) => {
+const denyRequest = (bookId: string, borrowerId: string, status: number) => {
+  console.log(typeof currentUser.id, typeof bookId, typeof borrowerId, typeof status)
   changeAvailability({
     variables: {
         userId: currentUser.id,
@@ -61,7 +62,8 @@ const denyRequest = (bookId: number, borrowerId: number, status: number) => {
   refetch()
 }
 
-const acceptRequest = (bookId: number, borrowerId: number, status: number) => {
+const acceptRequest = (bookId: string, borrowerId: string, status: number) => {
+  console.log(typeof currentUser.id, typeof bookId, typeof borrowerId, typeof status)
   changeAvailability({
     variables: {
       userId: currentUser.id,

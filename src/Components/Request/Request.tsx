@@ -3,16 +3,16 @@ import './Request.css'
 import { User } from "../../Interfaces";
 
 interface Props {
-  id: number;
+  id: string;
   title: string;
   imageUrl: string;
   borrower: string;
-  borrowerId: number;
+  borrowerId: string;
   borrowerLocation: string;
   borrowerEmailAddress: string;
   currentUser: User,
-  denyRequest: (bookId: number, borrowerId: number, status: number) => void;
-  acceptRequest: (bookId: number, borrowerId: number, status: number) => void
+  denyRequest: (bookId: string, borrowerId: string, status: number) => void;
+  acceptRequest: (bookId: string, borrowerId: string, status: number) => void
 }
 
 
