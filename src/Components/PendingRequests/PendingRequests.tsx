@@ -4,8 +4,8 @@ import Request from "../Request/Request";
 import { User } from '../../Interfaces'
 
 const REQUESTS = gql `
-  query user {
-    user(id:1) {
+query user($id: ID!) {
+  user(id: $id){
       id
       userName
       pendingRequested {
@@ -53,7 +53,11 @@ const CHANGE_TO_UNAVAILABLE = gql `
 
 
 const PendingRequests = ({ currentUser }: { currentUser: User }) => {
-const { loading, error, data, refetch } = useQuery(REQUESTS)
+const { loading, error, data, refetch } = useQuery(REQUESTS, {
+  variables: {
+    id: currentUser.id
+  }
+})
 const [ pendingRequests, setPendingRequests ] = useState([])
 const [ changeToAvailable ] = useMutation(CHANGE_TO_AVAILABLE)
 const [ changeToUnavailable ] = useMutation(CHANGE_TO_UNAVAILABLE)
