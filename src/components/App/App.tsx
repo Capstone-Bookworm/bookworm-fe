@@ -40,7 +40,7 @@ function App() {
       {getDashboardDisplay()}
       <Routes>
         <Route path='/' element={<Login handleSetUser={handleSetUser}/>}/>
-        <Route path='/dashboard' element={<Dashboard />}/>
+        <Route path='/dashboard' element={<Dashboard currentUser={currentUser!}/>}/>
         <Route path='/dashboard/my-borrowed-books'/>
         <Route path='/dashboard/add-book' />
         <Route path='/dashboard/pending-requests' element={<PendingRequests currentUser={currentUser!}/>}/>

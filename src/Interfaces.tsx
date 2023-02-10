@@ -11,5 +11,13 @@ export interface User {
   location: string;
   emailAddress: string;
   __typename: string;
-  id: number
+  id: string
 }
+
+// export interface CurrentUser {
+//   userName?: string ;
+//   location?: string;
+//   id?: string;
+//   emailAddress?: string;
+//   __typename?: string; 
+// }

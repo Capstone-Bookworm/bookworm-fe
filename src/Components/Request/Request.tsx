@@ -11,8 +11,8 @@ interface Props {
   borrowerLocation: string;
   borrowerEmailAddress: string;
   currentUser: User,
-  denyRequest: (bookId: string, borrowerId: string, status: number) => void;
-  acceptRequest: (bookId: string, borrowerId: string, status: number) => void
+  denyRequest: (bookId: string, borrowerId: string) => void;
+  acceptRequest: (bookId: string, borrowerId: string) => void
 }
 
 
@@ -20,9 +20,13 @@ const Request = (props : Props) => {
 
 const handleRequestResponse = (event: any) => {
   if (event.target.id === "accept") {
-    props.acceptRequest(props.id, props.borrowerId, 2)
+    console.log('Event: ', event.target.id)
+    console.log('accept')
+    props.acceptRequest(props.id, props.borrowerId)
   } else if (event.target.id === "deny") {
-    props.denyRequest(props.id, props.borrowerId, 0)
+    console.log('Event: ', event.target.id)
+    console.log('deny')
+    props.denyRequest(props.id, props.borrowerId)
   }
 }
 

@@ -1,18 +1,13 @@
 import MyBooks from '../MyBooks/MyBooks'
-
-interface Location {
-  pathname: string,
-  search: string,
-  hash: string,
-  state: null,
-  key: string
-}
+import { Location, User } from '../../Interfaces'
 
 
-const Dashboard = () => {
+
+const Dashboard = ({ currentUser }: { currentUser: User } ) => {
+  console.log("Dash user", currentUser.id)
   return (
     <div>
-      <MyBooks />
+      <MyBooks currentUser={currentUser}/>
     </div>
   )
 }

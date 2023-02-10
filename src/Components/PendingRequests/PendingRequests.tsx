@@ -23,13 +23,27 @@ const REQUESTS = gql `
   }
 `
 
-const CHANGE_AVAILABLE = gql `
-  mutation patchUserBook ($userId: Int!, $bookId: Int!, $borrowerId: Int!, $status: Int!) {
+const CHANGE_TO_AVAILABLE = gql `
+  mutation patchUserBook ($userId: Int!, $bookId: Int!, $borrowerId: Int!) {
     patchUserBook(input: {
         userId: $userId
         bookId: $bookId
         borrowerId: $borrowerId
-        status: $status
+        status: 0
+    }) { userBook {
+            bookId
+            }
+      }
+  }
+`
+
+const CHANGE_TO_UNAVAILABLE = gql `
+  mutation patchUserBook ($userId: Int!, $bookId: Int!, $borrowerId: Int!) {
+    patchUserBook(input: {
+        userId: $userId
+        bookId: $bookId
+        borrowerId: $borrowerId
+        status: 2
     }) { userBook {
             bookId
             }
@@ -38,10 +52,11 @@ const CHANGE_AVAILABLE = gql `
 `
 
 
-const PendingRequests = ({ currentUser }: { currentUser: any }) => {
+const PendingRequests = ({ currentUser }: { currentUser: User }) => {
 const { loading, error, data, refetch } = useQuery(REQUESTS)
 const [ pendingRequests, setPendingRequests ] = useState([])
-const [ changeAvailability ] = useMutation(CHANGE_AVAILABLE)
+const [ changeToAvailable ] = useMutation(CHANGE_TO_AVAILABLE)
+const [ changeToUnavailable ] = useMutation(CHANGE_TO_UNAVAILABLE)
 
 useEffect(() => {
   if(data) {
@@ -49,27 +64,26 @@ useEffect(() => {
   }
 }, [data])
 
-const denyRequest = (bookId: string, borrowerId: string, status: number) => {
-  console.log(typeof currentUser.id, typeof bookId, typeof borrowerId, typeof status)
-  changeAvailability({
+const denyRequest = (bookId: string, borrowerId: string) => {
+  changeToAvailable({
     variables: {
         userId: parseInt(currentUser.id),
         bookId: parseInt(bookId),
         borrowerId: parseInt(borrowerId),
-        status: status
+        status: 0
     }
   })
   refetch()
 }
 
-const acceptRequest = (bookId: string, borrowerId: string, status: number) => {
-  console.log(typeof currentUser.id, typeof bookId, typeof borrowerId, typeof status)
-  changeAvailability({
+const acceptRequest = (bookId: string, borrowerId: string) => {
+  console.log("this should work")
+  changeToUnavailable({
     variables: {
       userId: parseInt(currentUser.id),
       bookId: parseInt(bookId),
       borrowerId: parseInt(borrowerId),
-      status: status
+      status: 2
     }
   })
   refetch()
