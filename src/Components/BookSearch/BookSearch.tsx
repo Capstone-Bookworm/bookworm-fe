@@ -4,14 +4,6 @@ import { gql, useMutation } from '@apollo/client'
 
 interface Books {
   searchResults: Book[],
-  currentUser: {
-    userLogin: {
-      emailAddress: string,
-      id: number,
-      userName: string,
-      location: string
-    }
-  }
 }
 
 interface Book {
@@ -46,20 +38,24 @@ const ADD_BOOK = gql `
   }
 `
 
-const BookSearch = ({searchResults, currentUser}: Books) => {
+const BookSearch = ({searchResults}: Books) => {
 const [allBooks, setBooks] = useState(searchResults)
 const [savedBook, setSavedBook] = useState(false)
 const [saveMessage, setSaveMessage] = useState('')
 
 const [ addBook ] = useMutation(ADD_BOOK)
-
+  
   const addToLibrary = (isbn: any) => {
     let selectedBook = searchResults.filter(book => {
       return book.isbn === isbn
     })
+    let newObject: any = window.localStorage.getItem("currentUser")
+    let currentUser = JSON.parse(newObject)
+    console.log(currentUser)
+    
     addBook({
       variables: {
-        userId: currentUser.userLogin.id,
+        // userId: useableUser.id,
         isbn: selectedBook[0].isbn,
         title: selectedBook[0].title,
         author: selectedBook[0].author,
@@ -69,7 +65,7 @@ const [ addBook ] = useMutation(ADD_BOOK)
       }
     })
     setSavedBook(true)
-    setSaveMessage(`Added ${selectedBook[0].title} to ${currentUser.userLogin.userName}'s books`)
+    setSaveMessage(`Added ${selectedBook[0].title} to ${currentUser.userName}'s books`)
   }
 
   return (

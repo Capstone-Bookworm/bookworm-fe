@@ -32,12 +32,17 @@ function App() {
   let location: Location = useLocation()
   const navigate = useNavigate()
 
-  const [ currentUser, setCurrentUser ] = useState([])
+  const [ currentUser, setCurrentUser ] = useState(localStorage.cuurentUser)
 
   const handleSetUser = (user:any) => {
+    localStorage.setItem('currentUser', JSON.stringify(user.userLogin))
     setCurrentUser(user)
+    let newObject: any = window.localStorage.getItem("currentUser")
+    console.log("This is local storage", JSON.parse(newObject))
   }
 
+  
+  
   useEffect(() => {
     navigate('/home')
   }, [currentUser])
@@ -49,7 +54,7 @@ function App() {
     }
   }
 
-
+  
   return (
     <div>
       {location.pathname !== '/' && <Navbar />}
@@ -58,7 +63,7 @@ function App() {
         <Route path='/' element={<Login handleSetUser={handleSetUser}/>}/>
         <Route path='/dashboard' element={<Dashboard />}/>
         <Route path='/dashboard/my-borrowed-books'/>
-        <Route path='/dashboard/add-book' element={<AddBook currentUser={currentUser}/>}/>
+        <Route path='/dashboard/add-book' element={<AddBook/>}/>
         <Route path='/dashboard/pending-requests' element={<PendingRequests />}/>
         <Route path='/home' element={<Home />} />
         <Route path='/details/:id' element={<BookDetails key={location.key}/>}/>

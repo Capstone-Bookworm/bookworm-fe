@@ -34,7 +34,7 @@ interface Book {
   pageCount: number
 }
 
-const AddBook = ({currentUser}: any) => {
+const AddBook = () => {
   const [titleSearch, setTitle] = useState('')
   const [newTitle, setNewTitle] = useState('')
   
@@ -67,7 +67,7 @@ const AddBook = ({currentUser}: any) => {
       {loading ? (
         <h1>Loading ...</h1>
       ) : (
-        data && <BookSearch searchResults={data.googleBooks} currentUser={currentUser}/>
+        data && <BookSearch searchResults={data.googleBooks}/>
       )}
       {newTitle === '' && <h1>Search a title above to find a book to add to your library</h1>}
       </div>
