@@ -9,6 +9,7 @@ import PendingRequests from '../PendingRequests/PendingRequests';
 import Home from '../Home/Home';
 import BookDetails from '../BookDetails/BookDetails';
 import MyBooks from '../MyBooks/MyBooks';
+import BorrowedBooks from '../BorrowedBooks/BorrowedBooks';
 
 
 interface Location {
@@ -54,7 +55,7 @@ function App() {
       <Routes>
         <Route path='/' element={<Login handleSetUser={handleSetUser}/>}/>
         <Route path='/dashboard' element={<MyBooks />}/>
-        <Route path='/dashboard/my-borrowed-books'/>
+        <Route path='/dashboard/my-borrowed-books' element={< BorrowedBooks/>}/>
         <Route path='/dashboard/add-book' />
         <Route path='/dashboard/pending-requests' element={<PendingRequests />}/>
         <Route path='/home' element={<Home />} />
