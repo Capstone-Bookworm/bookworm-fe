@@ -24,7 +24,7 @@ const REQUESTS = gql `
 `
 
 const CHANGE_AVAILABLE = gql `
-  mutation patchUserBook ($userId: String!, $bookId: Int!, $borrowerId: Int!, $status: Int!) {
+  mutation patchUserBook ($userId: Int!, $bookId: Int!, $borrowerId: Int!, $status: Int!) {
     patchUserBook(input: {
         userId: $userId
         bookId: $bookId
@@ -38,7 +38,7 @@ const CHANGE_AVAILABLE = gql `
 `
 
 
-const PendingRequests = ({ currentUser }: { currentUser: User }) => {
+const PendingRequests = ({ currentUser }: { currentUser: any }) => {
 const { loading, error, data, refetch } = useQuery(REQUESTS)
 const [ pendingRequests, setPendingRequests ] = useState([])
 const [ changeAvailability ] = useMutation(CHANGE_AVAILABLE)
@@ -53,9 +53,9 @@ const denyRequest = (bookId: string, borrowerId: string, status: number) => {
   console.log(typeof currentUser.id, typeof bookId, typeof borrowerId, typeof status)
   changeAvailability({
     variables: {
-        userId: currentUser.id,
-        bookId: bookId,
-        borrowerId: borrowerId,
+        userId: parseInt(currentUser.id),
+        bookId: parseInt(bookId),
+        borrowerId: parseInt(borrowerId),
         status: status
     }
   })
@@ -66,10 +66,10 @@ const acceptRequest = (bookId: string, borrowerId: string, status: number) => {
   console.log(typeof currentUser.id, typeof bookId, typeof borrowerId, typeof status)
   changeAvailability({
     variables: {
-      userId: currentUser.id,
-        bookId: bookId,
-        borrowerId: borrowerId,
-        status: status
+      userId: parseInt(currentUser.id),
+      bookId: parseInt(bookId),
+      borrowerId: parseInt(borrowerId),
+      status: status
     }
   })
   refetch()
