@@ -36,9 +36,9 @@ function App() {
 
   const handleSetUser = (user:any) => {
     localStorage.setItem('currentUser', JSON.stringify(user.userLogin))
-    setCurrentUser(user)
     let newObject: any = window.localStorage.getItem("currentUser")
-    console.log("This is local storage", JSON.parse(newObject))
+    let newUser = JSON.parse(newObject)
+    setCurrentUser(newUser)
   }
 
   

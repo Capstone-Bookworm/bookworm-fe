@@ -45,17 +45,15 @@ const [saveMessage, setSaveMessage] = useState('')
 
 const [ addBook ] = useMutation(ADD_BOOK)
   
-  const addToLibrary = (isbn: any) => {
+  const addToLibrary = (isbn: string) => {
     let selectedBook = searchResults.filter(book => {
       return book.isbn === isbn
     })
     let newObject: any = window.localStorage.getItem("currentUser")
     let currentUser = JSON.parse(newObject)
-    console.log(currentUser)
-    
     addBook({
       variables: {
-        // userId: useableUser.id,
+        userId: currentUser.id,
         isbn: selectedBook[0].isbn,
         title: selectedBook[0].title,
         author: selectedBook[0].author,

@@ -25,15 +25,6 @@ interface Books {
   pageCount: Number
 }
 
-interface Book {
-  isbn: number,
-  title: string,
-  author: string,
-  imageUrl: string,
-  summary: string,
-  pageCount: number
-}
-
 const AddBook = () => {
   const [titleSearch, setTitle] = useState('')
   const [newTitle, setNewTitle] = useState('')
