@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import './Login.css'
 import { useQuery, useMutation, gql } from '@apollo/client'
-import { verify } from 'crypto'
 
 const GET_USER = gql `
   query userLogin($emailAddress: String!) {
@@ -10,6 +9,7 @@ const GET_USER = gql `
       userName
       location
       emailAddress
+      id
   }
   }
 `

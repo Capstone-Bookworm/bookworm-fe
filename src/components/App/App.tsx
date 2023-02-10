@@ -10,6 +10,7 @@ import { useQuery, gql } from '@apollo/client';
 import PendingRequests from '../PendingRequests/PendingRequests';
 import Home from '../Home/Home';
 import BookDetails from '../BookDetails/BookDetails';
+import AddBook from '../AddBook/AddBook';
 
 
 interface Location {
@@ -31,12 +32,17 @@ function App() {
   let location: Location = useLocation()
   const navigate = useNavigate()
 
-  const [ currentUser, setCurrentUser ] = useState([])
+  const [ currentUser, setCurrentUser ] = useState(localStorage.currentUser)
 
   const handleSetUser = (user:any) => {
-    setCurrentUser(user)
+    localStorage.setItem('currentUser', JSON.stringify(user.userLogin))
+    let newObject: any = window.localStorage.getItem("currentUser")
+    let newUser = JSON.parse(newObject)
+    setCurrentUser(newUser)
   }
 
+  
+  
   useEffect(() => {
     navigate('/home')
   }, [currentUser])
@@ -48,7 +54,7 @@ function App() {
     }
   }
 
-
+  
   return (
     <div>
       {location.pathname !== '/' && <Navbar />}
@@ -57,7 +63,7 @@ function App() {
         <Route path='/' element={<Login handleSetUser={handleSetUser}/>}/>
         <Route path='/dashboard' element={<Dashboard />}/>
         <Route path='/dashboard/my-borrowed-books'/>
-        <Route path='/dashboard/add-book' />
+        <Route path='/dashboard/add-book' element={<AddBook/>}/>
         <Route path='/dashboard/pending-requests' element={<PendingRequests />}/>
         <Route path='/home' element={<Home />} />
         <Route path='/details/:id' element={<BookDetails key={location.key}/>}/>
