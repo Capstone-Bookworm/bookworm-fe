@@ -55,7 +55,7 @@ function App() {
       <Routes>
         <Route path='/' element={<Login handleSetUser={handleSetUser}/>}/>
         <Route path='/dashboard' element={<MyBooks />}/>
-        <Route path='/dashboard/my-borrowed-books' element={< BorrowedBooks/>}/>
+        <Route path='/dashboard/my-borrowed-books' element={< BorrowedBooks />}/>
         <Route path='/dashboard/add-book' />
         <Route path='/dashboard/pending-requests' element={<PendingRequests />}/>
         <Route path='/home' element={<Home />} />
@@ -65,3 +65,5 @@ function App() {
   );
 }
 export default App;
+
+// current={currentUser.userLogin.id}

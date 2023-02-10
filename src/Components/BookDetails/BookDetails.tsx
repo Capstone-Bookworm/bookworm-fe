@@ -27,7 +27,7 @@ const BORROW_BOOK = gql `
       userId: $userId
       bookId: $bookId
       borrowId: $borrowerId
-      status: $status
+      status: 1
     }) 
     { userBook {
       bookId
