@@ -1,14 +1,10 @@
 import React, { useState, useEffect } from 'react'
-import { useQuery, gql } from '@apollo/client'
+
+import { useLazyQuery, gql } from '@apollo/client'
+import { User } from '../../Interfaces'
 import "./BorrowedBooks.css"
 
-interface currentUser {
-  userName?: string 
-  location?: string
-  id?: string
-  emailAddress?: string;
-  __typename?: string; 
-}
+
 
 const BORROWED_BOOKS = gql `
   query user ($id: ID!) {
@@ -24,23 +20,29 @@ const BORROWED_BOOKS = gql `
     }
   }
 `
-const BorrowedBooks: React.FC<currentUser | any> = (props) => {
+const BorrowedBooks = () => {
+
+  const currentUser : any = window.localStorage.getItem("currentUser")
+  const [ user, setUser ] = useState(JSON.parse(currentUser))
   const [borrowedBooks, setBorrowedBooks ] = useState([])
-  const borrowedBooksQuery = useQuery(BORROWED_BOOKS, {
-    variables: { id: props.currentUser.id }
+  const [getBorrowedBooks, {loading, error, data}] = useLazyQuery(BORROWED_BOOKS, {
+    variables: { id: user.id }
   })
 
   useEffect(() => {
-    if(!borrowedBooksQuery.loading) {
-      borrowedBooksQuery.refetch()
-      setBorrowedBooks(borrowedBooksQuery.data.user.borrowedBooks)
+    if(data) {
+      setBorrowedBooks(data?.user.borrowedBooks)
     }
-  }, [borrowedBooksQuery.data])
+  }, [data])
+
+  useEffect(() => {
+    getBorrowedBooks()
+  }, [user])
 
   return (
     <div>
-      {borrowedBooksQuery.loading && <h3>Loading...</h3>}
-      {!borrowedBooksQuery.loading && 
+      {loading && <h3>Loading...</h3>}
+      {!loading && 
         <div className='borrowed-book-section'>
          {borrowedBooks.map((book: any) => {
           return(

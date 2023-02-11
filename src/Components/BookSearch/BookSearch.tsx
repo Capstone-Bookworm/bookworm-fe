@@ -72,7 +72,7 @@ const [ addBook ] = useMutation(ADD_BOOK)
       <div className='book-card-container'>
         {allBooks.map((book: Book) => {
         return (
-          <div className='book-card'>
+          <div key={book.isbn} className='book-card'>
             <img className='book-image' src={book.imageUrl} alt={`image of ${book.title}`}></img>
             <div className='image-overlay'>
               <p>Isbn: {book.isbn}</p>

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { gql, useQuery, useMutation } from '@apollo/client'
+import { gql, useLazyQuery, useMutation } from '@apollo/client'
 import Request from "../Request/Request";
 import { User } from '../../Interfaces'
 
@@ -52,49 +52,62 @@ const CHANGE_TO_UNAVAILABLE = gql `
 `
 
 
-const PendingRequests = ({ currentUser }: { currentUser: User | any}) => {
-const { loading, error, data, refetch } = useQuery(REQUESTS, {
-  variables: {
-    id: currentUser.id
-  }
-})
+const PendingRequests = () => {
+
+  const currentUser : any = window.localStorage.getItem("currentUser")
+  const [ user, setUser ] = useState(JSON.parse(currentUser))
+  const [getAllRequests, { loading, error, data: requests }] = useLazyQuery(REQUESTS, {
+    variables: {
+      id: user.id
+    }
+  })
+
+//needs error handling for requests
+
 const [ pendingRequests, setPendingRequests ] = useState([])
 const [ changeToAvailable ] = useMutation(CHANGE_TO_AVAILABLE)
 const [ changeToUnavailable ] = useMutation(CHANGE_TO_UNAVAILABLE)
 
 useEffect(() => {
-  if(data) {
-    setPendingRequests(data.user.pendingRequested)
+  console.log(requests)
+  if(requests) {
+    setPendingRequests(requests?.user.pendingRequested)
   }
-}, [data])
+}, [requests?.user.pendingRequested])
+
+useEffect(() => {
+  // console.log("in useEffect", user)
+  getAllRequests()
+}, [user])
+
 
 const denyRequest = (bookId: string, borrowerId: string) => {
   changeToAvailable({
     variables: {
-        userId: parseInt(currentUser.id),
+        userId: parseInt(user.id),
         bookId: parseInt(bookId),
         borrowerId: parseInt(borrowerId),
         status: 0
     }
   })
-  refetch()
+  getAllRequests()
 }
 
 const acceptRequest = (bookId: string, borrowerId: string) => {
   changeToUnavailable({
     variables: {
-      userId: parseInt(currentUser.id),
+      userId: parseInt(user.id),
       bookId: parseInt(bookId),
       borrowerId: parseInt(borrowerId),
       status: 2
     }
   })
-  refetch()
+  getAllRequests()
 }
 
 
 const getRequests = () => {
-  if(data) {
+  if(requests) {
     return pendingRequests.map((request:any) => {
      return <Request 
        key={request.id}
@@ -105,7 +118,7 @@ const getRequests = () => {
        borrowerId={request.borrower.id}
        borrowerLocation={request.borrower.location}
        borrowerEmailAddress={request.borrower.emailAddress}
-       currentUser={currentUser}
+       currentUser={user}
        denyRequest={denyRequest}
        acceptRequest={acceptRequest}
      />
@@ -114,9 +127,12 @@ const getRequests = () => {
 }
 
   return(
-    <div className="pending-requests">
+    <div>
+      <div className="pending-requests">
       {getRequests()}
-    </div>
+      </div>
+      {/* <button onClick={() => {getAllRequests()}}>ClickMe</button> */}
+      </div>
   )
 }
 

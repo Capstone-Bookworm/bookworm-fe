@@ -25,7 +25,7 @@ interface Location {
 
 function App() {
   let location: Location = useLocation()
-  const navigate = useNavigate()
+  // const navigate = useNavigate()
 
   const [ currentUser, setCurrentUser ] = useState(localStorage.currentUser)
 
@@ -36,9 +36,6 @@ function App() {
     setCurrentUser(newUser)
   }
 
-  useEffect(() => {
-    navigate('/home')
-  }, [currentUser])
 
   const getDashboardDisplay = () => {
     if(location.pathname === '/dashboard/my-borrowed-books' || location.pathname === '/dashboard' || location.pathname === '/dashboard/add-book' || location.pathname === '/dashboard/pending-requests') {
@@ -52,9 +49,9 @@ function App() {
       {getDashboardDisplay()}
       <Routes>
         <Route path='/' element={<Login handleSetUser={handleSetUser}/>}/>
-        <Route path='/dashboard' element={<MyBooks currentUser={currentUser}/>}/>
-        <Route path='/dashboard/my-borrowed-books' element={< BorrowedBooks currentUser={currentUser}/>}/>
-        <Route path='/dashboard/pending-requests' element={<PendingRequests currentUser={currentUser!}/>}/>
+        <Route path='/dashboard' element={<MyBooks />}/>
+        <Route path='/dashboard/my-borrowed-books' element={< BorrowedBooks />}/>
+        <Route path='/dashboard/pending-requests' element={<PendingRequests />}/>
         <Route path='/dashboard/add-book' element={<AddBook/>}/>
         <Route path='/home' element={<Home currentUser={currentUser}/>} />
         <Route path='/details/:id' element={<BookDetails key={location.key} currentUser={currentUser}/>}/>
