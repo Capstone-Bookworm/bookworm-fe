@@ -11,6 +11,7 @@ import BookDetails from '../BookDetails/BookDetails';
 import MyBooks from '../MyBooks/MyBooks';
 import BorrowedBooks from '../BorrowedBooks/BorrowedBooks';
 import { User } from '../../Interfaces'
+import AddBook from '../AddBook/AddBook';
 
 
 interface Location {
@@ -26,12 +27,17 @@ function App() {
   let location: Location = useLocation()
   const navigate = useNavigate()
 
-  const [ currentUser, setCurrentUser ] = useState([])
+  const [ currentUser, setCurrentUser ] = useState(localStorage.currentUser)
 
   const handleSetUser = (user:any) => {
-    setCurrentUser(user.userLogin)
+    localStorage.setItem('currentUser', JSON.stringify(user.userLogin))
+    let newObject: any = window.localStorage.getItem("currentUser")
+    let newUser = JSON.parse(newObject)
+    setCurrentUser(newUser)
   }
 
+  
+  
   useEffect(() => {
     navigate('/home')
   }, [currentUser])
@@ -50,8 +56,8 @@ function App() {
         <Route path='/' element={<Login handleSetUser={handleSetUser}/>}/>
         <Route path='/dashboard' element={<MyBooks currentUser={currentUser}/>}/>
         <Route path='/dashboard/my-borrowed-books' element={< BorrowedBooks currentUser={currentUser}/>}/>
-        <Route path='/dashboard/add-book' />
         <Route path='/dashboard/pending-requests' element={<PendingRequests currentUser={currentUser!}/>}/>
+        <Route path='/dashboard/add-book' element={<AddBook/>}/>
         <Route path='/home' element={<Home />} />
         <Route path='/details/:id' element={<BookDetails key={location.key} currentUser={currentUser}/>}/>
       </Routes>
