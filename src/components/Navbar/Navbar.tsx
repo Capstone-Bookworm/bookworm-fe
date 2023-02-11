@@ -4,11 +4,12 @@ import { NavLink, useLocation } from 'react-router-dom'
 import { RxHamburgerMenu, RxCross2 } from "react-icons/rx"
 import { User } from '../../Interfaces'
 
-const Navbar = ({currentUser}: {currentUser: User | any}) => {
+const Navbar = () => {
   const [navbarOpen, setNavbarOpen] = useState<boolean>(false)
   const style = { fontSize: "2em", cursor: 'pointer' }
   const location = useLocation()
-  console.log('location', location)
+  const currentUser : any = window.localStorage.getItem("currentUser")
+  const [ user, setUser ] = useState(JSON.parse(currentUser))
 
   const handleClick = () => {
     setNavbarOpen(!navbarOpen)
@@ -30,7 +31,7 @@ const Navbar = ({currentUser}: {currentUser: User | any}) => {
         <h1 className='title'>Bookworm</h1>
       </section>
       <div className='welcome-display'>
-        <h2>Welcome {currentUser.userName}!</h2>
+        <h2>Welcome {user.userName}!</h2>
       </div>
       <nav>
       <button onClick={handleClick}>{navbarOpen ? <RxCross2 style={style}/> : <RxHamburgerMenu style={style}/>}</button>
