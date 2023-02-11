@@ -3,6 +3,7 @@ import Book from '../Book/Book'
 import './Home.css'
 import { RxCaretRight, RxCaretLeft } from "react-icons/rx"
 import { useQuery, gql } from '@apollo/client'
+import { User } from '../../Interfaces'
 
 const BOOK_SEARCH = gql`
   query BookSearch($title: String!) {   
@@ -26,7 +27,9 @@ interface book {
   imageUrl: string
 }
 
-const Home: React.FC = () => {
+
+
+const Home = ({currentUser}: {currentUser: User | any}) => {
   const [searchBook, setSearchBook] = useState<string>('')
   const [searchMessage, setSearchMessage] = useState<string>('')
   const style = { fontSize: "5em", cursor: 'pointer' }
@@ -50,7 +53,6 @@ const Home: React.FC = () => {
       />
       )
     })
-    
     const searchQuery = useQuery(BOOK_SEARCH, {
       variables: { title: searchBook }})
 
@@ -62,7 +64,7 @@ const Home: React.FC = () => {
 
   return(
     <div className='homepage-container'>
-      <h2>Home page</h2>
+      <h2>Welcome, {currentUser.userName}!</h2>
       <form className='form-container'>
         <input 
           type='text'
