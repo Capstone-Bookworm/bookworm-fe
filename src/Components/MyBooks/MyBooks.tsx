@@ -55,7 +55,6 @@ interface UserBook {
 }
 
 const MyBooks = ( { currentUser }: { currentUser: User | any}) => {
-  console.log("HIII", currentUser)
 
   const { loading, error, data, refetch } = useQuery(MY_BOOKS, {
     variables: {

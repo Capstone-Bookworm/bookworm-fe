@@ -58,7 +58,6 @@ interface currentUser {
 }
 
 const BookDetails: React.FC<currentUser | any> = (props) => {
-  console.log('PROPS', props)
   const [ selectedUser, setSelectedUser ] = useState('')
   const [ matchedUser, setMatchedUser ] = useState('')
   const { id } = useParams()

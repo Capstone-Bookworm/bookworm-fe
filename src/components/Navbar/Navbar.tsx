@@ -7,7 +7,6 @@ const Navbar = () => {
   const [navbarOpen, setNavbarOpen] = useState<boolean>(false)
   const style = { fontSize: "2em", cursor: 'pointer' }
   const location = useLocation()
-  console.log('location', location)
 
   const handleClick = () => {
     setNavbarOpen(!navbarOpen)

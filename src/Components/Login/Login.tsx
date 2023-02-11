@@ -56,7 +56,6 @@ const Login = ( { handleSetUser }: { handleSetUser: (user: any) => void}) => {
   useEffect(() => {
     if(userQuery.data) {
       handleSetUser(userQuery.data)
-      console.log(userQuery.data)
     }
   }, [userQuery.data])
 
