@@ -1,10 +1,12 @@
 import React, {useState, useEffect} from "react";
 import { useQuery, gql } from "@apollo/client";
 import LibraryBook from '../LibraryBook/LibraryBook'
+import { User } from '../../Interfaces'
+
 
 const MY_BOOKS = gql `
-  query user {
-    user(id:1) {
+  query user($id: ID!) {
+    user(id: $id) {
         id
         userName
         availableBooks {
@@ -41,12 +43,17 @@ interface UserBook {
   imageUrl: string
 }
 
-const MyBooks = () => {
+const MyBooks = ( { currentUser }: { currentUser: User }) => {
   
-  const { loading, error, data } = useQuery(MY_BOOKS)
+  const { loading, error, data } = useQuery(MY_BOOKS, {
+    variables: {
+      id: currentUser.id
+    }
+  })
   const [ availLibrary, setAvailLibrary ] = useState([])
   const [ unavailLibrary, setUnavailLibrary ] = useState([])
   const [ pendingRequests, setPendingRequests ] = useState([])
+
   
   useEffect(() => {
     if(data){

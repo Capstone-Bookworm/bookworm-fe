@@ -35,7 +35,7 @@ function App() {
   const [ currentUser, setCurrentUser ] = useState([])
 
   const handleSetUser = (user:any) => {
-    setCurrentUser(user)
+    setCurrentUser(user.userLogin)
   }
 
   useEffect(() => {
@@ -54,10 +54,10 @@ function App() {
       {getDashboardDisplay()}
       <Routes>
         <Route path='/' element={<Login handleSetUser={handleSetUser}/>}/>
-        <Route path='/dashboard' element={<MyBooks />}/>
+        <Route path='/dashboard' element={<MyBooks currentUser={currentUser!}/>}/>
         <Route path='/dashboard/my-borrowed-books' element={< BorrowedBooks currentUser={currentUser}/>}/>
         <Route path='/dashboard/add-book' />
-        <Route path='/dashboard/pending-requests' element={<PendingRequests />}/>
+        <Route path='/dashboard/pending-requests' element={<PendingRequests currentUser={currentUser!}/>}/>
         <Route path='/home' element={<Home />} />
         <Route path='/details/:id' element={<BookDetails key={location.key} currentUser={currentUser}/>}/>
       </Routes>
