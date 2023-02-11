@@ -83,15 +83,15 @@ const MyBooks = () => {
   useEffect(() => {
     getMyBooks()
   }, [user])
+
   const deleteSelectedBook = (id: number) => {
-    let currentUser = JSON.parse(localStorage.currentUser)
     deleteBook({
       variables: {
-        userId: currentUser.id,
+        userId: user.id,
         bookId: id
       }
     })
-    refetch()
+    getMyBooks()
   }
 
   const getLibrary = (library:UserBook[], availability: boolean) => {
@@ -112,7 +112,7 @@ const MyBooks = () => {
 
   return (
     <div className="my-books-display">
-      <h1 className="user-book-welcome">{currentUser.userName}'s Books</h1>
+      <h1 className="user-book-welcome">{user.userName}'s Books</h1>
       <div className="my-books-container">
         {getLibrary(availLibrary, true)}
         {getLibrary(pendingRequests, false)}
