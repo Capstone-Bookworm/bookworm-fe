@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
-import { gql, useQuery } from '@apollo/client'
+import { gql, useQuery, useMutation } from '@apollo/client'
 import Request from "../Request/Request";
+import { User } from '../../Interfaces'
 
 const REQUESTS = gql `
-  query user {
-    user(id:1) {
+query user($id: ID!) {
+  user(id: $id){
       id
       userName
       pendingRequested {
@@ -22,22 +23,79 @@ const REQUESTS = gql `
   }
 `
 
+const CHANGE_TO_AVAILABLE = gql `
+  mutation patchUserBook ($userId: Int!, $bookId: Int!, $borrowerId: Int!) {
+    patchUserBook(input: {
+        userId: $userId
+        bookId: $bookId
+        borrowerId: $borrowerId
+        status: 0
+    }) { userBook {
+            bookId
+            }
+      }
+  }
+`
 
-const PendingRequests = () => {
-const { loading, error, data } = useQuery(REQUESTS)
+const CHANGE_TO_UNAVAILABLE = gql `
+  mutation patchUserBook ($userId: Int!, $bookId: Int!, $borrowerId: Int!) {
+    patchUserBook(input: {
+        userId: $userId
+        bookId: $bookId
+        borrowerId: $borrowerId
+        status: 2
+    }) { userBook {
+            bookId
+            }
+      }
+  }
+`
+
+
+const PendingRequests = ({ currentUser }: { currentUser: User | any}) => {
+const { loading, error, data, refetch } = useQuery(REQUESTS, {
+  variables: {
+    id: currentUser.id
+  }
+})
 const [ pendingRequests, setPendingRequests ] = useState([])
-
+const [ changeToAvailable ] = useMutation(CHANGE_TO_AVAILABLE)
+const [ changeToUnavailable ] = useMutation(CHANGE_TO_UNAVAILABLE)
 
 useEffect(() => {
   if(data) {
-    console.log(data.user.pendingRequested)
     setPendingRequests(data.user.pendingRequested)
   }
 }, [data])
 
+const denyRequest = (bookId: string, borrowerId: string) => {
+  changeToAvailable({
+    variables: {
+        userId: parseInt(currentUser.id),
+        bookId: parseInt(bookId),
+        borrowerId: parseInt(borrowerId),
+        status: 0
+    }
+  })
+  refetch()
+}
+
+const acceptRequest = (bookId: string, borrowerId: string) => {
+  console.log("this should work")
+  changeToUnavailable({
+    variables: {
+      userId: parseInt(currentUser.id),
+      bookId: parseInt(bookId),
+      borrowerId: parseInt(borrowerId),
+      status: 2
+    }
+  })
+  refetch()
+}
+
+
 const getRequests = () => {
   if(data) {
-    console.log(pendingRequests)
     return pendingRequests.map((request:any) => {
      return <Request 
        key={request.id}
@@ -48,6 +106,9 @@ const getRequests = () => {
        borrowerId={request.borrower.id}
        borrowerLocation={request.borrower.location}
        borrowerEmailAddress={request.borrower.emailAddress}
+       currentUser={currentUser}
+       denyRequest={denyRequest}
+       acceptRequest={acceptRequest}
      />
      })
   }
