@@ -1,4 +1,4 @@
-.my-books-container {
+.borrowed-book-section {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -9,15 +9,14 @@
   margin-top: -5em;
 }
 
-.my-books-display {
+.borrowed-book {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-}
-
-h1 {
-  color: #0F4D92;
-  font-size: xx-large;
-  font-family: Verdana, Geneva, Tamhoma, sans-serif;
+  border: solid 3px #0F4D92;
+  box-shadow: 3px 3px 3px #0F4D92;
+  width: 18%;
+  height: 50%;
+  margin: 15px;
 }
