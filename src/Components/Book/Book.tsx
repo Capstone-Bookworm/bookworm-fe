@@ -12,7 +12,7 @@ const Book: React.FC<book> = ({ id, imageUrl }): JSX.Element => {
   return (
     <div className='book-item'>
       <NavLink to={`/details/${id}`} key={id}>
-        <img src={imageUrl} alt="Book cover"/>
+        <img className='book-item-image' src={imageUrl} alt="Book cover"/>
       </NavLink>
     </div>
   )

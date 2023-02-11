@@ -62,7 +62,7 @@ const Home: React.FC = () => {
 
   return(
     <div className='homepage-container'>
-      <h2>Home page</h2>
+      <h2 className='home-page-title'>Home page</h2>
       <form className='form-container'>
         <input 
           type='text'
@@ -70,15 +70,15 @@ const Home: React.FC = () => {
           placeholder='Search by book title...'
           onChange={event => setSearchBook(event.target.value)}
         />
-        <button type='button' onClick={() => searchBooks()}>SEARCH</button>
+        <button type='button' className='search-button' onClick={() => searchBooks()}>SEARCH</button>
       </form>
       <h2 className='search-message'>{searchMessage}</h2>
       {loading ? <h2 className='loading-message'>Loading...</h2> : <div className={`book-container ${bookData.length > 5 ? "display-search" : ""}`}>
-      <RxCaretLeft style={style} id='left-arrow' />
+      {/* <RxCaretLeft style={style} id='left-arrow' /> */}
         <div className={`${bookData.length > 5 ? "display-search book-list" : "original-book-list"}`}>
           {bookList}
         </div>
-      <RxCaretRight style={style} id='right-arrow' />
+      {/* <RxCaretRight style={style} id='right-arrow' /> */}
       </div>}
     </div>
   )

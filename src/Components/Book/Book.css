@@ -1,4 +1,13 @@
 .book-item {
   cursor: pointer;
   margin: 1rem;
+  width: 25%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.book-item-image{
+  box-shadow: 3px 3px 3px #0F4D92;
+  border: solid 2px black;
 }
