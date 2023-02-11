@@ -88,7 +88,7 @@ useEffect(() => {
 }, [requests?.user.pendingRequested])
 
 useEffect(() => {
-  console.log("in useEffect", user)
+  // console.log("in useEffect", user)
   getAllRequests()
 }, [user])
 

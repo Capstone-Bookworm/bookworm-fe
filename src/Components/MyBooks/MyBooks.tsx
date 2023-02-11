@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from "react";
-import { useQuery, gql } from "@apollo/client";
+import { useLazyQuery, gql } from "@apollo/client";
 import LibraryBook from '../LibraryBook/LibraryBook'
 import { User } from '../../Interfaces'
 
@@ -44,34 +44,42 @@ interface UserBook {
 }
 
 const MyBooks = ( { currentUser }: { currentUser: User | any}) => {
-
-  const { loading, error, data, refetch } = useQuery(MY_BOOKS, {
-    variables: {
-      id: currentUser.id
-    }
-  })
-
+  
+  const [ user, setUser ] = useState(currentUser || JSON.parse(currentUser))
   const [ availLibrary, setAvailLibrary ] = useState([])
   const [ unavailLibrary, setUnavailLibrary ] = useState([])
   const [ pendingRequests, setPendingRequests ] = useState([])
 
+  const [getMyBooks, { loading, error, data }] = useLazyQuery(MY_BOOKS, {
+    variables: {
+      id: user.id
+    }
+  })
+
+
+  useEffect(() => {
+    if(currentUser.userName) {
+      setUser(currentUser)
+    } else if (!currentUser.userName) {
+      setUser(JSON.parse(currentUser))
+    }
+    
+  }, [])
   
   useEffect(() => {
     if(!loading && !error){
-      // console.log(data)
-      refetch()
-      setAvailLibrary(data.user.availableBooks)
-      setUnavailLibrary(data.user.unavailableBooks)
-      setPendingRequests(data.user.pendingRequested)
+      setAvailLibrary(data?.user.availableBooks)
+      setUnavailLibrary(data?.user.unavailableBooks)
+      setPendingRequests(data?.user.pendingRequested)
   }
   }, [data])
 
-  // useEffect(() => {
-  //   getUserBooks()
-  // }, [])
+  useEffect(() => {
+    getMyBooks()
+  }, [user])
 
   const getLibrary = (library:UserBook[], availability: boolean) => {
-    if(!loading) {
+    if(pendingRequests) {
       return library.map((book:any)=> {
        return <LibraryBook 
            key={book.id}
