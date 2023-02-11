@@ -48,7 +48,7 @@ function App() {
 
   return (
     <div>
-      {location.pathname !== '/' && <Navbar />}
+      {location.pathname !== '/' && <Navbar currentUser={currentUser}/>}
       {getDashboardDisplay()}
       <Routes>
         <Route path='/' element={<Login handleSetUser={handleSetUser}/>}/>
@@ -56,7 +56,7 @@ function App() {
         <Route path='/dashboard/my-borrowed-books' element={< BorrowedBooks currentUser={currentUser}/>}/>
         <Route path='/dashboard/pending-requests' element={<PendingRequests currentUser={currentUser!}/>}/>
         <Route path='/dashboard/add-book' element={<AddBook/>}/>
-        <Route path='/home' element={<Home />} />
+        <Route path='/home' element={<Home currentUser={currentUser}/>} />
         <Route path='/details/:id' element={<BookDetails key={location.key} currentUser={currentUser}/>}/>
       </Routes>
     </div>
