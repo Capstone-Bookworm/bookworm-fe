@@ -20,12 +20,8 @@ const Request = (props : Props) => {
 
 const handleRequestResponse = (event: any) => {
   if (event.target.id === "accept") {
-    console.log('Event: ', event.target.id)
-    console.log('accept')
     props.acceptRequest(props.id, props.borrowerId)
   } else if (event.target.id === "deny") {
-    console.log('Event: ', event.target.id)
-    console.log('deny')
     props.denyRequest(props.id, props.borrowerId)
   }
 }

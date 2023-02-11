@@ -1,6 +1,17 @@
+.details-page {
+  background-color: #5c5c5c;
+  height: 110vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .details-container {
   display: flex;
   margin: 3rem;
+  background-color: white;
+  border: solid 3px black;
+  box-shadow: 11px 8px 8px black;
 }
 
 img {
@@ -28,16 +39,28 @@ img {
   border: none;
   background-color: white;
   font-size: large;
-  color: blue;
+  color: #0F4D92;
   height: 4vh;
 }
 
 #borrow-btn:hover {
-  background-color: blue;
+  background-color: #5c5c5c;
   color: white;
 }
 
 #loading {
   font-size: 3rem;
   margin-right: 2rem;
+}
+
+.book-details-image {
+  height: 60vh;
+  border: solid 2px black;
+}
+
+.borrow-selection {
+  color: #0F4D92;
+  font-size: large;
+  border: none;
+  cursor: pointer;
 }

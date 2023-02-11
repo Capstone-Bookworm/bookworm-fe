@@ -36,8 +36,6 @@ function App() {
     setCurrentUser(newUser)
   }
 
-  
-  
   useEffect(() => {
     navigate('/home')
   }, [currentUser])
@@ -58,7 +56,7 @@ function App() {
         <Route path='/dashboard/my-borrowed-books' element={< BorrowedBooks currentUser={currentUser}/>}/>
         <Route path='/dashboard/pending-requests' element={<PendingRequests currentUser={currentUser!}/>}/>
         <Route path='/dashboard/add-book' element={<AddBook/>}/>
-        <Route path='/home' element={<Home />} />
+        <Route path='/home' element={<Home currentUser={currentUser}/>} />
         <Route path='/details/:id' element={<BookDetails key={location.key} currentUser={currentUser}/>}/>
       </Routes>
     </div>

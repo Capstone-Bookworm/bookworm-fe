@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useQuery, gql } from '@apollo/client'
+import "./BorrowedBooks.css"
 
 interface currentUser {
   userName?: string 

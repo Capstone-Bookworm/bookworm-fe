@@ -23,28 +23,28 @@
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  box-shadow: 3px 3px 3px maroon;
+  box-shadow: 3px 3px 3px #0F4D92;
 }
 
 .search-header {
   margin-right: 15px;
   font-size: x-large;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
-  color: maroon;
+  color: #0F4D92;
 }
 
 .search-input {
   font-size: x-large;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
-  color: maroon;
-  border-color: maroon;
+  color: #0F4D92;
+  border-color: #0F4D92;
 }
 
 .search-button {
   border: none;
   border-radius: 3px;
   background-color: white;
-  color: maroon;
+  color: #0F4D92;
   cursor: pointer;
   margin-left: 15px;
   font-size: x-large;
@@ -52,6 +52,11 @@
 }
 
 .search-button:hover {
-  background-color: maroon;
+  background-color: #5c5c5c;
   color: white;
+}
+
+.empty-search {
+  color: #0F4D92;
+  font-size: xx-large;
 }

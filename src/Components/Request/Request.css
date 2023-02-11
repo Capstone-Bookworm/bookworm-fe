@@ -1,13 +1,36 @@
 .book-request {
   display: flex;
-  justify-content: space-around;
+  justify-content: flex-start;
   margin-top: 2%;
   align-items: center;
   width: 80%;
+  border: solid 3px black;
+  margin-left: 2%;
 }
 
 .accept-request-btn,
 .deny-request-btn {
+  border-radius: 5px;
   cursor: pointer;
   margin: 2%;
+  color: #0F4D92;
+  background-color: white;
+  border-style: ridge;
+  border-color: #5c5c5c;
+  font-size: x-large;
 }
+
+.accept-request-btn:hover,
+.deny-request-btn:hover {
+  cursor: pointer;
+  margin: 2%;
+  color: white;
+  background-color: #5c5c5c;
+}
+
+h3 {
+  color: #0F4D92;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-size: x-large;
+}
+

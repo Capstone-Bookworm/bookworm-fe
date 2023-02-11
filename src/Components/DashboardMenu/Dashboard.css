@@ -1,0 +1,23 @@
+.user-dash-nav {
+  width: 100vw;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+.nav-button-mybooks{
+  color: #0F4D92;
+  border-color: #5c5c5c;
+  background-color: white;
+  cursor: pointer;
+  border-radius: 5px;
+  border-style: ridge;
+  font-size: medium;
+  margin: 15px;
+}
+
+.nav-button-mybooks:hover{
+  color: white;
+  background-color: #5c5c5c;
+}
