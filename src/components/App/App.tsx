@@ -50,7 +50,7 @@ function App() {
 
   return (
     <div>
-      {location.pathname !== '/' && <Navbar />}
+      {location.pathname !== '/' && <Navbar currentUser={currentUser}/>}
       {getDashboardDisplay()}
       <Routes>
         <Route path='/' element={<Login handleSetUser={handleSetUser}/>}/>

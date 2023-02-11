@@ -2,8 +2,9 @@ import React, { useState } from 'react'
 import './Navbar.css'
 import { NavLink, useLocation } from 'react-router-dom'
 import { RxHamburgerMenu, RxCross2 } from "react-icons/rx"
+import { User } from '../../Interfaces'
 
-const Navbar = () => {
+const Navbar = ({currentUser}: {currentUser: User | any}) => {
   const [navbarOpen, setNavbarOpen] = useState<boolean>(false)
   const style = { fontSize: "2em", cursor: 'pointer' }
   const location = useLocation()
@@ -28,6 +29,9 @@ const Navbar = () => {
         <img src='https://cdn-icons-png.flaticon.com/512/2789/2789786.png' alt='Logo' className='logo' />
         <h1 className='title'>Bookworm</h1>
       </section>
+      <div className='welcome-display'>
+        <h2>Welcome {currentUser.userName}!</h2>
+      </div>
       <nav>
       <button onClick={handleClick}>{navbarOpen ? <RxCross2 style={style}/> : <RxHamburgerMenu style={style}/>}</button>
         <ul className={`menuNav ${navbarOpen ? "showMenu" : ""}`}>

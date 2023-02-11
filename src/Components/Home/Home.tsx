@@ -64,7 +64,7 @@ const Home = ({currentUser}: {currentUser: User | any}) => {
 
   return(
     <div className='homepage-container'>
-      <h2>Welcome, {currentUser.userName}!</h2>
+      <h2 className='home-display'>My Home</h2>
       <form className='form-container'>
         <input 
           type='text'
