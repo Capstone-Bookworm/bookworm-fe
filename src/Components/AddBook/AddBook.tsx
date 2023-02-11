@@ -1,6 +1,6 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import './AddBook.css'
-import { gql, useQuery } from '@apollo/client'
+import { gql, useLazyQuery } from '@apollo/client'
 import BookSearch from '../BookSearch/BookSearch'
 
 const GOOGLE_BOOKS = gql `
@@ -26,11 +26,14 @@ interface Books {
 }
 
 const AddBook = () => {
+  const currentUser : any = window.localStorage.getItem("currentUser")
+  const [ user, serUser ] = useState(JSON.parse(currentUser))
+
   const [titleSearch, setTitle] = useState('')
-  const [newTitle, setNewTitle] = useState('')
+  const [submitTitle, setSubmitTitle] = useState('')
   
-  const {data, loading, error} = useQuery(GOOGLE_BOOKS, {
-    variables: { title: newTitle}
+  const [ getSearchResults, {data, loading, error}] = useLazyQuery(GOOGLE_BOOKS, {
+    variables: { title: submitTitle}
     })
 
   const handleChange = (event: {target: HTMLInputElement}) => {
@@ -38,8 +41,16 @@ const AddBook = () => {
   }
 
   const handleClick = () => {
-    setNewTitle(titleSearch)
+    setSubmitTitle(titleSearch)
   }
+
+  useEffect(() => {   
+    getSearchResults()
+  }, [submitTitle])
+
+  useEffect(() => {
+    console.log(data)
+  }, [data])
 
   return (
     <section className='add-book-page'>
@@ -60,7 +71,7 @@ const AddBook = () => {
       ) : (
         data && <BookSearch searchResults={data.googleBooks}/>
       )}
-      {newTitle === '' && <h1>Search a title above to find a book to add to your library</h1>}
+      {submitTitle === '' && <h1>Search a title above to find a book to add to your library</h1>}
       </div>
     </section>
   )
