@@ -102,15 +102,21 @@ const BookDetails: React.FC<currentUser | any> = (props) => {
         <hr />
         <p id='summary'>Summary: <br/> {bookDetails?.summary}</p>
         <h3 id='pages'>{bookDetails?.pageCount} pages</h3>
-        <select onChange={(event) => findID(event)}>
-          <option>Choose a borrower...</option>
-            {bookDetails?.users?.map((user: any) => {
-              return(
-              <option onClick={(event) => findID(event)} value={user.id}>{user.userName}</option>)
+        {bookDetails?.users?.map((user: any) => {
+              if(user.id === props.currentUser.id) {
+                return (<h4>This book is already in your library.</h4>)
+              } else {
+                return(
+                  <div>
+                    <select>
+                      <option>Choose a borrower...</option>
+                      <option onClick={(event) => findID(event)} value={user.id}>{user.userName}</option>
+                    </select>
+                    <br />
+                    <button id='borrow-btn' onClick={borrowBook}>Borrow Book</button>
+                  </div>
+                )}
             })}
-        </select>
-        <br />
-        <button id='borrow-btn' onClick={borrowBook}>Borrow Book</button>
         </div>
       </div>}
     </div>
