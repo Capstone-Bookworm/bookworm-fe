@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import './Login.css'
-import { useQuery, useMutation, gql } from '@apollo/client'
+import { useLazyQuery, useMutation, gql } from '@apollo/client'
 
 const GET_USER = gql `
   query userLogin($emailAddress: String!) {
@@ -37,8 +37,9 @@ const Login = ( { handleSetUser }: { handleSetUser: (user: any) => void}) => {
   const [ username, setUsername ] = useState('')
   const [ userLocation, setUserLocation ] = useState('')
   const [ accountToCreate, setAccountToCreate ] = useState('')
+  const navigate = useNavigate()
 
-  const userQuery = useQuery(GET_USER, {
+  const [userQuery, { loading, error, data }] = useLazyQuery(GET_USER, {
     variables: { emailAddress: login }
   })
 
@@ -48,17 +49,30 @@ const Login = ( { handleSetUser }: { handleSetUser: (user: any) => void}) => {
     event.preventDefault()
     if(activeAccount) {
       setLogin(email)
+      userQuery()
     } else {
       handleNewAccount()
     }
   }
 
-  useEffect(() => {
-    if(userQuery.data) {
-      handleSetUser(userQuery.data)
-      console.log(userQuery.data)
+  const getError = () => {
+    if(!login && error) {
+      return false
+    } else if (login && error) {
+      return true
+    } else {
+      return false
     }
-  }, [userQuery.data])
+  }
+
+  useEffect(() => {
+    if(data) {
+      handleSetUser(data)
+    }
+    if(!getError() && data) {
+      navigate('/home')
+    }
+  }, [data])
 
 
   const handleNewAccount = () => {
@@ -74,15 +88,7 @@ const Login = ( { handleSetUser }: { handleSetUser: (user: any) => void}) => {
     }
   }
 
-  const getError = () => {
-    if(!login && userQuery.error) {
-      return false
-    } else if (login && userQuery.error) {
-      return true
-    } else {
-      return false
-    }
-  }
+  
 
   return ( 
     <main> 

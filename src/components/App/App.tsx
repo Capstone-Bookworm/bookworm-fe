@@ -25,7 +25,7 @@ interface Location {
 
 function App() {
   let location: Location = useLocation()
-  const navigate = useNavigate()
+  // const navigate = useNavigate()
 
   const [ currentUser, setCurrentUser ] = useState(localStorage.currentUser)
 
@@ -38,9 +38,9 @@ function App() {
 
   
   
-  useEffect(() => {
-    navigate('/home')
-  }, [currentUser])
+  // useEffect(() => {
+  //   navigate('/home')
+  // }, [currentUser])
 
   const getDashboardDisplay = () => {
     if(location.pathname === '/dashboard/my-borrowed-books' || location.pathname === '/dashboard' || location.pathname === '/dashboard/add-book' || location.pathname === '/dashboard/pending-requests') {
