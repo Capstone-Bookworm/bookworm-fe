@@ -58,7 +58,6 @@ interface currentUser {
 }
 
 const BookDetails: React.FC<currentUser | any> = (props) => {
-  console.log('PROPS', props)
   const [ selectedUser, setSelectedUser ] = useState('')
   const [ matchedUser, setMatchedUser ] = useState('')
   const { id } = useParams()
@@ -96,11 +95,11 @@ const BookDetails: React.FC<currentUser | any> = (props) => {
   }
 
   return(
-    <div>
+    <div className='details-page'>
       {detailsQuery.loading && <h3 id='loading'>Loading...</h3>}
       {!detailsQuery.loading && 
       <div className='details-container'>
-        <img src={bookDetails?.imageUrl} alt='image of book cover'/>
+        <img className='book-details-image' src={bookDetails?.imageUrl} alt='image of book cover'/>
         <div className='book-info'>
         <h2 id='title'>{bookDetails?.title} by {bookDetails?.author}</h2>
         <hr />
@@ -108,7 +107,7 @@ const BookDetails: React.FC<currentUser | any> = (props) => {
         <h3 id='pages'>{bookDetails?.pageCount} pages</h3>
         {matchedUser ? <h4>This book is already in your library.</h4> : 
         <div>
-        <select onChange={(event) => findID(event)}>
+        <select className='borrow-selection' onChange={(event) => findID(event)}>
           <option>Choose a borrower...</option>
             {bookDetails?.users?.map((user: any) => {
               return(

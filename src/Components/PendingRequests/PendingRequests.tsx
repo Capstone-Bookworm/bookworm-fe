@@ -81,7 +81,6 @@ const denyRequest = (bookId: string, borrowerId: string) => {
 }
 
 const acceptRequest = (bookId: string, borrowerId: string) => {
-  console.log("this should work")
   changeToUnavailable({
     variables: {
       userId: parseInt(currentUser.id),
