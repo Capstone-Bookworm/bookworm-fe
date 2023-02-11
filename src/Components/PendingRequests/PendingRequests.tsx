@@ -52,27 +52,15 @@ const CHANGE_TO_UNAVAILABLE = gql `
 `
 
 
-const PendingRequests = ({ currentUser }: { currentUser: User | any}) => {
+const PendingRequests = () => {
 
-  
-  const [ user, setUser ] = useState(currentUser || JSON.parse(currentUser))
+  const currentUser : any = window.localStorage.getItem("currentUser")
+  const [ user, setUser ] = useState(JSON.parse(currentUser))
   const [getAllRequests, { loading, error, data: requests }] = useLazyQuery(REQUESTS, {
     variables: {
       id: user.id
     }
   })
-  
-  useEffect(() => {
-    if(currentUser.userName) {
-      setUser(currentUser)
-      console.log(currentUser)
-    } else if (!currentUser.userName) {
-      setUser(JSON.parse(currentUser))
-      console.log(JSON.parse(currentUser))
-    }
-    
-  }, [])
-
 
 //needs error handling for requests
 

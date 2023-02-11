@@ -27,7 +27,7 @@ interface Books {
 
 const AddBook = () => {
   const currentUser : any = window.localStorage.getItem("currentUser")
-  const [ user, serUser ] = useState(JSON.parse(currentUser))
+  const [ user, setUser ] = useState(JSON.parse(currentUser))
 
   const [titleSearch, setTitle] = useState('')
   const [submitTitle, setSubmitTitle] = useState('')

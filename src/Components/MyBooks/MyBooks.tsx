@@ -43,9 +43,10 @@ interface UserBook {
   imageUrl: string
 }
 
-const MyBooks = ( { currentUser }: { currentUser: User | any}) => {
-  
-  const [ user, setUser ] = useState(currentUser || JSON.parse(currentUser))
+const MyBooks = () => {
+
+  const currentUser : any = window.localStorage.getItem("currentUser")
+  const [ user, setUser ] = useState(JSON.parse(currentUser))
   const [ availLibrary, setAvailLibrary ] = useState([])
   const [ unavailLibrary, setUnavailLibrary ] = useState([])
   const [ pendingRequests, setPendingRequests ] = useState([])
@@ -55,16 +56,6 @@ const MyBooks = ( { currentUser }: { currentUser: User | any}) => {
       id: user.id
     }
   })
-
-
-  useEffect(() => {
-    if(currentUser.userName) {
-      setUser(currentUser)
-    } else if (!currentUser.userName) {
-      setUser(JSON.parse(currentUser))
-    }
-    
-  }, [])
   
   useEffect(() => {
     if(!loading && !error){

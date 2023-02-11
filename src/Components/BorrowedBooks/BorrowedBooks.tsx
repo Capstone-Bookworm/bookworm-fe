@@ -17,9 +17,10 @@ const BORROWED_BOOKS = gql `
     }
   }
 `
-const BorrowedBooks = ({ currentUser }: { currentUser: User | any}) => {
+const BorrowedBooks = () => {
 
-  const [ user, setUser ] = useState(currentUser || JSON.parse(currentUser))
+  const currentUser : any = window.localStorage.getItem("currentUser")
+  const [ user, setUser ] = useState(JSON.parse(currentUser))
   const [borrowedBooks, setBorrowedBooks ] = useState([])
   const [getBorrowedBooks, {loading, error, data}] = useLazyQuery(BORROWED_BOOKS, {
     variables: { id: user.id }
@@ -30,16 +31,6 @@ const BorrowedBooks = ({ currentUser }: { currentUser: User | any}) => {
       setBorrowedBooks(data?.user.borrowedBooks)
     }
   }, [data])
-
-  useEffect(() => {
-    if(currentUser.userName) {
-      setUser(currentUser)
-      console.log(currentUser)
-    } else if (!currentUser.userName) {
-      setUser(JSON.parse(currentUser))
-      console.log(JSON.parse(currentUser))
-    }
-  }, [])
 
   useEffect(() => {
     getBorrowedBooks()

@@ -54,9 +54,9 @@ function App() {
       {getDashboardDisplay()}
       <Routes>
         <Route path='/' element={<Login handleSetUser={handleSetUser}/>}/>
-        <Route path='/dashboard' element={<MyBooks currentUser={currentUser}/>}/>
-        <Route path='/dashboard/my-borrowed-books' element={< BorrowedBooks currentUser={currentUser}/>}/>
-        <Route path='/dashboard/pending-requests' element={<PendingRequests currentUser={currentUser!}/>}/>
+        <Route path='/dashboard' element={<MyBooks />}/>
+        <Route path='/dashboard/my-borrowed-books' element={< BorrowedBooks />}/>
+        <Route path='/dashboard/pending-requests' element={<PendingRequests />}/>
         <Route path='/dashboard/add-book' element={<AddBook/>}/>
         <Route path='/home' element={<Home />} />
         <Route path='/details/:id' element={<BookDetails key={location.key} currentUser={currentUser}/>}/>
