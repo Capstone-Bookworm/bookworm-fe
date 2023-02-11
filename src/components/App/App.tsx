@@ -36,8 +36,6 @@ function App() {
     setCurrentUser(newUser)
   }
 
-  
-  
   useEffect(() => {
     navigate('/home')
   }, [currentUser])

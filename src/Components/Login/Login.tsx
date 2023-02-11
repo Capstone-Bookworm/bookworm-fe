@@ -56,7 +56,6 @@ const Login = ( { handleSetUser }: { handleSetUser: (user: any) => void}) => {
   useEffect(() => {
     if(userQuery.data) {
       handleSetUser(userQuery.data)
-      console.log(userQuery.data)
     }
   }, [userQuery.data])
 
@@ -90,7 +89,7 @@ const Login = ( { handleSetUser }: { handleSetUser: (user: any) => void}) => {
         <div className='login-container'>
         <h1 className='page-title'>Book Worm</h1>
         {getError() && <h3>We couldn't find your account, please try again</h3>}
-        <form onSubmit={event => handleSubmit(event)}>
+        <form className='create-acct-form' onSubmit={event => handleSubmit(event)}>
           <input 
             type='email'
             className='email-login' 
