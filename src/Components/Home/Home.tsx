@@ -30,11 +30,12 @@ const Home: React.FC = () => {
   const [searchBook, setSearchBook] = useState<string>('')
   const [searchMessage, setSearchMessage] = useState<string>('')
   const style = { fontSize: "5em", cursor: 'pointer' }
-  const { loading, data } = useQuery(BOOKS_DATA)
+  const { loading, data, refetch } = useQuery(BOOKS_DATA)
   const [bookData, setBookData] = useState([])
 
   useEffect(() => {
     if(data) {
+      // refetch()
       setBookData(data.books)
       console.log('IT WORKED!')
     }

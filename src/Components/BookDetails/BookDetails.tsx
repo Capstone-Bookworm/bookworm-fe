@@ -58,7 +58,9 @@ interface currentUser {
 }
 
 const BookDetails: React.FC<currentUser | any> = (props) => {
+  console.log('PROPS', props)
   const [ selectedUser, setSelectedUser ] = useState('')
+  const [ matchedUser, setMatchedUser ] = useState('')
   const { id } = useParams()
 
   const detailsQuery = useQuery(BOOK_DETAILS, {
@@ -69,6 +71,8 @@ const BookDetails: React.FC<currentUser | any> = (props) => {
   useEffect(() => {
     if(!detailsQuery.loading) {
       setBookDetails(detailsQuery.data.book)
+      const userOwnsBook = detailsQuery.data.book.users.some((user: any) => user.id === props.currentUser.id)
+      setMatchedUser(userOwnsBook)
     }
   }, [detailsQuery.data])
 
@@ -102,21 +106,19 @@ const BookDetails: React.FC<currentUser | any> = (props) => {
         <hr />
         <p id='summary'>Summary: <br/> {bookDetails?.summary}</p>
         <h3 id='pages'>{bookDetails?.pageCount} pages</h3>
-        {bookDetails?.users?.map((user: any) => {
-              if(user.id === props.currentUser.id) {
-                return (<h4>This book is already in your library.</h4>)
-              } else {
-                return(
-                  <div>
-                    <select>
-                      <option>Choose a borrower...</option>
-                      <option onClick={(event) => findID(event)} value={user.id}>{user.userName}</option>
-                    </select>
-                    <br />
-                    <button id='borrow-btn' onClick={borrowBook}>Borrow Book</button>
-                  </div>
-                )}
+        {matchedUser ? <h4>This book is already in your library.</h4> : 
+        <div>
+        <select onChange={(event) => findID(event)}>
+          <option>Choose a borrower...</option>
+            {bookDetails?.users?.map((user: any) => {
+              return(
+              <option onClick={(event) => findID(event)} value={user.id}>{user.userName}</option>)
             })}
+        </select>
+        <br />
+        <button id='borrow-btn' onClick={borrowBook}>Borrow Book</button>
+        </div>
+        }
         </div>
       </div>}
     </div>
