@@ -43,7 +43,8 @@ interface UserBook {
   imageUrl: string
 }
 
-const MyBooks = ( { currentUser }: { currentUser: User }) => {
+const MyBooks = ( { currentUser }: { currentUser: User | any}) => {
+  console.log("HIII", currentUser)
   
   const { loading, error, data } = useQuery(MY_BOOKS, {
     variables: {
