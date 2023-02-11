@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useQuery, gql, useMutation } from '@apollo/client'
 import { useParams } from 'react-router-dom'
 import './BookDetails.css'
+import userEvent from '@testing-library/user-event'
 
 const BOOK_DETAILS = gql `
   query BookDetails($id: ID!) {
@@ -102,15 +103,21 @@ const BookDetails: React.FC<currentUser | any> = (props) => {
         <hr />
         <p id='summary'>Summary: <br/> {bookDetails?.summary}</p>
         <h3 id='pages'>{bookDetails?.pageCount} pages</h3>
-        <select onChange={(event) => findID(event)}>
-          <option>Choose a borrower...</option>
             {bookDetails?.users?.map((user: any) => {
-              return(
-              <option onClick={(event) => findID(event)} value={user.id}>{user.userName}</option>)
+              if(user.id === props.currentUser.userLogin.id) {
+                return (<h4>This book is already in your library.</h4>)
+              } else {
+                return(
+                  <div>
+                    <select>
+                      <option>Choose a borrower...</option>
+                      <option onClick={(event) => findID(event)} value={user.id}>{user.userName}</option>
+                    </select>
+                    <br />
+                    <button id='borrow-btn' onClick={borrowBook}>Borrow Book</button>
+                  </div>
+                )}
             })}
-        </select>
-        <br />
-        <button id='borrow-btn' onClick={borrowBook}>Borrow Book</button>
         </div>
       </div>}
     </div>
