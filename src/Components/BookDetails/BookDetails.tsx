@@ -85,7 +85,7 @@ const BookDetails: React.FC<currentUser | any> = (props) => {
       variables: {
         userId: parseInt(selectedUser),
         bookId: Number(id),
-        borrowerId: parseInt(props.currentUser.userLogin.id),
+        borrowerId: parseInt(props.currentUser.id),
         status: 1
       }
     })

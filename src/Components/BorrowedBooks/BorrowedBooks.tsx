@@ -26,7 +26,7 @@ const BORROWED_BOOKS = gql `
 const BorrowedBooks: React.FC<currentUser | any> = (props) => {
   const [borrowedBooks, setBorrowedBooks ] = useState([])
   const borrowedBooksQuery = useQuery(BORROWED_BOOKS, {
-    variables: { id: props.currentUser.userLogin.id }
+    variables: { id: props.currentUser.id }
   })
 
   useEffect(() => {
@@ -56,5 +56,3 @@ const BorrowedBooks: React.FC<currentUser | any> = (props) => {
 }
 
 export default BorrowedBooks
-
-// borrowedBooksQuery.data.user.
