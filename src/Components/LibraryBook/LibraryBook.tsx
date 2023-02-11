@@ -10,6 +10,7 @@ interface UserLibraryBook {
 }
 
 const LibraryBook = (props: UserLibraryBook) => {
+  console.log('PROPS', props)
   return(
     <div>
       <img src={props.imageUrl} className={props.availability ? 'book-available': 'book-unavailable'} />
