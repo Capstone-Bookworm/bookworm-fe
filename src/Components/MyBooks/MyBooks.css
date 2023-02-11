@@ -3,10 +3,9 @@
   flex-direction: row;
   flex-wrap: wrap;
   align-items:center;
-  justify-content: space-between;
+  justify-content: space-evenly;
   height: 100vh;
   width: 100vw;
-  margin-top: -5em;
 }
 
 .my-books-display {
@@ -16,8 +15,9 @@
   justify-content: center;
 }
 
-h1 {
+.user-book-welcome {
   color: #0F4D92;
   font-size: xx-large;
   font-family: Verdana, Geneva, Tamhoma, sans-serif;
+
 }

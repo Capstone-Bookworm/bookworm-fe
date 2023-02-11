@@ -105,7 +105,7 @@ const MyBooks = ( { currentUser }: { currentUser: User | any}) => {
 
   return (
     <div className="my-books-display">
-      <h1>{currentUser.userName}'s Books</h1>
+      <h1 className="user-book-welcome">{currentUser.userName}'s Books</h1>
       <div className="my-books-container">
         {getLibrary(availLibrary, true)}
         {getLibrary(pendingRequests, false)}
