@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from 'react'
+
 import { useLazyQuery, gql } from '@apollo/client'
 import { User } from '../../Interfaces'
+import "./BorrowedBooks.css"
+
 
 
 const BORROWED_BOOKS = gql `

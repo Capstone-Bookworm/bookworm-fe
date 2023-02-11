@@ -36,11 +36,6 @@ function App() {
     setCurrentUser(newUser)
   }
 
-  
-  
-  // useEffect(() => {
-  //   navigate('/home')
-  // }, [currentUser])
 
   const getDashboardDisplay = () => {
     if(location.pathname === '/dashboard/my-borrowed-books' || location.pathname === '/dashboard' || location.pathname === '/dashboard/add-book' || location.pathname === '/dashboard/pending-requests') {
@@ -58,7 +53,7 @@ function App() {
         <Route path='/dashboard/my-borrowed-books' element={< BorrowedBooks />}/>
         <Route path='/dashboard/pending-requests' element={<PendingRequests />}/>
         <Route path='/dashboard/add-book' element={<AddBook/>}/>
-        <Route path='/home' element={<Home />} />
+        <Route path='/home' element={<Home currentUser={currentUser}/>} />
         <Route path='/details/:id' element={<BookDetails key={location.key} currentUser={currentUser}/>}/>
       </Routes>
     </div>

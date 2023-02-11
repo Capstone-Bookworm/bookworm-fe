@@ -1,7 +1,7 @@
 .book-container {
   display: flex;
   justify-content: space-evenly;
-  border: 3px solid black;
+  border: 3px solid #0F4D92;
   height: 20rem;
   align-items: center;
   width: 75%;
@@ -30,15 +30,23 @@ button {
   height: max-content;
   width: 85%;
   padding: 0.5rem;
+  overflow-x: scroll;
 }
 
 .book-list {
   display: flex;
   flex-direction: row;
-  flex-wrap: wrap;
+  overflow-x: scroll;
+  width: 100%;
 }
 
-.original-book-list {
+/* .original-book-list {
   display: flex;
   flex-direction: row;
+  overflow-x: scroll;
+} */
+
+.home-page-title {
+  color: #0F4D92;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
 }

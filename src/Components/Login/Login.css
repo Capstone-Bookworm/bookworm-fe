@@ -27,12 +27,12 @@
   border: none;
   background-color: white;
   font-size: large;
-  color: blue;
+  color: #0F4D92;
   height: 4vh;
 }
 
 .login-btn:hover {
-  background-color: blue;
+  background-color: #5c5c5c;
   color: white;
 }
 
@@ -53,4 +53,27 @@
   align-items: center;
   justify-content: center;
   margin-top: 20px;
+}
+
+.create-account-btn {
+  border: none;
+  border-radius: 3px;
+  background-color: white;
+  color: #0F4D92;
+  cursor: pointer;
+  font-size: large;
+}
+
+.create-account-btn:hover {
+  border: none;
+  background-color: #5c5c5c;
+  color: white;
+}
+
+.create-acct-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+  height: 80%;
 }

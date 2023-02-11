@@ -71,7 +71,9 @@ const AddBook = () => {
       ) : (
         data && <BookSearch searchResults={data.googleBooks}/>
       )}
-      {submitTitle === '' && <h1>Search a title above to find a book to add to your library</h1>}
+
+      {submitTitle === '' && <h1 className='empty-search'>Search a title above to find a book to add to your library</h1>}
+
       </div>
     </section>
   )

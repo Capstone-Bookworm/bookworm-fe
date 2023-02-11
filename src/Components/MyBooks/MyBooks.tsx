@@ -1,8 +1,21 @@
+
 import React, {useState, useEffect} from "react";
-import { useLazyQuery, gql } from "@apollo/client";
+import { useLazyQuery, gql, useMutation } from "@apollo/client";
+
 import LibraryBook from '../LibraryBook/LibraryBook'
 import { User } from '../../Interfaces'
+import "./MyBooks.css"
 
+const DELETE_BOOK = gql `
+  mutation deleteBook ($userId: ID!, $bookId: ID!) {
+    deleteBook (input: {
+        userId: $userId
+        bookId: $bookId
+      }
+    ) { success
+    }
+  }
+`
 
 const MY_BOOKS = gql `
   query user($id: ID!) {
@@ -57,6 +70,8 @@ const MyBooks = () => {
     }
   })
   
+  const [ deleteBook ] = useMutation(DELETE_BOOK)
+  
   useEffect(() => {
     if(!loading && !error){
       setAvailLibrary(data?.user.availableBooks)
@@ -68,6 +83,16 @@ const MyBooks = () => {
   useEffect(() => {
     getMyBooks()
   }, [user])
+  const deleteSelectedBook = (id: number) => {
+    let currentUser = JSON.parse(localStorage.currentUser)
+    deleteBook({
+      variables: {
+        userId: currentUser.id,
+        bookId: id
+      }
+    })
+    refetch()
+  }
 
   const getLibrary = (library:UserBook[], availability: boolean) => {
     if(pendingRequests) {
@@ -79,16 +104,20 @@ const MyBooks = () => {
            author={book.author}
            imageUrl={book.imageUrl}
            availability={availability}
+           deleteSelectedBook={deleteSelectedBook}
          />
      })
     }
   }
 
   return (
-    <div>
-      {getLibrary(availLibrary, true)}
-      {getLibrary(pendingRequests, false)}
-      {getLibrary(unavailLibrary, false)}
+    <div className="my-books-display">
+      <h1 className="user-book-welcome">{currentUser.userName}'s Books</h1>
+      <div className="my-books-container">
+        {getLibrary(availLibrary, true)}
+        {getLibrary(pendingRequests, false)}
+        {getLibrary(unavailLibrary, false)}
+      </div>
     </div>
   )
 }
