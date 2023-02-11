@@ -84,7 +84,7 @@ const MyBooks = ( { currentUser }: { currentUser: User | any}) => {
   return (
     <div>
       {getLibrary(availLibrary, true)}
-      {getLibrary(pendingRequests, true)}
+      {getLibrary(pendingRequests, false)}
       {getLibrary(unavailLibrary, false)}
     </div>
   )
