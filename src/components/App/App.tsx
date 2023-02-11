@@ -10,6 +10,7 @@ import Home from '../Home/Home';
 import BookDetails from '../BookDetails/BookDetails';
 import MyBooks from '../MyBooks/MyBooks';
 import BorrowedBooks from '../BorrowedBooks/BorrowedBooks';
+import { User } from '../../Interfaces'
 
 
 interface Location {
@@ -20,13 +21,6 @@ interface Location {
   key: string
 }
 
-interface User {
-  userName: string;
-  location: string;
-  emailAddress: string;
-  __typename: string;
-  id: string
-}
 
 function App() {
   let location: Location = useLocation()
@@ -54,7 +48,7 @@ function App() {
       {getDashboardDisplay()}
       <Routes>
         <Route path='/' element={<Login handleSetUser={handleSetUser}/>}/>
-        <Route path='/dashboard' element={<MyBooks currentUser={currentUser!}/>}/>
+        <Route path='/dashboard' element={<MyBooks currentUser={currentUser}/>}/>
         <Route path='/dashboard/my-borrowed-books' element={< BorrowedBooks currentUser={currentUser}/>}/>
         <Route path='/dashboard/add-book' />
         <Route path='/dashboard/pending-requests' element={<PendingRequests currentUser={currentUser!}/>}/>

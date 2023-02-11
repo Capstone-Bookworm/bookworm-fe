@@ -52,7 +52,7 @@ const CHANGE_TO_UNAVAILABLE = gql `
 `
 
 
-const PendingRequests = ({ currentUser }: { currentUser: User }) => {
+const PendingRequests = ({ currentUser }: { currentUser: User | any}) => {
 const { loading, error, data, refetch } = useQuery(REQUESTS, {
   variables: {
     id: currentUser.id
