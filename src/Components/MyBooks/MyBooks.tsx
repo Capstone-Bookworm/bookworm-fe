@@ -44,7 +44,6 @@ interface UserBook {
 }
 
 const MyBooks = ( { currentUser }: { currentUser: User | any}) => {
-  console.log("HIII", currentUser)
 
   const { loading, error, data, refetch } = useQuery(MY_BOOKS, {
     variables: {
@@ -58,13 +57,18 @@ const MyBooks = ( { currentUser }: { currentUser: User | any}) => {
 
   
   useEffect(() => {
-    if(data){
+    if(!loading && !error){
+      // console.log(data)
       refetch()
       setAvailLibrary(data.user.availableBooks)
       setUnavailLibrary(data.user.unavailableBooks)
       setPendingRequests(data.user.pendingRequested)
   }
   }, [data])
+
+  // useEffect(() => {
+  //   getUserBooks()
+  // }, [])
 
   const getLibrary = (library:UserBook[], availability: boolean) => {
     if(!loading) {
