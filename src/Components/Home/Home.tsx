@@ -35,7 +35,7 @@ const Home: React.FC = () => {
 
   useEffect(() => {
     if(data) {
-      // refetch()
+      refetch()
       setBookData(data.books)
       console.log('IT WORKED!')
     }
