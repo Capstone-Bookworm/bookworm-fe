@@ -11,11 +11,12 @@ interface UserLibraryBook {
 
 const LibraryBook = (props: UserLibraryBook) => {
   return(
-    <div>
+    <div className="book-card">
       <img src={props.imageUrl} className={props.availability ? 'book-available': 'book-unavailable'} />
       <h3>{props.title}</h3>
+      <button className="delete-btn">Delete From Library</button>
     </div>
   )
 }
 
-export default LibraryBook
+export default LibraryBook;
