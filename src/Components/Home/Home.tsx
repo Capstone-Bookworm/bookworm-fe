@@ -74,9 +74,10 @@ const Home: React.FC = () => {
       <h2 className='search-message'>{searchMessage}</h2>
       {loading ? <h2 className='loading-message'>Loading...</h2> : <div className={`book-container ${bookData.length > 5 ? "display-search" : ""}`}>
       {/* <RxCaretLeft style={style} id='left-arrow' /> */}
-        <div className={`${bookData.length > 5 ? "display-search book-list" : "original-book-list"}`}>
+        <div className="book-list">
           {bookList}
         </div>
+        {/* {`${bookData.length > 5 ? "display-search book-list" : "original-book-list"}`} */}
       {/* <RxCaretRight style={style} id='right-arrow' /> */}
       </div>}
     </div>
