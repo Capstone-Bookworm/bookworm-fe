@@ -13,6 +13,10 @@ describe('My Borrowed Books Dashboard View flow', () => {
     cy.get('.title').should('have.text', 'Bookworm')
     cy.get('.welcome-display > h2').should('have.text', 'Welcome Lauren!')
     cy.get('nav > button').should('be.visible')
+    cy.get('.user-dash-nav').should('contain', 'My Books')
+      .and('contain', 'My borrowed books')
+      .and('contain', 'Pending Requests')
+      .and('contain', 'Add a book')
   })
   it('Should display their borrowed books', () => {
     cy.get('[href="/dashboard/my-borrowed-books"] > .nav-button-mybooks').click()
