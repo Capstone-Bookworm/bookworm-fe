@@ -89,6 +89,10 @@ const BookDetails = () => {
     })
   }
 
+  useEffect(() => {
+    
+  }, [borrowABook])
+
   const borrowerOptions = () => {
     return bookDetails?.users?.map((user: any) => {
       return(
