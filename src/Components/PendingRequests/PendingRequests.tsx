@@ -71,12 +71,12 @@ const [ changeToUnavailable ] = useMutation(CHANGE_TO_UNAVAILABLE)
 useEffect(() => {
   console.log(requests)
   if(requests) {
-    setPendingRequests(requests?.user.pendingRequested)
+    setPendingRequests(requests.user.pendingRequested)
   }
 }, [requests?.user.pendingRequested])
 
 useEffect(() => {
-  // console.log("in useEffect", user)
+  console.log(user)
   getAllRequests()
 }, [user])
 
@@ -90,7 +90,6 @@ const denyRequest = (bookId: string, borrowerId: string) => {
         status: 0
     }
   })
-  getAllRequests()
 }
 
 const acceptRequest = (bookId: string, borrowerId: string) => {
@@ -102,9 +101,11 @@ const acceptRequest = (bookId: string, borrowerId: string) => {
       status: 2
     }
   })
-  getAllRequests()
 }
 
+useEffect(() => {
+  getAllRequests()
+}, [changeToAvailable, changeToUnavailable])
 
 const getRequests = () => {
   if(requests) {
@@ -127,11 +128,8 @@ const getRequests = () => {
 }
 
   return(
-    <div>
       <div className="pending-requests">
-      {getRequests()}
-      </div>
-      {/* <button onClick={() => {getAllRequests()}}>ClickMe</button> */}
+      {!pendingRequests ? getRequests() : <h3>No pending requests at this time</h3>}
       </div>
   )
 }
