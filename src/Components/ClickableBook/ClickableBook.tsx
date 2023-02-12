@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import './Book.css'
+import './ClickableBook.css'
 import { NavLink } from 'react-router-dom'
 import BookDetails from '../BookDetails/BookDetails'
 

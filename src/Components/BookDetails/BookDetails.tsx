@@ -49,14 +49,6 @@ interface details {
   }[]
 }
 
-interface currentUser {
-    userName?: string 
-    location?: string
-    id?: string
-    emailAddress?: string;
-    __typename?: string; 
-}
-
 const BookDetails = () => {
 
   const currentUser : any = window.localStorage.getItem("currentUser")
@@ -97,6 +89,13 @@ const BookDetails = () => {
     })
   }
 
+  const borrowerOptions = () => {
+    return bookDetails?.users?.map((user: any) => {
+      return(
+      <option onClick={(event) => findID(event)} key={user.id} value={user.id}>{user.userName}</option>)
+    })
+  }
+
   return(
     <div className='details-page'>
       {detailsQuery.loading && <h3 id='loading'>Loading...</h3>}
@@ -111,11 +110,8 @@ const BookDetails = () => {
         {matchedUser ? <h4>This book is already in your library.</h4> : 
         <div>
         <select className='borrow-selection' onChange={(event) => findID(event)}>
-          <option>Choose a borrower...</option>
-            {bookDetails?.users?.map((user: any) => {
-              return(
-              <option onClick={(event) => findID(event)} value={user.id}>{user.userName}</option>)
-            })}
+          <option>Choose a lender...</option>
+            {borrowerOptions()}
         </select>
         <br />
         <button id='borrow-btn' onClick={borrowBook}>Borrow Book</button>
