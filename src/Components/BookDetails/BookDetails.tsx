@@ -57,7 +57,10 @@ interface currentUser {
     __typename?: string; 
 }
 
-const BookDetails: React.FC<currentUser | any> = (props) => {
+const BookDetails = () => {
+
+  const currentUser : any = window.localStorage.getItem("currentUser")
+  const [ user, setUser ] = useState(JSON.parse(currentUser))
   const [ selectedUser, setSelectedUser ] = useState('')
   const [ matchedUser, setMatchedUser ] = useState('')
   const { id } = useParams()
@@ -70,7 +73,7 @@ const BookDetails: React.FC<currentUser | any> = (props) => {
   useEffect(() => {
     if(!detailsQuery.loading) {
       setBookDetails(detailsQuery.data.book)
-      const userOwnsBook = detailsQuery.data.book.users.some((user: any) => user.id === props.currentUser.id)
+      const userOwnsBook = detailsQuery.data.book.users.some((foundUser: any) => foundUser.id === user.id)
       setMatchedUser(userOwnsBook)
     }
   }, [detailsQuery.data])
@@ -88,7 +91,7 @@ const BookDetails: React.FC<currentUser | any> = (props) => {
       variables: {
         userId: parseInt(selectedUser),
         bookId: Number(id),
-        borrowerId: parseInt(props.currentUser.id),
+        borrowerId: parseInt(user.id),
         status: 1
       }
     })
