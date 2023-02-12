@@ -15,6 +15,7 @@ describe('Home page flow', () => {
     cy.get('nav > button').click()
   })
   it('Should be able to see the display of all available books', () => {
+    //NEED TO INTERCEPT POST
     cy.get('.book-list').should('be.visible').children().should('have.length', 7)
     cy.get('.book-list').scrollTo('right', { easing: 'linear' })
     cy.get(':nth-child(1) > a > .book-item-image')

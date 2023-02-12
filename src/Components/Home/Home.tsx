@@ -59,8 +59,13 @@ const Home = ({currentUser}: {currentUser: User | any}) => {
     const searchBooks = () => {
       setBookData(searchQuery.data.bookSearch)
       setSearchMessage(`Search results for "${searchBook}". Please try a more specific search if your book is not displayed below.`)
-      setSearchBook('')
   }
+    const returnAllBookView = () => {
+      refetch()
+      setBookData(data.books)
+      setSearchMessage('')
+      setSearchBook('')
+    }
 
   return(
     <div className='homepage-container'>
@@ -74,13 +79,11 @@ const Home = ({currentUser}: {currentUser: User | any}) => {
         <button type='button' className='search-button' onClick={() => searchBooks()}>SEARCH</button>
       </form>
       <h2 className='search-message'>{searchMessage}</h2>
+      {searchMessage && <button onClick={returnAllBookView} style={{marginBottom: '5rem'}} className='return-btn'>See All Books</button>}
       {loading ? <h2 className='loading-message'>Loading...</h2> : <div className={`book-container ${bookData.length > 5 ? "display-search" : ""}`}>
-      {/* <RxCaretLeft style={style} id='left-arrow' /> */}
         <div className="book-list">
           {bookList}
         </div>
-        {/* {`${bookData.length > 5 ? "display-search book-list" : "original-book-list"}`} */}
-      {/* <RxCaretRight style={style} id='right-arrow' /> */}
       </div>}
     </div>
   )
