@@ -52,6 +52,7 @@ const Home = ({currentUser}: {currentUser: User | any}) => {
       />
       )
     })
+
     const searchQuery = useQuery(BOOK_SEARCH, {
       variables: { title: searchBook }})
 
@@ -63,7 +64,6 @@ const Home = ({currentUser}: {currentUser: User | any}) => {
 
   return(
     <div className='homepage-container'>
-      <h2 className='home-display'>My Home</h2>
       <form className='form-container'>
         <input 
           type='text'

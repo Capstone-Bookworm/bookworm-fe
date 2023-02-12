@@ -29,6 +29,7 @@ describe('Home page flow', () => {
   it('Should be able to search through the library of available books', () => {
     cy.get('input').type('crying').should('have.value', 'crying')
     // cy.get('.search-button').click() -- for some reason, the test isn't working...
+    // INTERCEPT POST REQUEST
   })
   it('Should be able to click on a book to see more details', () => {
     //INTERCEPT POST REQUEST FOR BOOK DETAILS
@@ -42,13 +43,30 @@ describe('Home page flow', () => {
     cy.get('.borrow-selection').select('Adelle')
     // cy.get('#borrow-btn').click() // INTERCEPT POST(PATCH) REQUEST FOR BORROWING A BOOK
   })
-
+  it('Should be able to navigate to their dashboard and see their personal library of books', () => {
+    cy.get('nav > button').click()
+    cy.get('.menuNav').should('contain', 'My Dashboard').click()
+    cy.get('nav > button').click()
+    cy.location("pathname").should("eq", "/dashboard")
+    cy.get('.user-dash-nav').should('contain', 'My Books')
+      .and('contain', 'My borrowed books')
+      .and('contain', 'Pending Requests')
+      .and('contain', 'Add a book')
+      cy.get('.user-book-welcome').should('have.text', "Lauren's Books")
+      cy.get('.my-books-container').should('be.visible').children().should('have.length', 3)
+      cy.get('.my-books-container > :nth-child(1)').should('have.text', 'Tuesdays with Morrie')
+        .find('img').should('have.attr', 'src', 'http://books.google.com/books/content?id=z2z_6hLoPmgC&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api')
+        .and('have.css', 'opacity', '0.5')
+      cy.get('.my-books-container > :nth-child(2)').should('have.text', 'Sins and Cigarettes')
+        .find('img').should('have.attr', 'src', 'http://books.google.com/books/content?id=XU4WxwEACAAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api')
+        .and('have.css', 'opacity', '0.5')
+      cy.get('.my-books-container > :nth-child(3)').should('have.text', 'The Seven Husbands of Evelyn Hugo')
+        .find('img').should('have.attr', 'src', 'http://books.google.com/books/content?id=5KlizgEACAAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api')
+        .and('have.css', 'opacity', '0.5')
+  })
+  it('Shold be able to logout of account', () => {
+    cy.get('nav > button').click()
+    cy.get('[href="/"] > li').click()
+    cy.location("pathname").should("eq", "/")
+  })
 })
-
-
-
-// I should see nav bar and logo (and menu)
-// I should see books
-// I should be able to search books and see results
-// I should be able to click on a book
-// I should see a error message if the server is down
