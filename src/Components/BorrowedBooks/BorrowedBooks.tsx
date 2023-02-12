@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-
+import Book from '../Book/Book'
 import { useLazyQuery, gql } from '@apollo/client'
 import { User } from '../../Interfaces'
 import "./BorrowedBooks.css"
@@ -40,12 +40,14 @@ const BorrowedBooks = () => {
   }, [user])
 
   const bookList = () => {
-    borrowedBooks.map((book: any) => {
+    return borrowedBooks.map((book: any) => {
       return(
-        <div className='borrowed-book'>
-          <img src={book.imageUrl} alt='image of book cover'/>
-          <h4>{book.title}</h4>
-        </div>
+        <Book 
+          key={book.id}
+          id={book.id}
+          imageUrl={book.imageUrl}
+          title={book.title}
+        />
       )
      })
   }
