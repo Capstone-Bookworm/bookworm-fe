@@ -1,9 +1,7 @@
 
-import React, {useState, useEffect} from "react";
+import { useState, useEffect } from "react";
 import { useLazyQuery, gql, useMutation } from "@apollo/client";
-
 import LibraryBook from '../LibraryBook/LibraryBook'
-import { User } from '../../Interfaces'
 import "./MyBooks.css"
 
 const DELETE_BOOK = gql `
@@ -14,6 +12,20 @@ const DELETE_BOOK = gql `
       }
     ) { success
     }
+  }
+`
+
+const CHANGE_TO_AVAILABLE = gql `
+  mutation patchUserBook ($userId: Int!, $bookId: Int!, $borrowerId: Int!) {
+    patchUserBook(input: {
+        userId: $userId
+        bookId: $bookId
+        borrowerId: $borrowerId
+        status: 0
+    }) { userBook {
+            bookId
+            }
+      }
   }
 `
 
@@ -33,6 +45,12 @@ const MY_BOOKS = gql `
           title
           author
           imageUrl
+          borrower {
+            id
+            userName
+            location
+            emailAddress
+          }
         }
         pendingRequested {
           id
@@ -71,6 +89,7 @@ const MyBooks = () => {
   })
   
   const [ deleteBook ] = useMutation(DELETE_BOOK)
+  const [ returnBook ] = useMutation(CHANGE_TO_AVAILABLE)
   
   useEffect(() => {
     if(!loading && !error){
@@ -94,6 +113,23 @@ const MyBooks = () => {
     getMyBooks()
   }
 
+  const returnSelectedBook = (id: any) => {
+    let matchId = data.user.unavailableBooks.find((book: any) => {
+      return book.id === id
+    })
+    let borrowerId = matchId.borrower.id
+    console.log(user.id, id, borrowerId)
+    returnBook({
+      variables: {
+        userId: parseInt(user.id),
+        bookId: parseInt(id),
+        borrowerId: parseInt(borrowerId),
+        status: 0
+      }
+    })
+    getMyBooks()
+  }
+
   const getLibrary = (library:UserBook[], availability: boolean) => {
     if(pendingRequests) {
       return library.map((book:any)=> {
@@ -105,6 +141,7 @@ const MyBooks = () => {
            imageUrl={book.imageUrl}
            availability={availability}
            deleteSelectedBook={deleteSelectedBook}
+           returnSelectedBook={returnSelectedBook}
          />
      })
     }

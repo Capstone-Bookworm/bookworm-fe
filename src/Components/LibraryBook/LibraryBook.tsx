@@ -10,6 +10,7 @@ interface UserLibraryBook {
   imageUrl: string,
   availability: boolean
   deleteSelectedBook: any
+  returnSelectedBook: any
 }
 
 const LibraryBook = (props: UserLibraryBook) => {
@@ -19,6 +20,7 @@ const LibraryBook = (props: UserLibraryBook) => {
       <img src={props.imageUrl} alt={`Image of ${props.title}`} className={props.availability ? 'book-available': 'book-unavailable'} />
       <h3 className="book-title">{props.title}</h3>
       {props.availability && <button className="delete-btn" onClick={() => props.deleteSelectedBook(props.id)}>Delete From Library</button>}
+      {!props.availability && <button className="delete-btn" onClick={() => props.returnSelectedBook(props.id)}>Book Returned</button>}
     </div>
   )
 }
