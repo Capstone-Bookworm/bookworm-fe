@@ -39,19 +39,23 @@ const BorrowedBooks = () => {
     getBorrowedBooks()
   }, [user])
 
+  const bookList = () => {
+    borrowedBooks.map((book: any) => {
+      return(
+        <div className='borrowed-book'>
+          <img src={book.imageUrl} alt='image of book cover'/>
+          <h4>{book.title}</h4>
+        </div>
+      )
+     })
+  }
+
   return (
     <div>
       {loading && <h3>Loading...</h3>}
       {!loading && 
         <div className='borrowed-book-section'>
-         {borrowedBooks.map((book: any) => {
-          return(
-            <div className='borrowed-book'>
-              <img src={book.imageUrl} alt='image of book cover'/>
-              <h4>{book.title}</h4>
-            </div>
-          )
-         })}
+         {bookList()}
         </div>
       }
     </div>
