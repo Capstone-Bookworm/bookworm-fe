@@ -7,19 +7,30 @@ describe('Login Page spec', () => {
     // cy.wait('@books')
     //   .visit('http://localhost:3000/home') 
   });
-  it('Should display a login box', () => {
+  it('Should be able to sign in', () => {
     cy.get('.login-container').should('have.text', 'Book Worm')
     cy.get('.email-login').type('lauren@gmail.com').should('have.value', 'lauren@gmail.com')
     cy.get('.create-acct-form > .login-btn').click()
     // cy.wait('@userLogin')
+    //INTERCEPT POST
     cy.visit('http://localhost:3000/home') 
   })
   it('Should have an option to create an account if one doesnt exist', () => {
     cy.get('.create-acct').should('have.text', "Don't have an account? Create New Account")
     cy.visit('http://localhost:3000/');
-    cy.get('.create-acct-form > .login-btn').click();
-    // cy.get('.email-login').type('eleanor@gmail.com').should('have.value', 'eleanor@gmail.com')
-    // cy.get('.username-login').type('')
+    cy.get('.create-acct > .login-btn').click();
+    cy.get('.email-login').type('eleanor@gmail.com').should('have.value', 'eleanor@gmail.com')
+    cy.get('.username-login').type('eleanor').should('have.value', 'eleanor')
+    cy.get('.location-login').type('Denver, CO').should('have.value', 'Denver, CO')
+    // cy.get('.create-account-btn').click()
+    //INTERCEPT POST
+    cy.get('.login-btn').click()
+    cy.get('.email-login').should('have.value', 'eleanor@gmail.com')
+  })
+  it('Should throw an error if user account does not exist', () => {
+    cy.get('.email-login').type('eleanor@gmail.com').should('have.value', 'eleanor@gmail.com')
+    cy.get('.create-acct-form > .login-btn').click()
+    cy.get('.login-container > h3').should('have.text', "We couldn't find your account, please try again")
   })
 })
 // })

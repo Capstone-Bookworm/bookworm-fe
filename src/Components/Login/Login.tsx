@@ -129,8 +129,8 @@ const Login = ( { handleSetUser }: { handleSetUser: (user: any) => void}) => {
         </div>
         <div className='create-acct'>
           {activeAccount === true && <h3>Don't have an account? </h3>}
-          {activeAccount === true && <button className='login-btn' onClick={() => setAccount(false)}>Create New Account</button>}
-          {activeAccount === false && <button className='login-btn' onClick={() => setAccount(true)}>Return to Login</button>}
+          {activeAccount === true && <button className='login-btn create-btn' onClick={() => setAccount(false)}>Create New Account</button>}
+          {activeAccount === false && <button className='login-btn return-btn' onClick={() => setAccount(true)}>Return to Login</button>}
         </div>
       </section>
     </main>
