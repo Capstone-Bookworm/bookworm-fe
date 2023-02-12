@@ -1,5 +1,5 @@
 import React from "react";
-import { GrAlert } from 'react-icons/Gr'
+import { GrAlert } from 'react-icons/gr'
 import { Link } from 'react-router-dom'
 import './ServerError.css'
 

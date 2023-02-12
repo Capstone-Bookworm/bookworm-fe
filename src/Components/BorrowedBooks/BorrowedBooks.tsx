@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-
+import ServerError from '../ServerError/ServerError'
 import { useLazyQuery, gql } from '@apollo/client'
 import { User } from '../../Interfaces'
 import "./BorrowedBooks.css"
@@ -38,6 +38,8 @@ const BorrowedBooks = () => {
   useEffect(() => {
     getBorrowedBooks()
   }, [user])
+  
+  if (error) return <ServerError />
 
   return (
     <div>

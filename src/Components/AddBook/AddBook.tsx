@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import './AddBook.css'
 import { gql, useLazyQuery } from '@apollo/client'
 import BookSearch from '../BookSearch/BookSearch'
+import ServerError from '../ServerError/ServerError'
 
 const GOOGLE_BOOKS = gql `
   query GoogleBooks($title: String!){
@@ -51,6 +52,8 @@ const AddBook = () => {
   useEffect(() => {
     console.log(data)
   }, [data])
+
+  if (error) return <ServerError />
 
   return (
     <section className='add-book-page'>

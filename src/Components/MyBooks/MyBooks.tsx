@@ -1,7 +1,7 @@
 
 import React, {useState, useEffect} from "react";
 import { useLazyQuery, gql, useMutation } from "@apollo/client";
-
+import ServerError from "../ServerError/ServerError";
 import LibraryBook from '../LibraryBook/LibraryBook'
 import { User } from '../../Interfaces'
 import "./MyBooks.css"
@@ -109,6 +109,8 @@ const MyBooks = () => {
      })
     }
   }
+
+  if (error) return <ServerError />
 
   return (
     <div className="my-books-display">
