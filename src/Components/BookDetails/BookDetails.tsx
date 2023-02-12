@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useQuery, gql, useMutation } from '@apollo/client'
-import { useParams } from 'react-router-dom'
+import { useParams, useNavigate } from 'react-router-dom'
 import './BookDetails.css'
 
 const BOOK_DETAILS = gql `
@@ -50,11 +50,14 @@ interface details {
 }
 
 const BookDetails = () => {
+  const navigate = useNavigate()
+
 
   const currentUser : any = window.localStorage.getItem("currentUser")
   const [ user, setUser ] = useState(JSON.parse(currentUser))
   const [ selectedUser, setSelectedUser ] = useState('')
   const [ matchedUser, setMatchedUser ] = useState('')
+  const [ successfulBorrow, setSuccessfulBorrow ] = useState(false)
   const { id } = useParams()
 
   const detailsQuery = useQuery(BOOK_DETAILS, {
@@ -70,7 +73,7 @@ const BookDetails = () => {
     }
   }, [detailsQuery.data])
 
-  const [ borrowABook ] = useMutation(BORROW_BOOK)
+  const [ borrowABook, {loading, error, data} ] = useMutation(BORROW_BOOK)
 
   const findID = (event: React.FormEvent<HTMLOptionElement> | React.ChangeEvent<HTMLSelectElement>) => {
     if(event.currentTarget.value !== 'Choose a borrower...') {
@@ -87,11 +90,11 @@ const BookDetails = () => {
         status: 1
       }
     })
+    if(!error) {
+      navigate('/home')
+    }
   }
 
-  useEffect(() => {
-    
-  }, [borrowABook])
 
   const borrowerOptions = () => {
     return bookDetails?.users?.map((user: any) => {
@@ -118,7 +121,7 @@ const BookDetails = () => {
             {borrowerOptions()}
         </select>
         <br />
-        <button id='borrow-btn' onClick={borrowBook}>Borrow Book</button>
+        <button className={successfulBorrow ? 'borrow-btn-disable' :'borrow-btn'} onClick={borrowBook}>Borrow Book</button>
         </div>
         }
         </div>
