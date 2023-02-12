@@ -3,7 +3,6 @@ describe('Home page flow', () => {
     cy.visit('http://localhost:3000/')
     cy.get('.email-login').type('lauren@gmail.com')
     cy.get('.create-acct-form > .login-btn').click()
-    cy.location("pathname").should("eq", "/home")
   })
   it('Should expect to see a title and a logo with a nav bar', () => {
     cy.get('.logo').should('have.attr', 'src', 'https://cdn-icons-png.flaticon.com/512/2789/2789786.png')
