@@ -39,31 +39,33 @@ const ADD_BOOK = gql `
 `
 
 const BookSearch = ({searchResults}: Books) => {
-const [allBooks, setBooks] = useState(searchResults)
-const [savedBook, setSavedBook] = useState(false)
-const [saveMessage, setSaveMessage] = useState('')
 
-const [ addBook ] = useMutation(ADD_BOOK)
-  
+  const currentUser : any = window.localStorage.getItem("currentUser")
+  const [ user, setUser ] = useState(JSON.parse(currentUser))
+  const [allBooks, setBooks] = useState(searchResults)
+  const [savedBook, setSavedBook] = useState(false)
+  const [saveMessage, setSaveMessage] = useState('')
+
+  const [ addBook ] = useMutation(ADD_BOOK)
+    
   const addToLibrary = (isbn: string) => {
-    let selectedBook = searchResults.filter(book => {
+    let selectedBook = searchResults.find(book => {
       return book.isbn === isbn
     })
-    let newObject: any = window.localStorage.getItem("currentUser")
-    let currentUser = JSON.parse(newObject)
+    console.log(selectedBook)
     addBook({
       variables: {
-        userId: currentUser.id,
-        isbn: selectedBook[0].isbn,
-        title: selectedBook[0].title,
-        author: selectedBook[0].author,
-        summary: selectedBook[0].summary,
-        pageCount: selectedBook[0].pageCount,
-        imageUrl: selectedBook[0].imageUrl
+        userId: user.id,
+        isbn: selectedBook?.isbn,
+        title: selectedBook?.title,
+        author: selectedBook?.author,
+        summary: selectedBook?.summary,
+        pageCount: selectedBook?.pageCount,
+        imageUrl: selectedBook?.imageUrl
       }
     })
     setSavedBook(true)
-    setSaveMessage(`Added ${selectedBook[0].title} to ${currentUser.userName}'s books`)
+    setSaveMessage(`Added ${selectedBook?.title} to ${user.userName}'s books`)
   }
 
   return (
