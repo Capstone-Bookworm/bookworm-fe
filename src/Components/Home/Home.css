@@ -45,6 +45,12 @@ button {
   font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
+.home-display {
+  color: #0F4D92;
+  font-size: xx-large;
+  font-family: Verdana, Geneva, Tamhoma, sans-serif;
+  }
+  
 .return-btn {
   border-radius: 5px;
   cursor: pointer;
