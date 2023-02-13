@@ -36,6 +36,7 @@ const Login = ( { handleSetUser }: { handleSetUser: (user: any) => void}) => {
   const [ activeAccount, setAccount] = useState(true)
   const [ username, setUsername ] = useState('')
   const [ userLocation, setUserLocation ] = useState('')
+  const [ errorMessage, setMessage ] = useState("We couldn't find your account, please try again")
   const [ accountToCreate, setAccountToCreate ] = useState('')
   const navigate = useNavigate()
 
@@ -59,6 +60,7 @@ const Login = ( { handleSetUser }: { handleSetUser: (user: any) => void}) => {
     if(!login && error) {
       return false
     } else if (login && error) {
+      setTimeout(() => setMessage(""), 3000)
       return true
     } else {
       return false
@@ -88,14 +90,22 @@ const Login = ( { handleSetUser }: { handleSetUser: (user: any) => void}) => {
     }
   }
 
-  
+  const handleChange = () => {
+    if(activeAccount) {
+      setAccount(false)
+      setEmail('')
+    } else {
+      setAccount(true)
+      setEmail('')
+    }
+  }
 
   return ( 
     <main> 
       <section className='login-page'>
         <div className='login-container'>
         <h1 className='page-title'>Book Worm</h1>
-        {getError() && <h3>We couldn't find your account, please try again</h3>}
+        {getError() && <h3>{errorMessage}</h3>}
         <form className='create-acct-form' onSubmit={event => handleSubmit(event)}>
           <input 
             type='email'
@@ -129,8 +139,8 @@ const Login = ( { handleSetUser }: { handleSetUser: (user: any) => void}) => {
         </div>
         <div className='create-acct'>
           {activeAccount === true && <h3>Don't have an account? </h3>}
-          {activeAccount === true && <button className='login-btn' onClick={() => setAccount(false)}>Create New Account</button>}
-          {activeAccount === false && <button className='login-btn' onClick={() => setAccount(true)}>Return to Login</button>}
+          {activeAccount === true && <button className='login-btn' onClick={handleChange}>Create New Account</button>}
+          {activeAccount === false && <button className='login-btn' onClick={handleChange}>Return to Login</button>}
         </div>
       </section>
     </main>
