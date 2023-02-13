@@ -38,11 +38,10 @@ const BorrowedBooks = () => {
   useEffect(() => {
     getBorrowedBooks()
   }, [user])
-  
-  if (error) return <ServerError />
 
   return (
     <div>
+      {error && <ServerError />}
       {loading && <h3>Loading...</h3>}
       {!loading && 
         <div className='borrowed-book-section'>

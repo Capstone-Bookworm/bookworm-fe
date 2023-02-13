@@ -53,12 +53,11 @@ const AddBook = () => {
     console.log(data)
   }, [data])
 
-  if (error) return <ServerError />
-
   return (
     <section className='add-book-page'>
       <div className='search-form'>
         <h1 className='search-header'>Search For Book by Title: </h1>
+        {error && <ServerError />}
         <input
           type='title'
           className='search-input'

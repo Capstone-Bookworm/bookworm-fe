@@ -110,12 +110,11 @@ const MyBooks = () => {
     }
   }
 
-  if (error) return <ServerError />
-
   return (
     <div className="my-books-display">
       <h1 className="user-book-welcome">{user.userName}'s Books</h1>
       <div className="my-books-container">
+        {error && <ServerError />}
         {getLibrary(availLibrary, true)}
         {getLibrary(pendingRequests, false)}
         {getLibrary(unavailLibrary, false)}

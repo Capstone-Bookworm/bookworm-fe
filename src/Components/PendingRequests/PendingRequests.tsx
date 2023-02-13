@@ -127,11 +127,10 @@ const getRequests = () => {
   }
 }
 
-  if (error) return <ServerError />
-
   return(
     <div>
       <div className="pending-requests">
+        {error && <ServerError />}
       {getRequests()}
       </div>
       {/* <button onClick={() => {getAllRequests()}}>ClickMe</button> */}
