@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useQuery, gql, useMutation } from "@apollo/client";
 import LibraryBook from '../LibraryBook/LibraryBook'
 import "./MyBooks.css"
-import { match } from "assert";
+import ServerError from "../ServerError/ServerError";
 
 const DELETE_BOOK = gql `
   mutation deleteBook ($userId: ID!, $bookId: ID!) {
@@ -82,29 +82,26 @@ const MyBooks = () => {
   const [ unavailLibrary, setUnavailLibrary ] = useState([])
   const [ pendingRequests, setPendingRequests ] = useState([])
 
-
-  const {loading, error, data, refetch} = useQuery(MY_BOOKS, {
+  const { loading, error, data, refetch } = useQuery(MY_BOOKS, {
     variables: {
       id: user.id
     }
   })
-
   
   const [ deleteBook ] = useMutation(DELETE_BOOK)
   const [ returnBook ] = useMutation(CHANGE_TO_AVAILABLE)
   
   useEffect(() => {
-    console.log(data?.user.availableBooks)
     if(!loading && !error){
       setAvailLibrary(data?.user.availableBooks)
       setUnavailLibrary(data?.user.unavailableBooks)
       setPendingRequests(data?.user.pendingRequested)
   }
   }, [data])
-  
+
   useEffect(() => {
     refetch()
-  }, [])
+  }, [user])
 
   const deleteSelectedBook = (id: number) => {
     deleteBook({
@@ -156,6 +153,7 @@ const MyBooks = () => {
     <div className="my-books-display">
       <h1 className="user-book-welcome">{user.userName}'s Books</h1>
       <div className="my-books-container">
+        {error && <ServerError />}
         {getLibrary(availLibrary, true, false, false)}
         {getLibrary(pendingRequests, false, false, true)}
         {getLibrary(unavailLibrary, false, true, false)}
