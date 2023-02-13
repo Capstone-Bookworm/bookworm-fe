@@ -40,13 +40,13 @@ button {
   width: 100%;
 }
 
-/* .original-book-list {
-  display: flex;
-  flex-direction: row;
-  overflow-x: scroll;
-} */
-
 .home-page-title {
   color: #0F4D92;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.home-display {
+  color: #0F4D92;
+  font-size: xx-large;
+  font-family: Verdana, Geneva, Tamhoma, sans-serif;
 }

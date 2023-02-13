@@ -31,7 +31,7 @@ const AddBook = () => {
   const [ user, setUser ] = useState(JSON.parse(currentUser))
 
   const [titleSearch, setTitle] = useState('')
-  const [submitTitle, setSubmitTitle] = useState('The Hobbit')
+  const [submitTitle, setSubmitTitle] = useState('')
   
   const [ getSearchResults, {data, loading, error}] = useLazyQuery(GOOGLE_BOOKS, {
     variables: { title: submitTitle}
