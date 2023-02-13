@@ -1,21 +1,13 @@
-import React, { useState } from 'react'
+import React from "react";
 import './Book.css'
-import { NavLink } from 'react-router-dom'
-import BookDetails from '../BookDetails/BookDetails'
 
-interface book {
-    id: number
-    imageUrl: string
-}
-
-const Book: React.FC<book> = ({ id, imageUrl }): JSX.Element => {
-  return (
-    <div className='book-item'>
-      <NavLink to={`/details/${id}`} key={id}>
-        <img className='book-item-image' src={imageUrl} alt="Book cover"/>
-      </NavLink>
+const Book = ({id, imageUrl, title }: {id: string, imageUrl: string, title: string}) => {
+  return(
+    <div className='borrowed-book'>
+      <img src={imageUrl} alt='image of book cover'/>
+      <h4>{title}</h4>
     </div>
   )
-}
+} 
 
 export default Book

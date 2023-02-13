@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useQuery, gql, useMutation } from '@apollo/client'
-import { useParams } from 'react-router-dom'
+import { useParams, useNavigate } from 'react-router-dom'
 import './BookDetails.css'
 
 const BOOK_DETAILS = gql `
@@ -49,17 +49,15 @@ interface details {
   }[]
 }
 
-interface currentUser {
-    userName?: string 
-    location?: string
-    id?: string
-    emailAddress?: string;
-    __typename?: string; 
-}
+const BookDetails = () => {
+  const navigate = useNavigate()
 
-const BookDetails: React.FC<currentUser | any> = (props) => {
+
+  const currentUser : any = window.localStorage.getItem("currentUser")
+  const [ user, setUser ] = useState(JSON.parse(currentUser))
   const [ selectedUser, setSelectedUser ] = useState('')
   const [ matchedUser, setMatchedUser ] = useState('')
+  const [ successfulBorrow, setSuccessfulBorrow ] = useState(false)
   const { id } = useParams()
 
   const detailsQuery = useQuery(BOOK_DETAILS, {
@@ -70,12 +68,12 @@ const BookDetails: React.FC<currentUser | any> = (props) => {
   useEffect(() => {
     if(!detailsQuery.loading) {
       setBookDetails(detailsQuery.data.book)
-      const userOwnsBook = detailsQuery.data.book.users.some((user: any) => user.id === props.currentUser.id)
+      const userOwnsBook = detailsQuery.data.book.users.some((foundUser: any) => foundUser.id === user.id)
       setMatchedUser(userOwnsBook)
     }
   }, [detailsQuery.data])
 
-  const [ borrowABook ] = useMutation(BORROW_BOOK)
+  const [ borrowABook, {loading, error, data} ] = useMutation(BORROW_BOOK)
 
   const findID = (event: React.FormEvent<HTMLOptionElement> | React.ChangeEvent<HTMLSelectElement>) => {
     if(event.currentTarget.value !== 'Choose a borrower...') {
@@ -88,9 +86,20 @@ const BookDetails: React.FC<currentUser | any> = (props) => {
       variables: {
         userId: parseInt(selectedUser),
         bookId: Number(id),
-        borrowerId: parseInt(props.currentUser.id),
+        borrowerId: parseInt(user.id),
         status: 1
       }
+    })
+    if(!error) {
+      navigate('/home')
+    }
+  }
+
+
+  const borrowerOptions = () => {
+    return bookDetails?.users?.map((user: any) => {
+      return(
+      <option onClick={(event) => findID(event)} key={user.id} value={user.id}>{user.userName}</option>)
     })
   }
 
@@ -108,14 +117,11 @@ const BookDetails: React.FC<currentUser | any> = (props) => {
         {matchedUser ? <h4>This book is already in your library.</h4> : 
         <div>
         <select className='borrow-selection' onChange={(event) => findID(event)}>
-          <option>Choose a borrower...</option>
-            {bookDetails?.users?.map((user: any) => {
-              return(
-              <option onClick={(event) => findID(event)} value={user.id}>{user.userName}</option>)
-            })}
+          <option>Choose a lender...</option>
+            {borrowerOptions()}
         </select>
         <br />
-        <button id='borrow-btn' onClick={borrowBook}>Borrow Book</button>
+        <button className={successfulBorrow ? 'borrow-btn-disable' :'borrow-btn'} onClick={borrowBook}>Borrow Book</button>
         </div>
         }
         </div>

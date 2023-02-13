@@ -54,7 +54,7 @@ function App() {
         <Route path='/dashboard/pending-requests' element={<PendingRequests />}/>
         <Route path='/dashboard/add-book' element={<AddBook/>}/>
         <Route path='/home' element={<Home currentUser={currentUser}/>} />
-        <Route path='/details/:id' element={<BookDetails key={location.key} currentUser={currentUser}/>}/>
+        <Route path='/details/:id' element={<BookDetails key={location.key}/>}/>
       </Routes>
     </div>
   );
