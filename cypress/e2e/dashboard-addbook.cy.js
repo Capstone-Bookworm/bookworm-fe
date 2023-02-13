@@ -1,8 +1,12 @@
 describe('My Add a Book Dashboard View flow', () => {
   beforeEach(() => {
-    //INTERCEPT POST -- shouldn't have to login everytime 
-    cy.visit('http://localhost:3000/')
-    cy.get('.email-login').type('lauren@gmail.com')
+    cy.visit('http://localhost:3000/') 
+    cy.intercept({ method: "POST", url: "https://bookworm-be.herokuapp.com/graphql" }, (req) => {
+      if (req.body.operationName === "userLogin") {
+        req.reply({ fixture: "user.json" });
+      }
+    })
+    cy.get('.email-login').type('adelle@gmail.com')
     cy.get('.create-acct-form > .login-btn').click()
     cy.get('nav > button').click()
     cy.get('[href="/dashboard"] > li').click()
@@ -19,14 +23,22 @@ describe('My Add a Book Dashboard View flow', () => {
       cy.get('.empty-search').should('have.text', 'Search a title above to find a book to add to your library')
   })
   it('Should allow user to search for a book to add to their library', () => {
+    cy.intercept({ method: "POST", url: "https://bookworm-be.herokuapp.com/graphql" }, (req) => {
+      req.reply({ fixture: "googleBooks.json"})
+        }).as('googleBooks')
     cy.get('.search-header').should('have.text', 'Search For Book by Title: ')
     cy.get('.search-input').type('milk and honey').should('have.value', 'milk and honey')
-    cy.get('.search-button').click() // -- INTERCEPT POST REQUEST AND ONLY DISPLAY 1 BOOK
-    cy.get(':nth-child(1) > .book-image').should('have.attr', 'src', 'http://books.google.com/books/content?id=WoWfCgAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api')
-    cy.get(':nth-child(1) > .image-overlay').should('contain', 'Isbn: 9781449478650')
-      .and('contain', 'Title: Milk and Honey')
-      .and('contain', 'Author: Rupi Kaur')
-      .and('contain', 'Page Count: 208')
-    cy.get(':nth-child(1) > .image-overlay > .add-btn') //click -- INTERCEPT POST REQUEST
+    cy.get('.search-button').click()
+    cy.get(':nth-child(1) > .book-image').should('have.attr', 'src', 'http://books.google.com/books/content?id=eYK8vsA8K8MC&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api')
+    cy.get(':nth-child(1) > .image-overlay').should('contain', 'Isbn: 9781857884081')
+      .and('contain', 'Title: Third Culture Kids 3rd Edition')
+      .and('contain', 'Ruth E. Van Reken')
+      .and('contain', 'Page Count: 228')
+    cy.intercept({ method: "POST", url: "https://bookworm-be.herokuapp.com/graphql" }, (req) => {
+    req.reply({ fixture: "addBook.json"})
+      }).as('addBook')
+      cy.get('.add-btn').click()
   })
 })
+
+// NEED TO DOUBLE CHECK THAT ADD FEATURE IS WORKING
