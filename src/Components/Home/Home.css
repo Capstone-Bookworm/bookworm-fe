@@ -40,13 +40,22 @@ button {
   width: 100%;
 }
 
-/* .original-book-list {
-  display: flex;
-  flex-direction: row;
-  overflow-x: scroll;
-} */
 
 .home-page-title {
   color: #0F4D92;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
+
+@media screen and (max-width: 800px) {
+  .book-list {
+    flex-direction: column;
+    width: fit-content;
+    align-items: center;
+  }
+
+  .book-container,
+  .display-search {
+    width: 60%;
+  }
+}
+

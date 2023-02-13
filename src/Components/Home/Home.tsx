@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import Book from '../ClickableBook/ClickableBook'
+import ClickableBook from '../ClickableBook/ClickableBook'
 import './Home.css'
 import { RxCaretRight, RxCaretLeft } from "react-icons/rx"
 import { useQuery, gql } from '@apollo/client'
@@ -45,7 +45,7 @@ const Home = ({currentUser}: {currentUser: User | any}) => {
 
   const bookList: JSX.Element[] = bookData?.map((book: book) => {
     return (
-      <Book
+      <ClickableBook
       key={book.id}
       id={book.id}
       imageUrl={book.imageUrl}

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useQuery, gql, useMutation } from '@apollo/client'
+import { AiOutlineCloseCircle } from 'react-icons/ai'
 import { useParams, useNavigate } from 'react-router-dom'
 import './BookDetails.css'
 
@@ -125,6 +126,7 @@ const BookDetails = () => {
         </div>
         }
         </div>
+        <AiOutlineCloseCircle onClick={() => navigate('/home')} className='close-details'/>
       </div>}
     </div>
   )
