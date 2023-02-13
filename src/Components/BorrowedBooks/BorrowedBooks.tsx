@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react'
 import ServerError from '../ServerError/ServerError'
-import { useLazyQuery, gql } from '@apollo/client'
 import Book from '../Book/Book'
 import { useQuery, gql } from '@apollo/client'
 import { User } from '../../Interfaces'
