@@ -2,9 +2,9 @@
   "data": {
     "bookSearch": [
       {
-        "id": "38",
-        "title": "Next",
-        "imageUrl": "http://books.google.com/books/content?id=f4BElwEACAAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api"
+        "id": "3",
+        "title": "A Discovery of Witches",
+        "imageUrl": "http://books.google.com/books/content?id=UkSLDQAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api"
       }
     ]
   }
