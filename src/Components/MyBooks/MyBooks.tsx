@@ -1,8 +1,9 @@
 
 import { useState, useEffect } from "react";
-import { useLazyQuery, gql, useMutation } from "@apollo/client";
+import { useQuery, gql, useMutation } from "@apollo/client";
 import LibraryBook from '../LibraryBook/LibraryBook'
 import "./MyBooks.css"
+import { match } from "assert";
 
 const DELETE_BOOK = gql `
   mutation deleteBook ($userId: ID!, $bookId: ID!) {
@@ -82,7 +83,7 @@ const MyBooks = () => {
   const [ unavailLibrary, setUnavailLibrary ] = useState([])
   const [ pendingRequests, setPendingRequests ] = useState([])
 
-  const [getMyBooks, { loading, error, data }] = useLazyQuery(MY_BOOKS, {
+  const { loading, error, data, refetch } = useQuery(MY_BOOKS, {
     variables: {
       id: user.id
     }
@@ -100,7 +101,7 @@ const MyBooks = () => {
   }, [data])
 
   useEffect(() => {
-    getMyBooks()
+    refetch()
   }, [user])
 
   const deleteSelectedBook = (id: number) => {
@@ -110,15 +111,15 @@ const MyBooks = () => {
         bookId: id
       }
     })
-    getMyBooks()
+    refetch()
   }
 
   const returnSelectedBook = (id: any) => {
-    let matchId = data.user.unavailableBooks.find((book: any) => {
+    let matchId = data?.user.unavailableBooks.find((book: any) => {
+      console.log("In the Find ",book.id)
       return book.id === id
     })
     let borrowerId = matchId.borrower.id
-    console.log(user.id, id, borrowerId)
     returnBook({
       variables: {
         userId: parseInt(user.id),
@@ -127,10 +128,10 @@ const MyBooks = () => {
         status: 0
       }
     })
-    getMyBooks()
+    refetch()
   }
 
-  const getLibrary = (library:UserBook[], availability: boolean) => {
+  const getLibrary = (library:UserBook[], availability: boolean, unavailable: boolean, pending: boolean) => {
     if(pendingRequests) {
       return library.map((book:any)=> {
        return <LibraryBook 
@@ -140,6 +141,8 @@ const MyBooks = () => {
            author={book.author}
            imageUrl={book.imageUrl}
            availability={availability}
+           unavailable={unavailable}
+           pending={pending}
            deleteSelectedBook={deleteSelectedBook}
            returnSelectedBook={returnSelectedBook}
          />
@@ -151,9 +154,9 @@ const MyBooks = () => {
     <div className="my-books-display">
       <h1 className="user-book-welcome">{user.userName}'s Books</h1>
       <div className="my-books-container">
-        {getLibrary(availLibrary, true)}
-        {getLibrary(pendingRequests, false)}
-        {getLibrary(unavailLibrary, false)}
+        {getLibrary(availLibrary, true, false, false)}
+        {getLibrary(pendingRequests, false, false, true)}
+        {getLibrary(unavailLibrary, false, true, false)}
       </div>
     </div>
   )
