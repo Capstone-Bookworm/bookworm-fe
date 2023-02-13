@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import { useQuery, gql, useMutation } from "@apollo/client";
 import LibraryBook from '../LibraryBook/LibraryBook'
@@ -83,26 +82,29 @@ const MyBooks = () => {
   const [ unavailLibrary, setUnavailLibrary ] = useState([])
   const [ pendingRequests, setPendingRequests ] = useState([])
 
-  const { loading, error, data, refetch } = useQuery(MY_BOOKS, {
+
+  const {loading, error, data, refetch} = useQuery(MY_BOOKS, {
     variables: {
       id: user.id
     }
   })
+
   
   const [ deleteBook ] = useMutation(DELETE_BOOK)
   const [ returnBook ] = useMutation(CHANGE_TO_AVAILABLE)
   
   useEffect(() => {
+    console.log(data?.user.availableBooks)
     if(!loading && !error){
       setAvailLibrary(data?.user.availableBooks)
       setUnavailLibrary(data?.user.unavailableBooks)
       setPendingRequests(data?.user.pendingRequested)
   }
   }, [data])
-
+  
   useEffect(() => {
     refetch()
-  }, [user])
+  }, [])
 
   const deleteSelectedBook = (id: number) => {
     deleteBook({
