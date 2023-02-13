@@ -33,7 +33,7 @@ const CREATE_USER = gql `
 const Login = ( { handleSetUser }: { handleSetUser: (user: any) => void}) => {
   const [ email, setEmail] = useState('')
   const [ login, setLogin ] = useState('')
-  const [ activeAccount, setAccount] = useState(true)
+  const [ activeAccount, setActiveAccount] = useState(true)
   const [ username, setUsername ] = useState('')
   const [ userLocation, setUserLocation ] = useState('')
   const [ errorMessage, setMessage ] = useState("We couldn't find your account, please try again")
@@ -86,16 +86,16 @@ const Login = ( { handleSetUser }: { handleSetUser: (user: any) => void}) => {
           location: userLocation,
         }
       })
-      setAccount(true)
+      setActiveAccount(true)
     }
   }
 
   const handleChange = () => {
     if(activeAccount) {
-      setAccount(false)
+      setActiveAccount(false)
       setEmail('')
     } else {
-      setAccount(true)
+      setActiveAccount(true)
       setEmail('')
     }
   }
