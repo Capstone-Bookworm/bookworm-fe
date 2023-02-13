@@ -11,9 +11,9 @@ describe('Home page flow', () => {
       if (req.body.operationName.includes("bookSearch")) {
         req.reply({ fixture: "bookSearch.json" })
       }
-      // if (req.body.operationName.includes("user")) {
-      //   req.reply({ fixture: "myBooks.json" })
-      // }
+      if (req.body.operationName === 'user') {
+        req.reply({ fixture: "myBooks.json" })
+      }
     })
     cy.get('.email-login').type('lauren@gmail.com')
     cy.get('.create-acct-form > .login-btn').click()
