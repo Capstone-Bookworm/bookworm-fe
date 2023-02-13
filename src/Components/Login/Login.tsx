@@ -138,7 +138,7 @@ const Login = ( { handleSetUser }: { handleSetUser: (user: any) => void}) => {
         </form>
         </div>
         <div className='create-acct'>
-          {activeAccount === true && <h3>Don't have an account? </h3>}
+          {activeAccount === true && <p className='create-acct-msg'>Don't have an account? </p>}
           {activeAccount === true && <button className='login-btn' onClick={handleChange}>Create New Account</button>}
           {activeAccount === false && <button className='login-btn' onClick={handleChange}>Return to Login</button>}
         </div>
