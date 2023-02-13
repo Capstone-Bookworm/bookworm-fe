@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { gql, useLazyQuery, useMutation } from '@apollo/client'
 import Request from "../Request/Request";
 import { User } from '../../Interfaces'
+import ServerError from "../ServerError/ServerError";
 
 const REQUESTS = gql `
 query user($id: ID!) {
@@ -129,6 +130,7 @@ const getRequests = () => {
   return(
     <div>
       <div className="pending-requests">
+        {error && <ServerError />}
       {getRequests()}
       </div>
       {/* <button onClick={() => {getAllRequests()}}>ClickMe</button> */}

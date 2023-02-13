@@ -1,7 +1,7 @@
 
 import React, {useState, useEffect} from "react";
 import { useLazyQuery, gql, useMutation } from "@apollo/client";
-
+import ServerError from "../ServerError/ServerError";
 import LibraryBook from '../LibraryBook/LibraryBook'
 import { User } from '../../Interfaces'
 import "./MyBooks.css"
@@ -114,6 +114,7 @@ const MyBooks = () => {
     <div className="my-books-display">
       <h1 className="user-book-welcome">{user.userName}'s Books</h1>
       <div className="my-books-container">
+        {error && <ServerError />}
         {getLibrary(availLibrary, true)}
         {getLibrary(pendingRequests, false)}
         {getLibrary(unavailLibrary, false)}
