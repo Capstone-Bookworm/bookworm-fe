@@ -28,20 +28,16 @@ const Navbar = () => {
 
   return(
     <header className='navbar'>
-      <section className='header'>
+      <div className='welcome-container'>
         <img src='https://cdn-icons-png.flaticon.com/512/2789/2789786.png' alt='Logo' className='logo' />
-        <h1 className='title'>Bookworm</h1>
-      </section>
-      <div className='welcome-display'>
-        <h2>Welcome {user.userName}!</h2>
+        <h2 className='welcome-display'>Welcome {user.userName}!</h2>
       </div>
+      <h1 className='title'>Bookworm</h1>
       <nav>
-      <button onClick={handleClick}>{navbarOpen ? <RxCross2 style={style}/> : <RxHamburgerMenu style={style}/>}</button>
-        <ul className={`menuNav ${navbarOpen ? "showMenu" : ""}`}>
+        <button onClick={handleClick}>{navbarOpen ? <RxCross2 style={style}/> : <RxHamburgerMenu style={style}/>}</button>
+        <ul className={navbarOpen ? "showMenu menuNav" : "menuNav"}>
           <NavLink to='/home'><li onClick={() => closeMenu()}>Home</li></NavLink>
-
           <NavLink to='/dashboard'><li onClick={() => closeMenu()}>My Dashboard</li></NavLink>
-
           <NavLink to='/'><li onClick={() => logout()}>Logout</li></NavLink>
         </ul>
       </nav>

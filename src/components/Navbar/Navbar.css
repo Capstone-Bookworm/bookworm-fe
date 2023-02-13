@@ -2,19 +2,37 @@
   height: 11vh;
   width: 100vw;
   display: flex;
-  flex-direction: row;
   border-bottom: 1px solid black;
   align-items: center;
 }
 
-.header {
+.logo {
   height: 100%;
-  width: 33%;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: flex-start;
 }
+
+.title {
+  left: calc(50% - 13vh);
+  position: absolute;
+}
+
+.welcome-container {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  width: 33%;
+  height: 100%;
+}
+
+h1 {
+  font-size: 3rem;
+  padding-left: 1rem;
+  color: rgb(70, 112, 130);
+}
+
+.welcome-display {
+  color: rgb(70, 112, 130);
+}
+
 
 li {
   list-style: none;
@@ -23,7 +41,7 @@ li {
 
 nav {
   height: 100%;
-  width: 33%;
+  width: 20%;
   display: flex;
   align-items: center;
   justify-content: flex-end;
@@ -35,11 +53,12 @@ nav {
   top: 5rem;
   right: 0;
   bottom: 0;
-  height: 100vh;
+  height: 0;
   width: 0;
   overflow: hidden;
   max-width: 290px;
   z-index: 9;
+  background-color: rgb(193, 193, 193);
 }
 
 .menuNav.showMenu {
@@ -53,11 +72,12 @@ nav {
 ul.menuNav.menuNav.showMenu {
   height: 10vh;
   list-style: none;
+  position: absolute;
   width: max-content;
   display: flex;
   flex-direction: column;
   align-content: center;
-  margin-top: 4.2rem;
+  /* margin-top: 4.2rem; */
   padding: 0 1rem 1rem 1rem;
   border-left: 3px solid black;
   border-bottom: 3px solid black;
@@ -65,24 +85,3 @@ ul.menuNav.menuNav.showMenu {
   box-shadow: -4px 2px 0 grey;
 }
 
-.logo {
-  height: 10vh;
-  margin-left: -3rem;
-}
-
-h1 {
-  font-size: 3rem;
-  padding-left: 1rem;
-  color: rgb(70, 112, 130);
-}
-
-.welcome-display {
-  height: 100%;
-  width: 33%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: rgb(70, 112, 130);
-  font-size: x-large;
-  font-family: Verdana;
-}
