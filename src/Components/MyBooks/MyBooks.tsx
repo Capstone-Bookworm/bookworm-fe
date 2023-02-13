@@ -1,6 +1,6 @@
 
 import React, {useState, useEffect} from "react";
-import { useLazyQuery, gql, useMutation } from "@apollo/client";
+import { useLazyQuery, gql, useMutation, useQuery } from "@apollo/client";
 
 import LibraryBook from '../LibraryBook/LibraryBook'
 import { User } from '../../Interfaces'
@@ -64,25 +64,27 @@ const MyBooks = () => {
   const [ unavailLibrary, setUnavailLibrary ] = useState([])
   const [ pendingRequests, setPendingRequests ] = useState([])
 
-  const [getMyBooks, { loading, error, data }] = useLazyQuery(MY_BOOKS, {
+  const {loading, error, data, refetch} = useQuery(MY_BOOKS, {
     variables: {
       id: user.id
     }
   })
+
   
   const [ deleteBook ] = useMutation(DELETE_BOOK)
   
   useEffect(() => {
+    console.log(data?.user.availableBooks)
     if(!loading && !error){
       setAvailLibrary(data?.user.availableBooks)
       setUnavailLibrary(data?.user.unavailableBooks)
       setPendingRequests(data?.user.pendingRequested)
   }
   }, [data])
-
+  
   useEffect(() => {
-    getMyBooks()
-  }, [user])
+    refetch()
+  }, [])
 
   const deleteSelectedBook = (id: number) => {
     deleteBook({
@@ -91,7 +93,7 @@ const MyBooks = () => {
         bookId: id
       }
     })
-    getMyBooks()
+    refetch()
   }
 
   const getLibrary = (library:UserBook[], availability: boolean) => {

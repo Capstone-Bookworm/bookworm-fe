@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
-
-import { useLazyQuery, gql } from '@apollo/client'
+import Book from '../Book/Book'
+import { useQuery, gql } from '@apollo/client'
 import { User } from '../../Interfaces'
 import "./BorrowedBooks.css"
 
@@ -25,7 +25,7 @@ const BorrowedBooks = () => {
   const currentUser : any = window.localStorage.getItem("currentUser")
   const [ user, setUser ] = useState(JSON.parse(currentUser))
   const [borrowedBooks, setBorrowedBooks ] = useState([])
-  const [getBorrowedBooks, {loading, error, data}] = useLazyQuery(BORROWED_BOOKS, {
+  const { loading, error, data, refetch } = useQuery(BORROWED_BOOKS, {
     variables: { id: user.id }
   })
 
@@ -36,22 +36,28 @@ const BorrowedBooks = () => {
   }, [data])
 
   useEffect(() => {
-    getBorrowedBooks()
+    refetch()
   }, [user])
+
+  const bookList = () => {
+    return borrowedBooks?.map((book: any) => {
+      return(
+        <Book 
+          key={book.id}
+          id={book.id}
+          imageUrl={book.imageUrl}
+          title={book.title}
+        />
+      )
+     })
+  }
 
   return (
     <div>
       {loading && <h3>Loading...</h3>}
       {!loading && 
         <div className='borrowed-book-section'>
-         {borrowedBooks.map((book: any) => {
-          return(
-            <div className='borrowed-book'>
-              <img src={book.imageUrl} alt='image of book cover'/>
-              <h4>{book.title}</h4>
-            </div>
-          )
-         })}
+         {bookList()}
         </div>
       }
     </div>
