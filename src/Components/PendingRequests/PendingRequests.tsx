@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { gql, useQuery, useMutation } from '@apollo/client'
 import Request from "../Request/Request";
 import { User } from '../../Interfaces'
+import ServerError from "../ServerError/ServerError";
 
 const REQUESTS = gql `
 query user($id: ID!) {
@@ -126,9 +127,7 @@ const PendingRequests = () => {
   }
 
   const errorMessaging = () => {
-    if(!loading && error) {
-      return <h3>Oops, something went wrong</h3> //this should be replaced with the 500 
-    } else if (loading && !error) {
+     if (loading && !error) {
       return <h3>loading...</h3>
     } else if (!loading && !error && pendingRequests.length === 0) {
       return <h3>No pending requests at this time</h3>
@@ -137,6 +136,7 @@ const PendingRequests = () => {
 
   return(
       <div className="pending-requests">
+        {error && <ServerError />}
         {getRequests()}
         {errorMessaging()}
       </div>
