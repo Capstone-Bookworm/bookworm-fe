@@ -1,6 +1,5 @@
 describe('My Pending Requests Dashboard View flow', () => {
   beforeEach(() => {
-    //INTERCEPT POST -- shouldn't have to login everytime
     cy.visit('http://localhost:3000/') 
     cy.intercept({ method: "POST", url: "https://bookworm-be.herokuapp.com/graphql" }, (req) => {
       if (req.body.operationName === "userLogin") {

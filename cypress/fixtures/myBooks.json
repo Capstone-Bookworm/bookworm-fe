@@ -3,14 +3,15 @@
     "user": {
       "id": "4",
       "userName": "Lauren",
-      "availableBooks": [],
-      "unavailableBooks": [
+      "availableBooks": [
         {
           "id": "9",
           "title": "The Seven Husbands of Evelyn Hugo",
           "author": "Taylor Jenkins Reid",
           "imageUrl": "http://books.google.com/books/content?id=5KlizgEACAAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api"
-        },
+        }
+      ],
+      "unavailableBooks": [
         {
           "id": "11",
           "title": "Tuesdays with Morrie",

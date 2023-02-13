@@ -1,9 +1,18 @@
 describe('My Books Dashboard View flow', () => {
   beforeEach(() => {
-    //INTERCEPT POST -- shouldn't have to login everytime
-    cy.visit('http://localhost:3000/')
-    cy.get('.email-login').type('lauren@gmail.com')
+    cy.visit('http://localhost:3000/') 
+    cy.intercept({ method: "POST", url: "https://bookworm-be.herokuapp.com/graphql" }, (req) => {
+      if (req.body.operationName === "userLogin") {
+        req.reply({ fixture: "user.json" });
+      }
+    })
+    cy.get('.email-login').type('adelle@gmail.com')
     cy.get('.create-acct-form > .login-btn').click()
+    cy.get('nav > button').click()
+    cy.intercept({ method: "POST", url: "https://bookworm-be.herokuapp.com/graphql" }, (req) => {
+      req.reply({ fixture: "myBooks.json"})
+    }).as('myBooks')
+    cy.get('[href="/dashboard"] > li').click()
     cy.get('nav > button').click()
     cy.get('[href="/dashboard"] > li').click()
   })
@@ -24,14 +33,22 @@ describe('My Books Dashboard View flow', () => {
       .and('contain', 'Add a book')
       cy.get('.user-book-welcome').should('have.text', "Lauren's Books")
       cy.get('.my-books-container').should('be.visible').children().should('have.length', 3)
-      cy.get('.my-books-container > :nth-child(1)').should('have.text', 'Tuesdays with Morrie')
-        .find('img').should('have.attr', 'src', 'http://books.google.com/books/content?id=z2z_6hLoPmgC&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api')
-        .and('have.css', 'opacity', '0.5')
+      cy.get('.my-books-container > :nth-child(1)').should('have.text', 'The Seven Husbands of Evelyn HugoDelete From Library')
+      .find('img').should('have.attr', 'src', 'http://books.google.com/books/content?id=5KlizgEACAAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api')
+      .and('have.css', 'opacity', '1')
       cy.get('.my-books-container > :nth-child(2)').should('have.text', 'Sins and Cigarettes')
-        .find('img').should('have.attr', 'src', 'http://books.google.com/books/content?id=XU4WxwEACAAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api')
-        .and('have.css', 'opacity', '0.5')
-      cy.get('.my-books-container > :nth-child(3)').should('have.text', 'The Seven Husbands of Evelyn Hugo')
-        .find('img').should('have.attr', 'src', 'http://books.google.com/books/content?id=5KlizgEACAAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api')
-        .and('have.css', 'opacity', '0.5')
+      .find('img').should('have.attr', 'src', 'http://books.google.com/books/content?id=XU4WxwEACAAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api')
+      .and('have.css', 'opacity', '0.5')
+      cy.get('.my-books-container > :nth-child(3)').should('have.text', 'Tuesdays with Morrie')
+      .find('img').should('have.attr', 'src', 'http://books.google.com/books/content?id=z2z_6hLoPmgC&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api')
+      .and('have.css', 'opacity', '0.5')
+  })
+  it('Should be able to delete a book from my books', () => {
+    cy.intercept({ method: "POST", url: "https://bookworm-be.herokuapp.com/graphql" }, (req) => {
+      req.reply({ fixture: "deleteBook.json"})
+    }).as('deleteBook')
+    cy.get('.delete-btn').click() // for some reason it's not deleting
   })
 })
+
+//RETURN TO LIBRARY BUTTONS/STUB REQUEST
