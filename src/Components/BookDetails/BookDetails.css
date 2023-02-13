@@ -24,6 +24,22 @@ img {
   font-size: 1rem;
 }
 
+.return-home-btn {
+  position: relative;
+  top: 10px;
+  left: 90%;
+  border: none;
+  background-color: white;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-size: large;
+}
+
+.return-home-btn:hover {
+  border-style: groove;
+  border-radius: 5px;
+  background-color: white;
+}
+
 #summary {
   font-size: 1.5rem;
 }

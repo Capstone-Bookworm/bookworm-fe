@@ -110,20 +110,21 @@ const BookDetails = () => {
       <div className='details-container'>
         <img className='book-details-image' src={bookDetails?.imageUrl} alt='image of book cover'/>
         <div className='book-info'>
-        <h2 id='title'>{bookDetails?.title} by {bookDetails?.author}</h2>
-        <hr />
-        <p id='summary'>Summary: <br/> {bookDetails?.summary}</p>
-        <h3 id='pages'>{bookDetails?.pageCount} pages</h3>
-        {matchedUser ? <h4>This book is already in your library.</h4> : 
-        <div>
-        <select className='borrow-selection' onChange={(event) => findID(event)}>
-          <option>Choose a lender...</option>
-            {borrowerOptions()}
-        </select>
-        <br />
-        <button className={successfulBorrow ? 'borrow-btn-disable' :'borrow-btn'} onClick={borrowBook}>Borrow Book</button>
-        </div>
-        }
+          <button className='return-home-btn' onClick={() => navigate('/home')}>X</button>
+          <h2 id='title'>{bookDetails?.title} by {bookDetails?.author}</h2>
+          <hr />
+          <p id='summary'>Summary: <br/> {bookDetails?.summary}</p>
+          <h3 id='pages'>{bookDetails?.pageCount} pages</h3>
+          {matchedUser ? <h4>This book is already in your library.</h4> : 
+          <div>
+          <select className='borrow-selection' onChange={(event) => findID(event)}>
+            <option>Choose a lender...</option>
+              {borrowerOptions()}
+          </select>
+          <br />
+          <button className={successfulBorrow ? 'borrow-btn-disable' :'borrow-btn'} onClick={borrowBook}>Borrow Book</button>
+          </div>
+          }
         </div>
       </div>}
     </div>
