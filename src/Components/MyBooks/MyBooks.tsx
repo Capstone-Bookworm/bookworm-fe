@@ -1,9 +1,8 @@
-
 import { useState, useEffect } from "react";
 import { useQuery, gql, useMutation } from "@apollo/client";
 import LibraryBook from '../LibraryBook/LibraryBook'
 import "./MyBooks.css"
-import { match } from "assert";
+import ServerError from "../ServerError/ServerError";
 
 const DELETE_BOOK = gql `
   mutation deleteBook ($userId: ID!, $bookId: ID!) {
@@ -154,6 +153,7 @@ const MyBooks = () => {
     <div className="my-books-display">
       <h1 className="user-book-welcome">{user.userName}'s Books</h1>
       <div className="my-books-container">
+        {error && <ServerError />}
         {getLibrary(availLibrary, true, false, false)}
         {getLibrary(pendingRequests, false, false, true)}
         {getLibrary(unavailLibrary, false, true, false)}
