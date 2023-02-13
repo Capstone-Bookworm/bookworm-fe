@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import Book from '../Book/Book'
+import Book from '../ClickableBook/ClickableBook'
 import './Home.css'
 import { RxCaretRight, RxCaretLeft } from "react-icons/rx"
 import { useQuery, gql } from '@apollo/client'
