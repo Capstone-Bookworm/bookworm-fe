@@ -10,7 +10,7 @@ const ServerError = () => {
         <GrAlert className="error-icon"/>
         <h2>Oops! Something went wrong!</h2>
         <p>Please try again later</p>
-        <Link to='/'><button className="dismiss-button">Return Home</button></Link>
+        <Link to='/home'><button className="dismiss-button">Return Home</button></Link>
       </div>
     </div>
   );
