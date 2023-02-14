@@ -10,32 +10,21 @@ import Home from '../Home/Home';
 import BookDetails from '../BookDetails/BookDetails';
 import MyBooks from '../MyBooks/MyBooks';
 import BorrowedBooks from '../BorrowedBooks/BorrowedBooks';
-import { User } from '../../Interfaces'
+import { currentUser, User, Location } from '../../Interfaces'
 import AddBook from '../AddBook/AddBook';
-
-
-interface Location {
-  pathname: string,
-  search: string,
-  hash: string,
-  state: null,
-  key: string
-}
-
 
 function App() {
   let location: Location = useLocation()
-  // const navigate = useNavigate()
-
   const [ currentUser, setCurrentUser ] = useState(localStorage.currentUser)
 
-  const handleSetUser = (user:any) => {
+  const handleSetUser = (user: currentUser) => {
     localStorage.setItem('currentUser', JSON.stringify(user.userLogin))
-    let newObject: any = window.localStorage.getItem("currentUser")
-    let newUser = JSON.parse(newObject)
-    setCurrentUser(newUser)
+    let newObject: string | null = window.localStorage.getItem("currentUser")
+    if(typeof newObject === 'string') {
+      let newUser: string | User = JSON.parse(newObject)
+      setCurrentUser(newUser)
+    }
   }
-
 
   const getDashboardDisplay = () => {
     if(location.pathname === '/dashboard/my-borrowed-books' || location.pathname === '/dashboard' || location.pathname === '/dashboard/add-book' || location.pathname === '/dashboard/pending-requests') {

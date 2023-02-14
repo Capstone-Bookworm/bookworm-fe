@@ -7,11 +7,21 @@ export interface Location {
 }
 
 export interface User {
-  userName: string;
-  location: string;
   emailAddress: string;
-  __typename: string;
   id: string
+  location: string;
+  userName: string;
+  __typename: string;
+}
+
+export interface currentUser {
+  userLogin: {
+    emailAddress: string;
+    id: string
+    location: string;
+    userName: string;
+    __typename: string;
+  }
 }
 
 // export interface CurrentUser {
@@ -21,3 +31,13 @@ export interface User {
 //   emailAddress?: string;
 //   __typename?: string; 
 // }
+
+//ADD BOOK COMPONENT
+export interface Books {
+  isbn: Number,
+  title: String,
+  author: String,
+  imageUrl: String,
+  summary: String,
+  pageCount: Number
+}

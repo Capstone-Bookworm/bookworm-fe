@@ -3,6 +3,7 @@ import './AddBook.css'
 import { gql, useLazyQuery } from '@apollo/client'
 import BookSearch from '../BookSearch/BookSearch'
 import ServerError from '../ServerError/ServerError'
+import { User, Books } from '../../Interfaces'
 
 const GOOGLE_BOOKS = gql `
   query GoogleBooks($title: String!){
@@ -16,15 +17,6 @@ const GOOGLE_BOOKS = gql `
   }
 }
 `
-
-interface Books {
-  isbn: Number,
-  title: String,
-  author: String,
-  imageUrl: String,
-  summary: String,
-  pageCount: Number
-}
 
 const AddBook = () => {
   const currentUser : any = window.localStorage.getItem("currentUser")
