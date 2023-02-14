@@ -37,7 +37,3 @@ describe('Login Page spec', () => {
         cy.get('.login-container > h3').should('have.text', "We couldn't find your account, please try again")
     })
 })
-
-// CHECK TO SEE IF ITS CREATING USER CORRECTLY.
-
- 
