@@ -33,9 +33,9 @@ describe('Home page flow', () => {
     cy.get('input').type('witches').should('have.value', 'witches')
     cy.wait('@bookSearch')
     cy.get('.search-button').click() 
-    cy.get('.search-message')//.should('have.text', "Search results for 'witches'. Please try a more specific search if your book is not displayed below.")
+    cy.get('.search-message').should('have.text', "Search results for \"witches\". Please try a more specific search if your book is not displayed below.")
     cy.get('.book-item-image').should('have.attr', 'src', 'http://books.google.com/books/content?id=UkSLDQAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api')
-    //will need to test for returning to all books again - NEW POST
+    cy.get('.return-btn').click()
   })
   it('Should be able to click on a book to see more details', () => {
     cy.intercept({ method: "POST", url: "https://bookworm-be.herokuapp.com/graphql" }, (req) => {
@@ -45,14 +45,13 @@ describe('Home page flow', () => {
     cy.location("pathname").should("eq", "/details/1")
     cy.get('.book-details-image').should('have.attr', 'src', 'http://books.google.com/books/content?id=GbWp8QFX1K0C&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api')
     cy.get('#title').should('have.text', 'A Short History Of Nearly Everything by Bill Bryson')
-    cy.get('#summary') // need to figure out how to detail with <br /> in cypress testing
-    // cy.get('#summary').should('have.text', 'Summary: This new edition of the acclaimed bestseller')
+    cy.get('#summary').should('have.text', 'Summary:  This new edition of the acclaimed bestseller')
     cy.get('#pages').should('have.text', '876 pages')
     cy.get('.borrow-selection').select('Adelle')
     cy.intercept({ method: "POST", url: "https://bookworm-be.herokuapp.com/graphql" }, (req) => {
       req.reply({ fixture: "borrowBook.json"})
     }).as('borrowBook')
-    // cy.get('#borrow-btn').click()
+    cy.get('.borrow-btn').click()
   })
   it('Should be able to navigate to their dashboard and see their personal library of books', () => {
     cy.intercept({ method: "POST", url: "https://bookworm-be.herokuapp.com/graphql" }, (req) => {

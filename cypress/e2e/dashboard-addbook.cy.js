@@ -6,7 +6,7 @@ describe('My Add a Book Dashboard View flow', () => {
         req.reply({ fixture: "user.json" });
       }
     })
-    cy.get('.email-login').type('adelle@gmail.com')
+    cy.get('.email-login').type('lauren@gmail.com')
     cy.get('.create-acct-form > .login-btn').click()
     cy.get('nav > button').click()
     cy.get('[href="/dashboard"] > li').click()
@@ -39,8 +39,5 @@ describe('My Add a Book Dashboard View flow', () => {
       }).as('addBook')
       cy.get('.add-btn').click()
       cy.get('[href="/dashboard"] > .nav-button-mybooks').click()
-      // cy.get('.my-books-container > :nth-child(3)')
   })
 })
-
-// NEED TO DOUBLE CHECK THAT ADD FEATURE IS WORKING
