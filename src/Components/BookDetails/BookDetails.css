@@ -32,7 +32,7 @@ img {
   font-size: 2rem;
 }
 
-#borrow-btn {
+.borrow-btn {
   border-radius: 5px;
   margin-top: .5rem;
   cursor: pointer;
@@ -43,7 +43,18 @@ img {
   height: 4vh;
 }
 
-#borrow-btn:hover {
+.borrow-btn-disable {
+  border-radius: 5px;
+  margin-top: .5rem;
+  cursor: pointer;
+  border: none;
+  background-color: rgb(150, 150, 150);
+  font-size: large;
+  color: #0F4D92;
+  height: 4vh;
+}
+
+.borrow-btn:hover {
   background-color: #5c5c5c;
   color: white;
 }

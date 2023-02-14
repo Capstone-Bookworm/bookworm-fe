@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react'
-import Book from '../Book/Book'
+import Book from '../ClickableBook/ClickableBook'
 import './Home.css'
 import { RxCaretRight, RxCaretLeft } from "react-icons/rx"
 import { useQuery, gql } from '@apollo/client'
 import { User } from '../../Interfaces'
+import ServerError from '../ServerError/ServerError'
 
 const BOOK_SEARCH = gql`
   query BookSearch($title: String!) {   
@@ -33,7 +34,7 @@ const Home = ({currentUser}: {currentUser: User | any}) => {
   const [searchBook, setSearchBook] = useState<string>('')
   const [searchMessage, setSearchMessage] = useState<string>('')
   const style = { fontSize: "5em", cursor: 'pointer' }
-  const { loading, data, refetch } = useQuery(BOOKS_DATA)
+  const { loading, error, data, refetch } = useQuery(BOOKS_DATA)
   const [bookData, setBookData] = useState([])
 
   useEffect(() => {
@@ -64,6 +65,9 @@ const Home = ({currentUser}: {currentUser: User | any}) => {
 
   return(
     <div className='homepage-container'>
+      <h2 className='home-display'>My Home</h2>
+      {error && <ServerError />}
+      {searchQuery.error && <ServerError />}
       <form className='form-container'>
         <input 
           type='text'

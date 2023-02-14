@@ -1,13 +1,11 @@
-.book-item {
-  cursor: pointer;
-  margin: 1rem;
-  width: 25%;
+.borrowed-book {
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
-}
-
-.book-item-image{
+  border: solid 3px #0F4D92;
   box-shadow: 3px 3px 3px #0F4D92;
-  border: solid 2px black;
+  width: 18%;
+  height: 50%;
+  margin: 15px;
 }
