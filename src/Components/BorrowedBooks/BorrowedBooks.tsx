@@ -58,6 +58,7 @@ const BorrowedBooks = () => {
       {loading && <h3>Loading...</h3>}
       {!loading && 
         <div className='borrowed-book-section'>
+          {borrowedBooks.length === 0 && <h2>You are currently not borrowing any books.</h2>}
          {bookList()}
         </div>
       }
