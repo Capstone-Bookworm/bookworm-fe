@@ -3,6 +3,7 @@ import { useQuery, gql, useMutation } from "@apollo/client";
 import LibraryBook from '../LibraryBook/LibraryBook'
 import "./MyBooks.css"
 import ServerError from "../ServerError/ServerError";
+import { UserBook, Book } from '../../Interfaces'
 
 const DELETE_BOOK = gql `
   mutation deleteBook ($userId: ID!, $bookId: ID!) {
@@ -67,15 +68,7 @@ const MY_BOOKS = gql `
   }
 `
 
-interface UserBook {
-  id: number,
-  title: string,
-  author: string,
-  imageUrl: string
-}
-
 const MyBooks = () => {
-
   const currentUser : any = window.localStorage.getItem("currentUser")
   const [ user, setUser ] = useState(JSON.parse(currentUser))
   const [ availLibrary, setAvailLibrary ] = useState([])
@@ -113,8 +106,9 @@ const MyBooks = () => {
     refetch()
   }
 
-  const returnSelectedBook = (id: any) => {
+  const returnSelectedBook = (id: string) => {
     let matchId = data?.user.unavailableBooks.find((book: any) => {
+      console.log('BOOK', book)
       console.log("In the Find ",book.id)
       return book.id === id
     })

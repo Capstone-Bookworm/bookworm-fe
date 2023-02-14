@@ -32,7 +32,7 @@ export interface currentUser {
 //   __typename?: string; 
 // }
 
-//ADD BOOK COMPONENT
+//ADDBOOK COMPONENT
 export interface Books {
   isbn: Number,
   title: String,
@@ -40,4 +40,59 @@ export interface Books {
   imageUrl: String,
   summary: String,
   pageCount: Number
+}
+
+//BOOKDETAILS COMPONENT
+export interface details {
+  title: string
+  summary: string
+  author: string
+  pageCount: number
+  imageUrl: string
+  users: {
+    userName: string
+    emailAddress: string
+    location: string
+  }[]
+}
+
+//BOOK SEARCH COMPONENT
+export interface Books {
+  searchResults: Book[],
+}
+
+export interface Book {
+  isbn: string,
+  title: string,
+  author: string,
+  imageUrl: string,
+  summary: string,
+  pageCount: number
+}
+
+//CLICKABLE BOOK COMPONENT & HOME COMPONENT
+export interface bookProp {
+  id: number
+  imageUrl: string
+}
+
+//LIBRARY BOOK COMPONENT
+export interface UserLibraryBook {
+  id: number,
+  title: string,
+  author: string,
+  imageUrl: string,
+  availability: boolean,
+  unavailable: boolean,
+  pending: boolean,
+  deleteSelectedBook: any
+  returnSelectedBook: any
+}
+
+//MYBOOKS COMPONENT
+export interface UserBook {
+  id: number,
+  title: string,
+  author: string,
+  imageUrl: string
 }

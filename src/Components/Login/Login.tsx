@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import './Login.css'
 import { useLazyQuery, useMutation, gql } from '@apollo/client'
+import { User } from '../../Interfaces'
 
 const GET_USER = gql `
   query userLogin($emailAddress: String!) {
@@ -30,7 +31,7 @@ const CREATE_USER = gql `
   }
 `
 
-const Login = ( { handleSetUser }: { handleSetUser: (user: any) => void}) => {
+const Login = ( { handleSetUser }: { handleSetUser: (user: User) => void}) => {
   const [ email, setEmail] = useState('')
   const [ login, setLogin ] = useState('')
   const [ activeAccount, setActiveAccount] = useState(true)
@@ -46,7 +47,7 @@ const Login = ( { handleSetUser }: { handleSetUser: (user: any) => void}) => {
 
   const [ createAccount ] = useMutation(CREATE_USER)
 
-  const handleSubmit = (event:any) => {
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
     if(activeAccount) {
       setLogin(email)

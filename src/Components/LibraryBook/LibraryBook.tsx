@@ -1,16 +1,5 @@
 import './LibraryBook.css'
-
-interface UserLibraryBook {
-  id: number,
-  title: string,
-  author: string,
-  imageUrl: string,
-  availability: boolean,
-  unavailable: boolean,
-  pending: boolean,
-  deleteSelectedBook: any
-  returnSelectedBook: any
-}
+import { UserLibraryBook } from '../../Interfaces'
 
 const LibraryBook = (props: UserLibraryBook) => {
 

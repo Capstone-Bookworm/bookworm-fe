@@ -1,19 +1,7 @@
 import { useState } from 'react'
 import './BookSearch.css'
 import { gql, useMutation } from '@apollo/client'
-
-interface Books {
-  searchResults: Book[],
-}
-
-interface Book {
-  isbn: string,
-  title: string,
-  author: string,
-  imageUrl: string,
-  summary: string,
-  pageCount: number
-}
+import { Books, Book } from '../../Interfaces'
 
 const ADD_BOOK = gql `
   mutation createBook ($userId: ID!, $isbn: String!, $title: String!, $author: String!, $summary: String!, $pageCount: Int!, $imageUrl: String!) {

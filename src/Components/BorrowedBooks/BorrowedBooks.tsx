@@ -4,8 +4,6 @@ import Book from '../Book/Book'
 import { useQuery, gql } from '@apollo/client'
 import "./BorrowedBooks.css"
 
-
-
 const BORROWED_BOOKS = gql `
   query user ($id: ID!) {
     user(id: $id) {
@@ -40,7 +38,8 @@ const BorrowedBooks = () => {
   }, [user])
 
   const bookList = () => {
-    return borrowedBooks?.map((book: any) => {
+    return borrowedBooks?.map((book: typeof Book | any) => {
+      console.log('BOOK', book)
       return(
         <Book 
           key={book.id}
