@@ -18,6 +18,10 @@
   box-shadow: 11px 8px 8px black;
 }
 
+.pending-request-message {
+  font-size: 18px;
+}
+
 img {
   margin: 1.75rem;
   height: 30vh;
