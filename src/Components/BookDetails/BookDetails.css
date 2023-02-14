@@ -31,6 +31,10 @@ img {
   margin-right: 1%;
 }
 
+.close-details:hover {
+  transform: scale(1.1)
+}
+
 #pages {
   font-weight: 200;
   font-size: 1rem;
