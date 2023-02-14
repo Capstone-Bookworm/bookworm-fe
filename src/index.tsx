@@ -6,7 +6,7 @@ import reportWebVitals from './reportWebVitals';
 import { BrowserRouter } from 'react-router-dom';
 import { ApolloProvider, ApolloClient, InMemoryCache } from "@apollo/client";
 
-const client = new ApolloClient({
+export const client = new ApolloClient({
   uri: "https://bookworm-be.herokuapp.com/graphql",
   cache: new InMemoryCache()
 })

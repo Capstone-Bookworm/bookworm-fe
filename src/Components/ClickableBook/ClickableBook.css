@@ -11,3 +11,9 @@
   box-shadow: 3px 3px 3px #0F4D92;
   border: solid 2px black;
 }
+
+@media screen and (max-width: 300px) {
+  .book-item {
+    width: fit-content;
+  }
+}
