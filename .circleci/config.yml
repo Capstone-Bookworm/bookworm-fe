@@ -5,4 +5,4 @@ workflows:
   build:
     jobs:
       - cypress/run:
-        start: 'npm start' # start server before running tests
+          start: 'npm start' # start server before running tests
