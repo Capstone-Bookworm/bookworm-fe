@@ -45,6 +45,20 @@ button {
   font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
+@media screen and (max-width: 800px) {
+  .book-list {
+    flex-direction: column;
+    width: fit-content;
+    align-items: center;
+  }
+
+  .book-container,
+  .display-search {
+    width: 60%;
+  }
+}
+
+
 .home-display {
   color: #0F4D92;
   font-size: xx-large;
@@ -66,3 +80,4 @@ button {
   background-color: #5c5c5c;
   color: white;
 }
+
