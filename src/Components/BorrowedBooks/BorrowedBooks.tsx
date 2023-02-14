@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react'
+import { useState, useEffect } from 'react'
+import ServerError from '../ServerError/ServerError'
 import Book from '../Book/Book'
 import { useQuery, gql } from '@apollo/client'
-import { User } from '../../Interfaces'
 import "./BorrowedBooks.css"
 
 
@@ -54,6 +54,7 @@ const BorrowedBooks = () => {
 
   return (
     <div>
+      {error && <ServerError />}
       {loading && <h3>Loading...</h3>}
       {!loading && 
         <div className='borrowed-book-section'>

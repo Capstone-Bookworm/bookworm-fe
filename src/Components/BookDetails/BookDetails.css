@@ -8,6 +8,7 @@
 }
 
 .details-container {
+  position: relative;
   display: flex;
   width: 70%;
   justify-content: space-between;
@@ -33,6 +34,22 @@ img {
 #pages {
   font-weight: 200;
   font-size: 1rem;
+}
+
+.return-home-btn {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  border: none;
+  background-color: white;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-size: large;
+}
+
+.return-home-btn:hover {
+  border-style: groove;
+  border-radius: 5px;
+  background-color: white;
 }
 
 #summary {

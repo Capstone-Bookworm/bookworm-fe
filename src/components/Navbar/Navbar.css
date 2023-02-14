@@ -37,6 +37,7 @@ h1 {
 li {
   list-style: none;
   line-height: 1rem;
+  color: #0F4D92;
 }
 
 nav {
@@ -70,18 +71,21 @@ nav {
 }
 
 ul.menuNav.menuNav.showMenu {
-  height: 10vh;
+  height: 15vh;
+  width: 15vw;
   list-style: none;
   position: absolute;
   width: max-content;
   display: flex;
   flex-direction: column;
   align-content: center;
-  /* margin-top: 4.2rem; */
+  margin-right: 3.2rem;
   padding: 0 1rem 1rem 1rem;
   border-left: 3px solid black;
   border-bottom: 3px solid black;
   border-radius: 0.3rem;
   box-shadow: -4px 2px 0 grey;
+  border: solid 2px black; 
+  background-color: white;
 }
 

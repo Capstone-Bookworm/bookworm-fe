@@ -4,6 +4,7 @@ import './Home.css'
 import { RxCaretRight, RxCaretLeft } from "react-icons/rx"
 import { useQuery, gql } from '@apollo/client'
 import { User } from '../../Interfaces'
+import ServerError from '../ServerError/ServerError'
 
 const BOOK_SEARCH = gql`
   query BookSearch($title: String!) {   
@@ -33,7 +34,7 @@ const Home = ({currentUser}: {currentUser: User | any}) => {
   const [searchBook, setSearchBook] = useState<string>('')
   const [searchMessage, setSearchMessage] = useState<string>('')
   const style = { fontSize: "5em", cursor: 'pointer' }
-  const { loading, data, refetch } = useQuery(BOOKS_DATA)
+  const { loading, error, data, refetch } = useQuery(BOOKS_DATA)
   const [bookData, setBookData] = useState([])
 
   useEffect(() => {
@@ -52,18 +53,26 @@ const Home = ({currentUser}: {currentUser: User | any}) => {
       />
       )
     })
+
     const searchQuery = useQuery(BOOK_SEARCH, {
       variables: { title: searchBook }})
 
     const searchBooks = () => {
       setBookData(searchQuery.data.bookSearch)
       setSearchMessage(`Search results for "${searchBook}". Please try a more specific search if your book is not displayed below.`)
-      setSearchBook('')
   }
+    const returnAllBookView = () => {
+      refetch()
+      setBookData(data.books)
+      setSearchMessage('')
+      setSearchBook('')
+    }
 
   return(
     <div className='homepage-container'>
       <h2 className='home-display'>My Home</h2>
+      {error && <ServerError />}
+      {searchQuery.error && <ServerError />}
       <form className='form-container'>
         <input 
           type='text'
@@ -74,13 +83,11 @@ const Home = ({currentUser}: {currentUser: User | any}) => {
         <button type='button' className='search-button' onClick={() => searchBooks()}>SEARCH</button>
       </form>
       <h2 className='search-message'>{searchMessage}</h2>
+      {searchMessage && <button onClick={returnAllBookView} style={{marginBottom: '5rem'}} className='return-btn'>See All Books</button>}
       {loading ? <h2 className='loading-message'>Loading...</h2> : <div className={`book-container ${bookData.length > 5 ? "display-search" : ""}`}>
-      {/* <RxCaretLeft style={style} id='left-arrow' /> */}
         <div className="book-list">
           {bookList}
         </div>
-        {/* {`${bookData.length > 5 ? "display-search book-list" : "original-book-list"}`} */}
-      {/* <RxCaretRight style={style} id='right-arrow' /> */}
       </div>}
     </div>
   )

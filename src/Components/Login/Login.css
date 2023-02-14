@@ -77,3 +77,9 @@
   justify-content: space-evenly;
   height: 80%;
 }
+
+.create-acct-msg {
+  size: x-large;
+  color: #0F4D92;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}

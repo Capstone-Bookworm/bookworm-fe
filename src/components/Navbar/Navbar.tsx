@@ -36,8 +36,8 @@ const Navbar = () => {
       <nav>
         <button onClick={handleClick}>{navbarOpen ? <RxCross2 style={style}/> : <RxHamburgerMenu style={style}/>}</button>
         <ul className={navbarOpen ? "showMenu menuNav" : "menuNav"}>
-          <NavLink to='/home'><li onClick={() => closeMenu()}>Home</li></NavLink>
-          <NavLink to='/dashboard'><li onClick={() => closeMenu()}>My Dashboard</li></NavLink>
+          {location.pathname === '/home' && <NavLink to='/dashboard'><li onClick={() => closeMenu()}>My Dashboard</li></NavLink>}
+          {location.pathname !== '/home' && <NavLink to='/home'><li onClick={() => closeMenu()}>Home</li></NavLink>}
           <NavLink to='/'><li onClick={() => logout()}>Logout</li></NavLink>
         </ul>
       </nav>

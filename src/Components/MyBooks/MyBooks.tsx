@@ -1,10 +1,8 @@
-
-import React, {useState, useEffect} from "react";
-import { useLazyQuery, gql, useMutation, useQuery } from "@apollo/client";
-
+import { useState, useEffect } from "react";
+import { useQuery, gql, useMutation } from "@apollo/client";
 import LibraryBook from '../LibraryBook/LibraryBook'
-import { User } from '../../Interfaces'
 import "./MyBooks.css"
+import ServerError from "../ServerError/ServerError";
 
 const DELETE_BOOK = gql `
   mutation deleteBook ($userId: ID!, $bookId: ID!) {
@@ -14,6 +12,20 @@ const DELETE_BOOK = gql `
       }
     ) { success
     }
+  }
+`
+
+const CHANGE_TO_AVAILABLE = gql `
+  mutation patchUserBook ($userId: Int!, $bookId: Int!, $borrowerId: Int!) {
+    patchUserBook(input: {
+        userId: $userId
+        bookId: $bookId
+        borrowerId: $borrowerId
+        status: 0
+    }) { userBook {
+            bookId
+            }
+      }
   }
 `
 
@@ -33,6 +45,12 @@ const MY_BOOKS = gql `
           title
           author
           imageUrl
+          borrower {
+            id
+            userName
+            location
+            emailAddress
+          }
         }
         pendingRequested {
           id
@@ -64,27 +82,26 @@ const MyBooks = () => {
   const [ unavailLibrary, setUnavailLibrary ] = useState([])
   const [ pendingRequests, setPendingRequests ] = useState([])
 
-  const {loading, error, data, refetch} = useQuery(MY_BOOKS, {
+  const { loading, error, data, refetch } = useQuery(MY_BOOKS, {
     variables: {
       id: user.id
     }
   })
-
   
   const [ deleteBook ] = useMutation(DELETE_BOOK)
+  const [ returnBook ] = useMutation(CHANGE_TO_AVAILABLE)
   
   useEffect(() => {
-    console.log(data?.user.availableBooks)
     if(!loading && !error){
       setAvailLibrary(data?.user.availableBooks)
       setUnavailLibrary(data?.user.unavailableBooks)
       setPendingRequests(data?.user.pendingRequested)
   }
   }, [data])
-  
+
   useEffect(() => {
     refetch()
-  }, [])
+  }, [user])
 
   const deleteSelectedBook = (id: number) => {
     deleteBook({
@@ -96,7 +113,24 @@ const MyBooks = () => {
     refetch()
   }
 
-  const getLibrary = (library:UserBook[], availability: boolean) => {
+  const returnSelectedBook = (id: any) => {
+    let matchId = data?.user.unavailableBooks.find((book: any) => {
+      console.log("In the Find ",book.id)
+      return book.id === id
+    })
+    let borrowerId = matchId.borrower.id
+    returnBook({
+      variables: {
+        userId: parseInt(user.id),
+        bookId: parseInt(id),
+        borrowerId: parseInt(borrowerId),
+        status: 0
+      }
+    })
+    refetch()
+  }
+
+  const getLibrary = (library:UserBook[], availability: boolean, unavailable: boolean, pending: boolean) => {
     if(pendingRequests) {
       return library.map((book:any)=> {
        return <LibraryBook 
@@ -106,7 +140,10 @@ const MyBooks = () => {
            author={book.author}
            imageUrl={book.imageUrl}
            availability={availability}
+           unavailable={unavailable}
+           pending={pending}
            deleteSelectedBook={deleteSelectedBook}
+           returnSelectedBook={returnSelectedBook}
          />
      })
     }
@@ -116,9 +153,10 @@ const MyBooks = () => {
     <div className="my-books-display">
       <h1 className="user-book-welcome">{user.userName}'s Books</h1>
       <div className="my-books-container">
-        {getLibrary(availLibrary, true)}
-        {getLibrary(pendingRequests, false)}
-        {getLibrary(unavailLibrary, false)}
+        {error && <ServerError />}
+        {getLibrary(availLibrary, true, false, false)}
+        {getLibrary(pendingRequests, false, false, true)}
+        {getLibrary(unavailLibrary, false, true, false)}
       </div>
     </div>
   )

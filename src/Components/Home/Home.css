@@ -40,7 +40,6 @@ button {
   width: 100%;
 }
 
-
 .home-page-title {
   color: #0F4D92;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
@@ -57,5 +56,28 @@ button {
   .display-search {
     width: 60%;
   }
+}
+
+
+.home-display {
+  color: #0F4D92;
+  font-size: xx-large;
+  font-family: Verdana, Geneva, Tamhoma, sans-serif;
+  }
+  
+.return-btn {
+  border-radius: 5px;
+  cursor: pointer;
+  border: none;
+  background-color: white;
+  font-size: large;
+  color: #0F4D92;
+  height: 4vh;
+  margin-bottom: 2rem;
+}
+
+.return-btn:hover {
+  background-color: #5c5c5c;
+  color: white;
 }
 

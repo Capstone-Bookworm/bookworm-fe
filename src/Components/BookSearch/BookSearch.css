@@ -8,11 +8,10 @@
 .book-card-container {
   height: 150vh;
   width: 100vw;
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
   align-items: center;
-  justify-content: space-evenly;
+  margin-left: 5%;
 }
 
 .book-card{
@@ -27,7 +26,7 @@
 
 .add-btn {
   cursor: pointer;
-  width: 100%;
+  width: 80%;
 }
 
 .book-image {
@@ -46,7 +45,7 @@
   height: 100%;
   background: rgba(0, 0, 0, 0.6);
   color: white;
-  display: grid;
+  display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
