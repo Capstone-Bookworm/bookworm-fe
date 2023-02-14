@@ -18,21 +18,25 @@ interface Props {
 
 const Request = (props : Props) => {
 
-const handleRequestResponse = (event: any) => {
-  if (event.target.id === "accept") {
-    props.acceptRequest(props.id, props.borrowerId)
-  } else if (event.target.id === "deny") {
-    props.denyRequest(props.id, props.borrowerId)
-  }
-}
+// const handleRequestResponse = (event: any) => {
+//   if (event.target.id === "accept") {
+//     console.log("fire off the accept!")
+//     console.log(props.id, props.borrowerId)
+//     props.acceptRequest(props.id, props.borrowerId)
+//   } else if (event.target.id === "deny") {
+//     console.log("fire off the deny!")
+//     console.log(props.id, props.borrowerId)
+//     props.denyRequest(props.id, props.borrowerId)
+//   }
+// }
 
   return (
     <div className="book-request">
       <img src={props.imageUrl}/>
       <div className="request-info">
       <h3>{props.borrower} requested to borrow {props.title}</h3>
-        <button className="accept-request-btn" id="accept" onClick={event => handleRequestResponse(event)}>Accept</button>
-        <button className="deny-request-btn" id="deny" onClick={event => handleRequestResponse(event)}>Deny</button>
+        <button className="accept-request-btn" id="accept" onClick={() => props.acceptRequest(props.id, props.borrowerId)}>Accept</button>
+        <button className="deny-request-btn" id="deny" onClick={() => props.denyRequest(props.id, props.borrowerId)}>Deny</button>
       </div>
     </div>
   )
