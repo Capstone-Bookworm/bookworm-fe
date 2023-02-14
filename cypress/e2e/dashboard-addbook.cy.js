@@ -38,6 +38,8 @@ describe('My Add a Book Dashboard View flow', () => {
     req.reply({ fixture: "addBook.json"})
       }).as('addBook')
       cy.get('.add-btn').click()
+      cy.get('[href="/dashboard"] > .nav-button-mybooks').click()
+      // cy.get('.my-books-container > :nth-child(3)')
   })
 })
 

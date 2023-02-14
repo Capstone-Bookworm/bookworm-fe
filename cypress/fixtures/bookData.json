@@ -1,0 +1,14 @@
+{
+  "data": {
+    "books": [
+      {
+        "id": "1",
+        "imageUrl": "http://books.google.com/books/content?id=GbWp8QFX1K0C&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api"
+      },
+      {
+        "id": "3",
+        "imageUrl": "http://books.google.com/books/content?id=UkSLDQAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api"
+      }
+    ]
+  }
+}
