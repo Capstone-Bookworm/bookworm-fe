@@ -92,8 +92,8 @@ const PendingRequests = () => {
           bookId: parseInt(bookId),
           borrowerId: parseInt(borrowerId),
           status: 0
-      }
-      })
+        } 
+        })
       if (result.data) {
         refetch()
       }

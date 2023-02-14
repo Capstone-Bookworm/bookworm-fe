@@ -82,20 +82,25 @@ const BookDetails = () => {
     }
   }
 
-  const borrowBook = () => {
-    borrowABook({
-      variables: {
-        userId: parseInt(selectedUser),
-        bookId: Number(id),
-        borrowerId: parseInt(user.id),
-        status: 1
+  const borrowBook = async () => {
+
+    try {
+      const result = await borrowABook({
+        variables: {
+          userId: parseInt(selectedUser),
+          bookId: Number(id),
+          borrowerId: parseInt(user.id),
+          status: 1
+          }
+        })
+      if(result.data) {
+        navigate('/home')
       }
-    })
-    if(!error) {
-      navigate('/home')
+    }
+    catch (error) {
+      console.log(error)
     }
   }
-
 
   const borrowerOptions = () => {
     return bookDetails?.users?.map((user: any) => {
