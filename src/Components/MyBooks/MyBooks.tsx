@@ -133,6 +133,9 @@ const MyBooks = () => {
   const getLibrary = (library:UserBook[], availability: boolean, unavailable: boolean, pending: boolean) => {
     if(pendingRequests) {
       return library.map((book:any)=> {
+        console.log('BOOK', book.borrower)
+        console.log('BOOK', book.borrower.emailAddress)
+        console.log('BOOK', book.borrower.location)
        return <LibraryBook 
            key={book.id}
            id={book.id}
@@ -144,6 +147,8 @@ const MyBooks = () => {
            pending={pending}
            deleteSelectedBook={deleteSelectedBook}
            returnSelectedBook={returnSelectedBook}
+           contactInfo={book.borrower.emailAddress}
+           location={book.borrower.location}
          />
      })
     }
