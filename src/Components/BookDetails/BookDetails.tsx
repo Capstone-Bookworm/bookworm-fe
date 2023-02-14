@@ -106,7 +106,7 @@ const BookDetails = () => {
   const borrowerOptions = () => {
     return bookDetails?.users?.map((user: any) => {
       return(
-      <option onClick={(event) => findID(event)} key={user.id} value={user.id}>{user.userName}</option>)
+      <option onClick={(event) => findID(event)} key={user.id} value={user.id}>{user.userName}: {user.location}</option>)
     })
   }
 
