@@ -40,12 +40,14 @@ describe('My Books Dashboard View flow', () => {
       cy.get('.my-books-container > :nth-child(3)').should('have.text', 'Tuesdays with MorrieBook Returned')
       .find('img').should('have.attr', 'src', 'http://books.google.com/books/content?id=z2z_6hLoPmgC&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api')
       .and('have.css', 'opacity', '0.5')
+      cy.get('.book-available').should('have.attr', 'alt', 'Image of The Seven Husbands of Evelyn Hugo')
+      cy.get(':nth-child(3) > .book-unavailable').should('have.attr', 'alt', 'Image of Tuesdays with Morrie')
   })
   it('Should be able to delete a book from my books', () => {
     cy.intercept({ method: "POST", url: "https://bookworm-be.herokuapp.com/graphql" }, (req) => {
       req.reply({ fixture: "deleteBook.json"})
     }).as('deleteBook')
-    // cy.get(':nth-child(1) > .delete-btn').click() // for some reason it's not deleting
+    cy.get(':nth-child(1) > .delete-btn').click()
   })
 })
 

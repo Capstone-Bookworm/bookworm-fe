@@ -35,6 +35,9 @@ describe('Home page flow', () => {
     cy.get('.search-button').click() 
     cy.get('.search-message').should('have.text', "Search results for \"witches\". Please try a more specific search if your book is not displayed below.")
     cy.get('.book-item-image').should('have.attr', 'src', 'http://books.google.com/books/content?id=UkSLDQAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api')
+    cy.intercept({ method: "POST", url: "https://bookworm-be.herokuapp.com/graphql" }, (req) => {
+      req.reply({ fixture: "bookData.json"})
+    }).as('bookData')
     cy.get('.return-btn').click()
   })
   it('Should be able to click on a book to see more details', () => {

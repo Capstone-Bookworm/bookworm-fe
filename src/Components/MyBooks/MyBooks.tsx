@@ -103,31 +103,45 @@ const MyBooks = () => {
     refetch()
   }, [user])
 
-  const deleteSelectedBook = (id: number) => {
-    deleteBook({
+  const deleteSelectedBook = async(id: number) => {
+    try {
+      const result = await deleteBook({
       variables: {
         userId: user.id,
         bookId: id
       }
     })
-    refetch()
+    if(result.data){
+      refetch()
+      }
+    }
+    catch(error){
+      console.log(error)
+    } 
   }
 
-  const returnSelectedBook = (id: any) => {
+  const returnSelectedBook = async(id: any) => {
     let matchId = data?.user.unavailableBooks.find((book: any) => {
       console.log("In the Find ",book.id)
       return book.id === id
     })
     let borrowerId = matchId.borrower.id
-    returnBook({
-      variables: {
+    try {
+      const result = await returnBook({
+        variables: {
         userId: parseInt(user.id),
         bookId: parseInt(id),
         borrowerId: parseInt(borrowerId),
         status: 0
       }
     })
-    refetch()
+    if(result.data) {
+      refetch()
+      }
+      }
+    catch(error) {
+      console.log(error)
+    }
   }
 
   const getLibrary = (library:UserBook[], availability: boolean, unavailable: boolean, pending: boolean) => {

@@ -1,7 +1,30 @@
 {
   "data": {
-    "deleteBook": {
-      "success": "True"
+    "user": {
+      "id": "4",
+      "userName": "Lauren",
+      "availableBooks": [],
+      "unavailableBooks": [
+        {
+          "id": "11",
+          "title": "Tuesdays with Morrie",
+          "author": "Mitch Albom",
+          "imageUrl": "http://books.google.com/books/content?id=z2z_6hLoPmgC&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api"
+        }
+      ],
+      "pendingRequested": [
+        {
+          "id": "10",
+          "title": "Sins and Cigarettes",
+          "imageUrl": "http://books.google.com/books/content?id=XU4WxwEACAAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api",
+          "borrower": {
+            "id": "1",
+            "userName": "Adelle",
+            "location": "Maine",
+            "emailAddress": "adelle@gmail.com"
+          }
+        }
+      ]
     }
   }
 }
