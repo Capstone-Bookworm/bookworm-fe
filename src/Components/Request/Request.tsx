@@ -18,18 +18,6 @@ interface Props {
 
 const Request = (props : Props) => {
 
-// const handleRequestResponse = (event: any) => {
-//   if (event.target.id === "accept") {
-//     console.log("fire off the accept!")
-//     console.log(props.id, props.borrowerId)
-//     props.acceptRequest(props.id, props.borrowerId)
-//   } else if (event.target.id === "deny") {
-//     console.log("fire off the deny!")
-//     console.log(props.id, props.borrowerId)
-//     props.denyRequest(props.id, props.borrowerId)
-//   }
-// }
-
   return (
     <div className="book-request">
       <img src={props.imageUrl}/>
