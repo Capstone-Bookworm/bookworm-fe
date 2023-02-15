@@ -1,4 +1,4 @@
-const { createJSDocTypeExpression } = require("typescript");
+const { createJSDocTypeExpression, createSuper } = require("typescript");
 
 describe('Login Page spec', () => {
   it('Should be able to sign in', () => {
@@ -8,7 +8,7 @@ describe('Login Page spec', () => {
         req.reply({ fixture: "user.json" });
       }
       if (req.body.operationName === "books") {
-        req.reply({ fixture: "bookData.json" });
+        req.reply({ fixture: "../fixtures/bookData.json" });
       }
     })
     cy.get('.login-container').should('have.text', 'Book Worm')
@@ -23,12 +23,13 @@ describe('Login Page spec', () => {
     cy.get('.create-acct').should('have.text', "Don't have an account? Create New Account")
       cy.get('.create-acct > .login-btn').click();
     cy.intercept({ method: "POST", url: "https://bookworm-be.herokuapp.com/graphql" }, (req) => {
-      req.reply({ fixture: "createUser.json"})
+      req.reply({ fixture: "createUser.json" })
     }).as('createUser')
-      cy.get('.email-login').type('eleanor@gmail.com').should('have.value', 'eleanor@gmail.com')
-      cy.get('.username-login').type('eleanor').should('have.value', 'eleanor')
-      cy.get('.location-login').type('Denver, CO').should('have.value', 'Denver, CO')
+      cy.get('.email-login').type('evan@gmail.com').should('have.value', 'evan@gmail.com')
+      cy.get('.username-login').type('evan').should('have.value', 'evan')
+      cy.get('.location-login').type('Chicago, Il').should('have.value', 'Chicago, Il')
       cy.get('.create-account-btn').click()
+      cy.get('.login-container').contains("Account created! Log in below")
     })
     it('Should throw an error if user account does not exist', () => {
       cy.visit('http://localhost:3000/') 
@@ -39,13 +40,14 @@ describe('Login Page spec', () => {
     it('Should throw an error if the account email already exists', () => {
       cy.visit('http://localhost:3000/')
       cy.intercept({ method: "POST", url: "https://bookworm-be.herokuapp.com/graphql" }, (req) => {
-      req.reply({ fixture: "existingUser.json"})
+      req.reply({ status: 500})
     }).as('existingUser') 
       cy.get('.create-acct > .login-btn').click()
       cy.get('.email-login').type('joshua@gmail.com').should('have.value', 'joshua@gmail.com')
       cy.get('.username-login').type('joshua').should('have.value', 'joshua')
       cy.get('.location-login').type('Denver, CO').should('have.value', 'Denver, CO')
       cy.get('.create-account-btn').click()
+      cy.get('.login-container').contains('That username already exists please choose another one')
     })
     it('Should require all fields to be filled in when creating a new account', () => {
       cy.visit('http://localhost:3000/') 

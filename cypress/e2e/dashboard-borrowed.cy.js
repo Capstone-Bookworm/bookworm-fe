@@ -3,7 +3,10 @@ describe('My Borrowed Books Dashboard View flow', () => {
     cy.visit('http://localhost:3000/') 
     cy.intercept({ method: "POST", url: "https://bookworm-be.herokuapp.com/graphql" }, (req) => {
       if (req.body.operationName === "userLogin") {
-        req.reply({ fixture: "user.json" });
+        req.reply({ fixture: "user.json" })
+      }
+      if (req.body.operationName === "books") {
+        req.reply({ fixture: "bookData.json" })
       }
     })
     cy.get('.email-login').type('adelle@gmail.com')

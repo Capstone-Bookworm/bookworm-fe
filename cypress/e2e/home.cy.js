@@ -6,7 +6,10 @@ describe('Home page flow', () => {
         req.reply({ fixture: "user.json" });
       }
       if (req.body.operationName === "books") {
-        req.reply({ fixture: "bookData.json" });
+        req.reply({ fixture: "bookData.json" })
+      }
+      if (req.body.operationName === "bookSearch") {
+        req.reply({ fixture: "bookSearch.json" })
       }
     })
     cy.get('.email-login').type('adelle@gmail.com')
@@ -50,7 +53,7 @@ describe('Home page flow', () => {
     cy.get('#title').should('have.text', 'A Short History Of Nearly Everything by Bill Bryson')
     cy.get('#summary').should('have.text', 'Summary:  This new edition of the acclaimed bestseller')
     cy.get('#pages').should('have.text', '876 pages')
-    cy.get('.borrow-selection').select('Adelle')
+    cy.get('.borrow-selection').select('Adelle: Maine')
     cy.intercept({ method: "POST", url: "https://bookworm-be.herokuapp.com/graphql" }, (req) => {
       req.reply({ fixture: "borrowBook.json"})
     }).as('borrowBook')

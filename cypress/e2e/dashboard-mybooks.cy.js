@@ -5,6 +5,9 @@ describe('My Books Dashboard View flow', () => {
       if (req.body.operationName === "userLogin") {
         req.reply({ fixture: "user.json" });
       }
+      if (req.body.operationName === "books") {
+        req.reply({ fixture: "bookData.json" })
+      }
     })
     cy.get('.email-login').type('adelle@gmail.com')
     cy.get('.create-acct-form > .login-btn').click()
