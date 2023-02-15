@@ -40,14 +40,12 @@
 
 .search-header {
   font-size: 20px;
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
   color: #0F4D92;
   text-align: center;
 }
 
 .search-input {
   font-size: 20px;
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
   color: #0F4D92;
   border-color: #0F4D92;
 }
@@ -60,7 +58,6 @@
   cursor: pointer;
   margin-left: 15px;
   font-size: x-large;
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
 .search-button:hover {
