@@ -53,7 +53,7 @@ const BorrowedBooks = () => {
   }
 
   return (
-    <div>
+    <div className='borrowed-books-container'>
       {error && <ServerError message={error.message}/>}
       {loading && <h3>Loading...</h3>}
       {!loading && 
