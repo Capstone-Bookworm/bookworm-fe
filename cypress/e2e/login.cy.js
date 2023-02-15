@@ -56,7 +56,3 @@ describe('Login Page spec', () => {
       cy.get('.location-login').should('have.attr', 'required')
     })
 })
-
-// CHECK TO SEE IF ITS CREATING USER CORRECTLY.
-
- 

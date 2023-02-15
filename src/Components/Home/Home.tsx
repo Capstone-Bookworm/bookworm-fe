@@ -1,7 +1,6 @@
-import React, { useState, useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import ClickableBook from '../ClickableBook/ClickableBook'
 import './Home.css'
-import { RxCaretRight, RxCaretLeft } from "react-icons/rx"
 import { useQuery, gql } from '@apollo/client'
 import { User } from '../../Interfaces'
 import ServerError from '../ServerError/ServerError'
@@ -80,7 +79,7 @@ const Home = ({currentUser}: {currentUser: User | any}) => {
           placeholder='Search by book title...'
           onChange={event => setSearchBook(event.target.value)}
         />
-        <button type='button' className='search-button' onClick={() => searchBooks()}>SEARCH</button>
+        <button type='button' className='search-button' disabled={!searchBook} onClick={() => searchBooks()}>SEARCH</button>
       </form>
       <h2 className='search-message'>{searchMessage}</h2>
       {searchMessage && <button onClick={returnAllBookView} style={{marginBottom: '5rem'}} className='return-btn'>See All Books</button>}
