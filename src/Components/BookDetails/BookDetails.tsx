@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import { useQuery, gql, useMutation } from '@apollo/client'
+import { AiOutlineCloseCircle } from 'react-icons/ai'
 import { useParams, useNavigate } from 'react-router-dom'
 import './BookDetails.css'
 import { details, currentUser, User } from '../../Interfaces'
+import SuccessMessage from "../SuccessMessage/SuccessMessage"
 
 const BOOK_DETAILS = gql `
   query BookDetails($id: ID!) {
@@ -67,38 +69,44 @@ const BookDetails = () => {
     }
   }
 
-  const borrowBook = () => {
-    borrowABook({
-      variables: {
-        userId: parseInt(selectedUser),
-        bookId: Number(id),
-        borrowerId: parseInt(user.id),
-        status: 1
+  const borrowBook = async () => {
+
+    try {
+      const result = await borrowABook({
+        variables: {
+          userId: parseInt(selectedUser),
+          bookId: Number(id),
+          borrowerId: parseInt(user.id),
+          status: 1
+          }
+        })
+      if(result.data) {
+        setSuccessfulBorrow(true)
       }
-    })
-    if(!error) {
-      navigate('/home')
+    }
+    catch (error) {
+      console.log(error)
     }
   }
-
 
   const borrowerOptions = () => {
     return bookDetails?.users?.map((user: User | any) => {
       console.log('USER', user)
       console.log('USER MY TYPE', typeof user)
       return(
-      <option onClick={(event) => findID(event)} key={user.id} value={user.id}>{user.userName}</option>)
+      <option onClick={(event) => findID(event)} key={user.id} value={user.id}>{user.userName}: {user.location}</option>)
     })
   }
 
   return(
     <div className='details-page'>
       {detailsQuery.loading && <h3 id='loading'>Loading...</h3>}
+      {successfulBorrow && <SuccessMessage />}
       {!detailsQuery.loading && 
       <div className='details-container'>
         <img className='book-details-image' src={bookDetails?.imageUrl} alt='image of book cover'/>
         <div className='book-info'>
-          <button className='return-home-btn' onClick={() => navigate('/home')}>X</button>
+    
           <h2 id='title'>{bookDetails?.title} by {bookDetails?.author}</h2>
           <hr />
           <p id='summary'>Summary: <br/> {bookDetails?.summary}</p>
@@ -110,9 +118,12 @@ const BookDetails = () => {
               {borrowerOptions()}
           </select>
           <br />
-          <button className={successfulBorrow ? 'borrow-btn-disable' :'borrow-btn'} onClick={borrowBook}>Borrow Book</button>
+          {successfulBorrow ? <p className='pending-request-message'>Your request is pending!</p> :<button className='borrow-btn' onClick={borrowBook}>Borrow Book</button>}
           </div>
           }
+        </div>
+        <div className='close-container'>
+          <AiOutlineCloseCircle onClick={() => navigate('/home')} className='close-details'/>
         </div>
       </div>}
     </div>

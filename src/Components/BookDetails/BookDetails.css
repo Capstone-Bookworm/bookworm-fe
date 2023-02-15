@@ -1,23 +1,44 @@
 .details-page {
   background-color: #5c5c5c;
-  height: 110vh;
+  height: 90vh;
+  width: 100vw;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
 .details-container {
-  position: relative;
+  position: absolute;
   display: flex;
-  margin: 3rem;
+  width: 70%;
+  height: 60%;
+  justify-content: space-between;
+  margin: 5%;
   background-color: white;
   border: solid 3px black;
   box-shadow: 11px 8px 8px black;
 }
 
-img {
-  margin: 1.75rem;
-  height: 30vh;
+.pending-request-message {
+  font-size: 18px;
+}
+
+.book-details-image {
+  margin: 5%;
+  width: auto;
+  height: 80%;
+  border: solid 2px black;
+}
+
+.close-details {
+  cursor: pointer;
+  width: 70%;
+  height: auto;
+  margin-top: 15%;
+}
+
+.close-details:hover {
+  transform: scale(1.1)
 }
 
 #pages {
@@ -25,28 +46,23 @@ img {
   font-size: 1rem;
 }
 
-.return-home-btn {
-  position: absolute;
-  top: 5px;
-  right: 5px;
-  border: none;
-  background-color: white;
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
-  font-size: large;
-}
-
-.return-home-btn:hover {
-  border-style: groove;
-  border-radius: 5px;
-  background-color: white;
+.close-container {
+  width: 7%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 #summary {
-  font-size: 1.5rem;
+  font-size: 16px;
+  height: 30%;
+  overflow: hidden;
+  overflow-y: scroll;
 }
 
 #title {
-  font-size: 2rem;
+  font-size: 24px;
+  text-align: center;
 }
 
 .borrow-btn {
@@ -81,14 +97,55 @@ img {
   margin-right: 2rem;
 }
 
-.book-details-image {
-  height: 60vh;
-  border: solid 2px black;
-}
 
 .borrow-selection {
   color: #0F4D92;
   font-size: large;
   border: none;
   cursor: pointer;
+}
+
+.book-info {
+  width: 50%;
+}
+
+@media screen and (max-width: 800px) {
+  .details-container {
+    flex-direction: column;
+    width: 80%;
+    height: 70%;
+    align-items: center;
+    overflow: hidden;
+    overflow-y: scroll;
+    padding: 2%;
+  }
+
+  .book-info {
+    width: 90%;
+  }
+
+  .book-details-image {
+    width: 50%;
+    height: auto;
+  }
+
+  #title {
+    font-size: 18px;
+  }
+
+  #summary {
+    font-size: 14px;
+  }
+
+  .close-container {
+    margin-top: 10%;
+    width: 10%;
+  }
+  
+}
+
+@media screen and (max-width: 1200px) {
+  .details-container {
+    overflow: scroll;
+  }
 }

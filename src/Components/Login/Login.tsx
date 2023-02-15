@@ -38,8 +38,9 @@ const Login = ( { handleSetUser }: { handleSetUser: (user: User) => void}) => {
   const [ username, setUsername ] = useState('')
   const [ userLocation, setUserLocation ] = useState('')
   const [ errorMessage, setMessage ] = useState("We couldn't find your account, please try again")
-  const [ accountToCreate, setAccountToCreate ] = useState('')
+  const [ accountError, setAccountError ] = useState(false)
   const navigate = useNavigate()
+
 
   const [userQuery, { loading, error, data }] = useLazyQuery(GET_USER, {
     variables: { emailAddress: login }
@@ -78,17 +79,26 @@ const Login = ( { handleSetUser }: { handleSetUser: (user: User) => void}) => {
   }, [data])
 
 
-  const handleNewAccount = () => {
+  const handleNewAccount = async () => {
     if (username && email && userLocation) {
-      createAccount({
+      try {
+        const result = await createAccount({
         variables: {
           userName: username,
           emailAddress: email,
           location: userLocation,
         }
       })
-      setActiveAccount(true)
+      if (result.data) {
+        setActiveAccount(true)
+        setAccountError(false)
+      }
     }
+    catch (error) {
+      setAccountError(true)
+    }
+  }
+
   }
 
   const handleChange = () => {
@@ -107,6 +117,7 @@ const Login = ( { handleSetUser }: { handleSetUser: (user: User) => void}) => {
         <div className='login-container'>
         <h1 className='page-title'>Book Worm</h1>
         {getError() && <h3>{errorMessage}</h3>}
+        {accountError && <h3 className='account-error'>That username already exists please choose another one</h3>}
         <form className='create-acct-form' onSubmit={event => handleSubmit(event)}>
           <input 
             type='email'

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import Book from '../ClickableBook/ClickableBook'
+import ClickableBook from '../ClickableBook/ClickableBook'
 import './Home.css'
 import { RxCaretRight, RxCaretLeft } from "react-icons/rx"
 import { useQuery, gql } from '@apollo/client'
@@ -41,7 +41,7 @@ const Home = ({currentUser}: {currentUser: User | any}) => {
 
   const bookList: JSX.Element[] = bookData?.map((book: bookProp) => {
     return (
-      <Book
+      <ClickableBook
       key={book.id}
       id={book.id}
       imageUrl={book.imageUrl}
@@ -66,8 +66,8 @@ const Home = ({currentUser}: {currentUser: User | any}) => {
   return(
     <div className='homepage-container'>
       <h2 className='home-display'>My Home</h2>
-      {error && <ServerError />}
-      {searchQuery.error && <ServerError />}
+      {error && <ServerError message={error.message}/>}
+      {searchQuery.error && <ServerError message={searchQuery.error.message}/>}
       <form className='form-container'>
         <input 
           type='text'
