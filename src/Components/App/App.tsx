@@ -12,6 +12,7 @@ import MyBooks from '../MyBooks/MyBooks';
 import BorrowedBooks from '../BorrowedBooks/BorrowedBooks';
 import { User } from '../../Interfaces'
 import AddBook from '../AddBook/AddBook';
+import { PageNotFound } from '../PageNotFound/PageNotFound';
 
 
 interface Location {
@@ -55,6 +56,7 @@ function App() {
         <Route path='/dashboard/add-book' element={<AddBook/>}/>
         <Route path='/home' element={<Home currentUser={currentUser}/>} />
         <Route path='/details/:id' element={<BookDetails key={location.key}/>}/>
+        <Route path="*" element={<PageNotFound />} />
       </Routes>
     </div>
   );
