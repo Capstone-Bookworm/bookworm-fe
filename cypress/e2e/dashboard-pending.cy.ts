@@ -1,3 +1,6 @@
+const { createJSDocTypeExpression } = require("typescript");
+import App from "src/Components/App/App";
+
 describe('My Pending Requests Dashboard View flow', () => {
   beforeEach(() => {
     cy.visit('http://localhost:3000/') 

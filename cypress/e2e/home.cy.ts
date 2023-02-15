@@ -1,3 +1,6 @@
+const { createJSDocTypeExpression } = require("typescript");
+import App from "src/Components/App/App";
+
 describe('Home page flow', () => {
   beforeEach(() => {
     cy.visit('http://localhost:3000/') 
