@@ -55,4 +55,13 @@ describe('My Add a Book Dashboard View flow', () => {
         cy.get('.search-input').should('have.value', '')
         cy.get('.search-button').should('have.attr', 'disabled')
   })
+  it('Should return the user to the home page in the event of a 500 server error', () => {
+    cy.intercept({ method: "POST", url: "https://bookworm-be.herokuapp.com/graphql" }, (req) => {
+      req.reply({ error: 500 })
+        }).as('serverError')
+        cy.get('.search-input').type('Elsewhere')
+        cy.get('.error-modal').contains('Oops! Something went wrong!')
+        cy.get('.error-modal').contains('Server response was missing for query \'GoogleBooks\'.')
+        cy.get('.dismiss-button').click()
+  })
 })
