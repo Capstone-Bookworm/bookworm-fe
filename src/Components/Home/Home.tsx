@@ -62,8 +62,8 @@ const Home = () => {
 
   return(
     <div className='homepage-container'>
-      {error && <ServerError message={error.message}/>}
-      {searchQuery.error && <ServerError message={searchQuery.error.message}/>}
+      {error && <ServerError />}
+      {searchQuery.error && <ServerError />}
       <form className='form-container'>
         <input 
           type='text'
