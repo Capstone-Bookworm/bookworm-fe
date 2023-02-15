@@ -53,8 +53,8 @@ const CHANGE_TO_UNAVAILABLE = gql `
 `
 
 const PendingRequests = () => {
-  const currentUser : any = window.localStorage.getItem("currentUser")
-  const [ user, setUser ] = useState(JSON.parse(currentUser))
+  const currentUser: string = window.localStorage.getItem("currentUser")!
+  const [ user, setUser ] = useState<User>(JSON.parse(currentUser))
   const { loading, error, data: requests, refetch } = useQuery(REQUESTS, {
     variables: {
       id: user.id

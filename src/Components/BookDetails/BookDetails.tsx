@@ -41,8 +41,8 @@ const BORROW_BOOK = gql `
 
 const BookDetails = () => {
   const navigate = useNavigate()
-  const currentUser : any | User = window.localStorage.getItem("currentUser")
-  const [ user, setUser ] = useState(JSON.parse(currentUser))
+  const currentUser : string = window.localStorage.getItem("currentUser")!
+  const [ user, setUser ] = useState<User>(JSON.parse(currentUser))
   const [ selectedUser, setSelectedUser ] = useState('')
   const [ matchedUser, setMatchedUser ] = useState('')
   const [ successfulBorrow, setSuccessfulBorrow ] = useState(false)

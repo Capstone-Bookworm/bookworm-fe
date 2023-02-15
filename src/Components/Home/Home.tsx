@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import ClickableBook from '../ClickableBook/ClickableBook'
 import './Home.css'
-import { RxCaretRight, RxCaretLeft } from "react-icons/rx"
 import { useQuery, gql } from '@apollo/client'
 import ServerError from '../ServerError/ServerError'
 import { bookProp, User } from '../../Interfaces'
@@ -23,7 +22,7 @@ const BOOKS_DATA = gql `
     }
 }`
 
-const Home = ({currentUser}: {currentUser: User}) => {
+const Home = () => {
   const [searchBook, setSearchBook] = useState<string>('')
   const [searchMessage, setSearchMessage] = useState<string>('')
   const style = { fontSize: "5em", cursor: 'pointer' }

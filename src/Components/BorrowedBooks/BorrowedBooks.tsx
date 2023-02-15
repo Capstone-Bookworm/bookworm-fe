@@ -3,7 +3,7 @@ import ServerError from '../ServerError/ServerError'
 import Book from '../Book/Book'
 import { useQuery, gql } from '@apollo/client'
 import "./BorrowedBooks.css"
-import { UserBook } from '../../Interfaces'
+import { UserBook, User } from '../../Interfaces'
 
 const BORROWED_BOOKS = gql `
   query user ($id: ID!) {
@@ -20,8 +20,8 @@ const BORROWED_BOOKS = gql `
   }
 `
 const BorrowedBooks = () => {
-  const currentUser : any = window.localStorage.getItem("currentUser")
-  const [ user, setUser ] = useState(JSON.parse(currentUser))
+  const currentUser: string = window.localStorage.getItem("currentUser")!
+  const [ user, setUser ] = useState<User>(JSON.parse(currentUser))
   const [borrowedBooks, setBorrowedBooks ] = useState([])
   const { loading, error, data, refetch } = useQuery(BORROWED_BOOKS, {
     variables: { id: user.id }

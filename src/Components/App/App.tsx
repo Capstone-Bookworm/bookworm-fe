@@ -42,7 +42,7 @@ function App() {
         <Route path='/dashboard/my-borrowed-books' element={< BorrowedBooks />}/>
         <Route path='/dashboard/pending-requests' element={<PendingRequests />}/>
         <Route path='/dashboard/add-book' element={<AddBook/>}/>
-        <Route path='/home' element={<Home currentUser={currentUser}/>} />
+        <Route path='/home' element={<Home />} />
         <Route path='/details/:id' element={<BookDetails key={location.key}/>}/>
         <Route path="*" element={<PageNotFound />} />
       </Routes>

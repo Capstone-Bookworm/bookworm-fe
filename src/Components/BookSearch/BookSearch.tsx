@@ -2,7 +2,7 @@ import { useState } from 'react'
 import './BookSearch.css'
 import { gql, useMutation } from '@apollo/client'
 import BookResult from '../BookResult/BookResult'
-import { bookResult } from '../../Interfaces'
+import { bookResult, User } from '../../Interfaces'
 
 const ADD_BOOK = gql `
   mutation createBook ($userId: ID!, $isbn: String!, $title: String!, $author: String!, $summary: String!, $pageCount: Int!, $imageUrl: String!) {
@@ -28,8 +28,8 @@ const ADD_BOOK = gql `
 `
 
 const BookSearch = ({ searchResults }: {searchResults: bookResult[]}) => {
-  const currentUser : any = window.localStorage.getItem("currentUser")
-  const [ user, setUser ] = useState(JSON.parse(currentUser))
+  const currentUser: string = window.localStorage.getItem("currentUser")!
+  const [ user, setUser ] = useState<User>(JSON.parse(currentUser))
   const [savedBook, setSavedBook] = useState(false)
   const [saveMessage, setSaveMessage] = useState('')
   const [ addBook ] = useMutation(ADD_BOOK)
