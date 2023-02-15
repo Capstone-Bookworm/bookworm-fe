@@ -58,9 +58,9 @@ const BorrowedBooks = () => {
     <div className='borrowed-books-container'>
       {error && <ServerError message={error.message}/>}
       {loading && <AiOutlineLoading3Quarters className="loading"/>}
+      {!loading && borrowedBooks.length === 0 && <h3>You are currently not borrowing any books.</h3>}
       {!loading && 
         <div className='borrowed-book-section'>
-          {borrowedBooks.length === 0 && <h2>You are currently not borrowing any books.</h2>}
          {bookList()}
         </div>
       }

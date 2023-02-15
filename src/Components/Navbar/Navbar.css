@@ -57,7 +57,7 @@ nav {
 }
 
 ul.menuNav.menuNav.showMenu {
-  height: 15vh;
+  height: fit-content;
   width: 15vw;
   list-style: none;
   width: max-content;
