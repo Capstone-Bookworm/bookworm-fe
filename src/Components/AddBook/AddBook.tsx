@@ -60,8 +60,8 @@ const AddBook = () => {
     <section className='add-book-page'>
       <div className='search-container'>
         <h2 className='search-header'>Search for a book by title to add your library </h2>
-        {error && <ServerError />}
       <div className='search-form'>
+        {error && <ServerError message={error.message}/>}
         <input
           type='title'
           className='search-input'
