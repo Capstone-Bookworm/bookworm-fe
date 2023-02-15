@@ -88,7 +88,7 @@ const BookSearch = ({searchResults}: Books) => {
 
   return (
     <div className='book-page-container'>
-      {savedBook && <h2>{saveMessage}</h2>}
+      {savedBook && <h2 className='saved-msg'>{saveMessage}</h2>}
       <div className='book-card-container'>
         {bookResults()}
       </div>
