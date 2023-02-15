@@ -42,7 +42,7 @@ const BookSearch = ({searchResults}: Books) => {
 
   const currentUser : any = window.localStorage.getItem("currentUser")
   const [ user, setUser ] = useState(JSON.parse(currentUser))
-  const [allBooks, setBooks] = useState(searchResults)
+  // const [allBooks, setBooks] = useState(searchResults)
   const [savedBook, setSavedBook] = useState(false)
   const [saveMessage, setSaveMessage] = useState('')
 
@@ -72,7 +72,7 @@ const BookSearch = ({searchResults}: Books) => {
     <div className='book-page-container'>
       {savedBook && <h2>{saveMessage}</h2>}
       <div className='book-card-container'>
-        {allBooks.map((book: Book) => {
+        {searchResults.map((book: Book) => {
         return (
           <div key={book.isbn} className='book-card'>
             <img className='book-image' src={book.imageUrl} alt={`image of ${book.title}`}></img>

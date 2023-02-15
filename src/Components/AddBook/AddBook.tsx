@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import './AddBook.css'
-import { gql, useLazyQuery } from '@apollo/client'
+import { gql, useQuery } from '@apollo/client'
 import BookSearch from '../BookSearch/BookSearch'
 import ServerError from '../ServerError/ServerError'
 
@@ -29,35 +29,39 @@ interface Books {
 const AddBook = () => {
   const currentUser : any = window.localStorage.getItem("currentUser")
   const [ user, setUser ] = useState(JSON.parse(currentUser))
-
-  const [titleSearch, setTitle] = useState('')
+  const [titleSearch, setTitleSearch] = useState('')
   const [submitTitle, setSubmitTitle] = useState('')
   
-  const [ getSearchResults, {data, loading, error}] = useLazyQuery(GOOGLE_BOOKS, {
+  const {data, loading, error, refetch } = useQuery(GOOGLE_BOOKS, {
     variables: { title: submitTitle}
     })
 
   const handleChange = (event: {target: HTMLInputElement}) => {
-    setTitle(event.target.value)    
+    setTitleSearch(event.target.value)    
   }
 
   const handleClick = () => {
     setSubmitTitle(titleSearch)
   }
 
-  useEffect(() => {   
-    getSearchResults()
+  useEffect(() => {    
+    if (submitTitle) {
+      refetch()
+    } 
   }, [submitTitle])
 
   useEffect(() => {
-    console.log(data)
+    if(data) {
+      refetch()
+    }
   }, [data])
 
   return (
     <section className='add-book-page'>
-      <div className='search-form'>
-        <h1 className='search-header'>Search For Book by Title: </h1>
+      <div className='search-container'>
+        <h2 className='search-header'>Search for a book by title to add your library </h2>
         {error && <ServerError />}
+      <div className='search-form'>
         <input
           type='title'
           className='search-input'
@@ -67,15 +71,10 @@ const AddBook = () => {
         />
         <button className='search-button' onClick={handleClick}>Search</button>
       </div>
+      </div>
       <div className='books-container'>
-      {loading ? (
-        <h1>Loading ...</h1>
-      ) : (
-        data && <BookSearch searchResults={data.googleBooks}/>
-      )}
-
-      {submitTitle === '' && <h1 className='empty-search'>Search a title above to find a book to add to your library</h1>}
-
+      {loading && <h1>Loading ...</h1> }
+      {data && <BookSearch searchResults={data?.googleBooks}/>}
       </div>
     </section>
   )
