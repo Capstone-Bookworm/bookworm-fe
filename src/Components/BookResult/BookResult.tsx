@@ -1,17 +1,8 @@
 import React from 'react'
 import './BookResult.css'
+import { bookResult } from '../../Interfaces'
 
-interface Props {
-  imageUrl: string;
-  title: string;
-  isbn: string;
-  author: string;
-  pageCount: number;
-  addToLibrary: (isbn: string) => void
-}
-
-const BookResult = ( props: Props ) => {
-
+const BookResult: React.FC<bookResult> = (props) => {
   return(
   <div className='book-card'>
     <img className='book-image' src={props.imageUrl} alt={`image of ${props.title}`}></img>

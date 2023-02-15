@@ -3,6 +3,7 @@ import { useQuery, gql, useMutation } from '@apollo/client'
 import { AiOutlineCloseCircle } from 'react-icons/ai'
 import { useParams, useNavigate } from 'react-router-dom'
 import './BookDetails.css'
+import { details, User, Value } from '../../Interfaces'
 import SuccessMessage from "../SuccessMessage/SuccessMessage"
 
 const BOOK_DETAILS = gql `
@@ -38,25 +39,10 @@ const BORROW_BOOK = gql `
   }
 `
 
-interface details {
-  title: string
-  summary: string
-  author: string
-  pageCount: number
-  imageUrl: string
-  users: {
-    userName: string
-    emailAddress: string
-    location: string
-  }[]
-}
-
 const BookDetails = () => {
   const navigate = useNavigate()
-
-
-  const currentUser : any = window.localStorage.getItem("currentUser")
-  const [ user, setUser ] = useState(JSON.parse(currentUser))
+  const currentUser : string = window.localStorage.getItem("currentUser")!
+  const [ user, setUser ] = useState<User>(JSON.parse(currentUser))
   const [ selectedUser, setSelectedUser ] = useState('')
   const [ matchedUser, setMatchedUser ] = useState('')
   const [ successfulBorrow, setSuccessfulBorrow ] = useState(false)
@@ -70,7 +56,7 @@ const BookDetails = () => {
   useEffect(() => {
     if(!detailsQuery.loading) {
       setBookDetails(detailsQuery.data.book)
-      const userOwnsBook = detailsQuery.data.book.users.some((foundUser: any) => foundUser.id === user.id)
+      const userOwnsBook = detailsQuery.data.book.users.some((foundUser: User) => foundUser.id === user.id)
       setMatchedUser(userOwnsBook)
     }
   }, [detailsQuery.data])
@@ -104,7 +90,7 @@ const BookDetails = () => {
   }
 
   const borrowerOptions = () => {
-    return bookDetails?.users?.map((user: any) => {
+    return bookDetails?.users?.map((value: Value, index: number, array: Value[]): JSX.Element => {
       return(
       <option onClick={(event) => findID(event)} key={user.id} value={user.id}>{user.userName}: {user.location}</option>)
     })

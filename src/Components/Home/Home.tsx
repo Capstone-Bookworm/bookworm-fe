@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from 'react'
 import ClickableBook from '../ClickableBook/ClickableBook'
 import './Home.css'
-import { RxCaretRight, RxCaretLeft } from "react-icons/rx"
 import { useQuery, gql } from '@apollo/client'
-import { User } from '../../Interfaces'
 import ServerError from '../ServerError/ServerError'
+import { bookProp, User } from '../../Interfaces'
 
 const BOOK_SEARCH = gql`
   query BookSearch($title: String!) {   
@@ -23,14 +22,7 @@ const BOOKS_DATA = gql `
     }
 }`
 
-interface book {
-  id: number
-  imageUrl: string
-}
-
-
-
-const Home = ({currentUser}: {currentUser: User | any}) => {
+const Home = () => {
   const [searchBook, setSearchBook] = useState<string>('')
   const [searchMessage, setSearchMessage] = useState<string>('')
   const style = { fontSize: "5em", cursor: 'pointer' }
@@ -44,7 +36,7 @@ const Home = ({currentUser}: {currentUser: User | any}) => {
     }
   }, [data])
 
-  const bookList: JSX.Element[] = bookData?.map((book: book) => {
+  const bookList: JSX.Element[] = bookData?.map((book: bookProp) => {
     return (
       <ClickableBook
       key={book.id}
