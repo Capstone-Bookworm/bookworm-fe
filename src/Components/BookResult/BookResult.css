@@ -1,0 +1,43 @@
+.book-card{
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: auto;
+  width: 15vw;
+  margin-top: 5%;
+}
+
+.book-image {
+  display: block;
+  position: relative;
+  height: 100%;
+  width: 100%;
+  box-shadow: 3px 3px 3px black;
+}
+
+.image-overlay {
+  position: absolute;
+  top: 0;
+  left: -4%;
+  width: 110%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.25s;
+}
+
+.image-overlay:hover {
+  opacity: 1;
+}
+
+.add-btn {
+  cursor: pointer;
+  width: 80%;
+}

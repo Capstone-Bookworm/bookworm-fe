@@ -96,3 +96,20 @@ h1 {
   left: calc(50% - 13vh);
   position: absolute;
 }
+
+@media screen and (max-width: 650px) {
+  .title {
+    font-size: 30px;
+    left: 15%
+  }
+
+  .logo {
+    width: 50%;
+    height: auto
+  }
+
+  .welcome-display {
+    display: none
+  }
+}
+
