@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { gql, useQuery, useMutation } from '@apollo/client'
 import Request from "../Request/Request";
-import { User, SpecificRequest } from '../../Interfaces'
+import { User, SpecificRequest, RequestProps } from '../../Interfaces'
 import ServerError from "../ServerError/ServerError";
 
 const REQUESTS = gql `
@@ -120,7 +120,7 @@ const PendingRequests = () => {
 
   const getRequests = () => {
     if(requests) {
-      return pendingRequests.map((request: SpecificRequest, index: number, array: SpecificRequest[]) => {
+      return pendingRequests.map((request: RequestProps, index: number, array: RequestProps[]) => {
       return <Request 
         key={request.id}
         id={request.id}

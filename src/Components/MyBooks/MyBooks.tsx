@@ -3,7 +3,7 @@ import { useQuery, gql, useMutation } from "@apollo/client";
 import LibraryBook from '../LibraryBook/LibraryBook'
 import "./MyBooks.css"
 import ServerError from "../ServerError/ServerError";
-import { UserBook, IdMatch, User } from '../../Interfaces'
+import { UserBook, IdMatch, User, SpecificRequest } from '../../Interfaces'
 
 const DELETE_BOOK = gql `
   mutation deleteBook ($userId: ID!, $bookId: ID!) {
@@ -123,19 +123,23 @@ const MyBooks = () => {
   }
 
   const getLibrary = (library:UserBook[], availability: boolean, unavailable: boolean, pending: boolean) => {
+    console.log('LIBRARY', library)
     if(pendingRequests) {
-      return library.map((book: UserBook, index: number, array: UserBook[])=> {
+      return library.map((book: SpecificRequest, index: number, array: SpecificRequest[])=> {
+        console.log('BOOK', book)
        return <LibraryBook 
-           key={book.id}
-           id={book.id}
-           title={book.title}
-           author={book.author}
-           imageUrl={book.imageUrl}
-           availability={availability}
-           unavailable={unavailable}
-           pending={pending}
-           deleteSelectedBook={deleteSelectedBook}
-           returnSelectedBook={returnSelectedBook}
+          key={book.id}
+          id={book.id}
+          title={book.title}
+          author={book.author}
+          imageUrl={book.imageUrl}
+          availability={availability}
+          unavailable={unavailable}
+          pending={pending}
+          deleteSelectedBook={deleteSelectedBook}
+          returnSelectedBook={returnSelectedBook}
+          emailAddress={book.borrower?.emailAddress || ''}
+          location={book.borrower?.location || ''}
          />
      })
     }

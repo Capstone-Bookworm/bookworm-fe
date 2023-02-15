@@ -85,6 +85,8 @@ export interface UserLibraryBook {
   pending: boolean,
   deleteSelectedBook: any
   returnSelectedBook: any
+  emailAddress?: string
+  location?: string
 }
 
 //MYBOOKS & BORROWEDBOOKS COMPONENT
@@ -124,13 +126,13 @@ export interface IdMatch {
 //PENDING REQUEST COMPONENT
 export interface SpecificRequest {
   author: string
-  borrower: {
-    emailAddress: string
-    id: string
-    userName: string
-    location: string
+  borrower?: {
+    emailAddress?: string
+    id?: string
+    userName?: string
+    location?: string
   }
-  id: string
+  id: any
   imageUrl: string
   title: string
 }
@@ -141,7 +143,7 @@ export interface RequestProps {
   id: string;
   title: string;
   imageUrl: string;
-  borrower: string;
+  borrower: any;
   borrowerId: string;
   borrowerLocation: string;
   borrowerEmailAddress: string;
