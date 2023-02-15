@@ -6,7 +6,7 @@
 }
 
 .book-card-container {
-  height: 150vh;
+  height: auto;
   width: 100vw;
   display: grid;
   grid-template-columns: repeat(5, 1fr);
@@ -14,46 +14,4 @@
   margin-left: 5%;
 }
 
-.book-card{
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  height: 40vh;
-  width: 15vw;
-}
-
-.add-btn {
-  cursor: pointer;
-  width: 80%;
-}
-
-.book-image {
-  display: block;
-  position: relative;
-  height: 100%;
-  width: 100%;
-  box-shadow: 3px 3px 3px black;
-}
-
-.image-overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.6);
-  color: white;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  opacity: 0;
-  transition: opacity 0.25s;
-}
-
-.image-overlay:hover {
-  opacity: 1;
-}
 

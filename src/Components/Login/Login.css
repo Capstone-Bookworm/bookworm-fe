@@ -83,3 +83,9 @@
   color: #0F4D92;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
+
+.account-error {
+  font-size: 14px;
+  text-align: center;
+  margin-top: 0
+}
