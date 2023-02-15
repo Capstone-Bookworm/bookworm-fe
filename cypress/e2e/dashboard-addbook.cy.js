@@ -38,6 +38,6 @@ describe('My Add a Book Dashboard View flow', () => {
     req.reply({ fixture: "addBook.json"})
       }).as('addBook')
       cy.get('.add-btn').click()
-      cy.get('[href="/dashboard"] > .nav-button-mybooks').click()
+      cy.get('.book-page-container').contains('Added Third Culture Kids 3rd Edition to Lauren\'s books')
   })
 })
