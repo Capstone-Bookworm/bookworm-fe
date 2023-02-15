@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import './BookSearch.css'
 import { gql, useMutation } from '@apollo/client'
+import BookResult from '../BookResult/BookResult'
 
 interface Books {
   searchResults: Book[],
@@ -68,24 +69,29 @@ const BookSearch = ({searchResults}: Books) => {
     setSaveMessage(`Added ${selectedBook?.title} to ${user.userName}'s books`)
   }
 
+  const bookResults = () => {
+    return searchResults.map((book: Book) => {
+      return (
+        <BookResult 
+          key={book.isbn} 
+          imageUrl={book.imageUrl}
+          title={book.title}
+          isbn={book.isbn}
+          author={book.author}
+          pageCount={book.pageCount}
+          addToLibrary={addToLibrary}
+        />
+      )
+
+    })}
+
+
+
   return (
     <div className='book-page-container'>
       {savedBook && <h2>{saveMessage}</h2>}
       <div className='book-card-container'>
-        {searchResults.map((book: Book) => {
-        return (
-          <div key={book.isbn} className='book-card'>
-            <img className='book-image' src={book.imageUrl} alt={`image of ${book.title}`}></img>
-            <div className='image-overlay'>
-              <p>Isbn: {book.isbn}</p>
-              <p>Title: {book.title}</p>
-              <p>Author: {book.author}</p>
-              <p>Page Count: {book.pageCount}</p>
-              <button className='add-btn' onClick={() => addToLibrary(book.isbn)}>Add to Library</button>
-            </div>
-          </div>
-        )
-        })}
+        {bookResults()}
       </div>
     </div>
   )
