@@ -4,8 +4,20 @@
   margin-top: 2%;
   align-items: center;
   width: 80%;
-  border: solid 3px black;
+  border-bottom: 2px solid black;
+  /* border: solid 2px black; */
+  /* border-radius: 10px; */
   margin-left: 2%;
+  margin-right: 2%;
+}
+
+.pending-book-img {
+  margin-left: 5%;
+  margin-bottom: 2%;
+}
+
+.request-desc {
+  text-align: center;
 }
 
 .accept-request-btn,
@@ -17,7 +29,7 @@
   background-color: white;
   border-style: ridge;
   border-color: #5c5c5c;
-  font-size: x-large;
+  font-size: 20px;
 }
 
 .accept-request-btn:hover,
@@ -34,3 +46,46 @@ h3 {
   font-size: x-large;
 }
 
+.request-info {
+  margin-left: 5%;
+  margin-bottom: 2%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.pending-btn-container {
+  display: flex;
+}
+
+@media screen and (max-width: 800px) {
+  .request-title {
+    font-size: 20px;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .accept-request-btn,
+  .deny-request-btn {
+    font-size: 14px;
+  }
+
+  .request-desc {
+    font-size: 16px;
+    margin-top: 0%;
+    margin-bottom: 5%
+  }
+
+  .book-request {
+    width: 100%;
+  }
+
+  .info {
+    font-size: 12px;
+  }
+
+  .pending-book-img {
+    width: 35%;
+
+  }
+}
