@@ -146,6 +146,7 @@ const MyBooks = () => {
             returnSelectedBook={returnSelectedBook}
             contactInfo={book.borrower?.emailAddress || ''}
             location={book.borrower?.location || ''}
+            borrowerUsername={book.borrower?.userName || ''}
           />
      })
     }
