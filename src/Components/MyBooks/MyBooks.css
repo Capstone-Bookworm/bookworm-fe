@@ -1,9 +1,8 @@
 .my-books-container {
   display: flex;
-  flex-direction: row;
   flex-wrap: wrap;
   justify-content: space-evenly;
-  height: 100vh;
+  /* height: 100vh; */
   width: 100vw;
 }
 
@@ -18,5 +17,14 @@
   color: #0F4D92;
   font-size: xx-large;
   font-family: Verdana, Geneva, Tamhoma, sans-serif;
+}
+
+@media screen and (max-width: 920px) {
+  .my-books-container {
+    flex-direction: column;
+    width: fit-content;
+    align-items: center;
+  }
+
 
 }
