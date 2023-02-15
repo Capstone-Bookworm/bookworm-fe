@@ -3,6 +3,8 @@ import { useQuery, gql, useMutation } from "@apollo/client";
 import LibraryBook from '../LibraryBook/LibraryBook'
 import "./MyBooks.css"
 import ServerError from "../ServerError/ServerError";
+import { AiOutlineLoading3Quarters } from "react-icons/ai";
+
 
 const DELETE_BOOK = gql `
   mutation deleteBook ($userId: ID!, $bookId: ID!) {
@@ -155,6 +157,7 @@ const MyBooks = () => {
   return (
     <div className="my-books-display">
       <h1 className="user-book-welcome">{user.userName}'s Books</h1>
+      {loading && <AiOutlineLoading3Quarters className="loading"/>}
       <div className="my-books-container">
         {error && <ServerError message={error.message}/>}
         {getLibrary(availLibrary, true, false, false)}

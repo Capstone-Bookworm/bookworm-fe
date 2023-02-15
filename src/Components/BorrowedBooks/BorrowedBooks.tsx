@@ -3,6 +3,8 @@ import ServerError from '../ServerError/ServerError'
 import Book from '../Book/Book'
 import { useQuery, gql } from '@apollo/client'
 import "./BorrowedBooks.css"
+import { AiOutlineLoading3Quarters } from "react-icons/ai";
+
 
 
 
@@ -55,7 +57,7 @@ const BorrowedBooks = () => {
   return (
     <div className='borrowed-books-container'>
       {error && <ServerError message={error.message}/>}
-      {loading && <h3>Loading...</h3>}
+      {loading && <AiOutlineLoading3Quarters className="loading"/>}
       {!loading && 
         <div className='borrowed-book-section'>
           {borrowedBooks.length === 0 && <h2>You are currently not borrowing any books.</h2>}

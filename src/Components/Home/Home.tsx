@@ -5,6 +5,7 @@ import { RxCaretRight, RxCaretLeft } from "react-icons/rx"
 import { useQuery, gql } from '@apollo/client'
 import { User } from '../../Interfaces'
 import ServerError from '../ServerError/ServerError'
+import { AiOutlineLoading3Quarters } from "react-icons/ai";
 
 const BOOK_SEARCH = gql`
   query BookSearch($title: String!) {   
@@ -83,7 +84,7 @@ const Home = ({currentUser}: {currentUser: User | any}) => {
       </form>
       <h2 className='search-message'>{searchMessage}</h2>
       {searchMessage && <button onClick={returnAllBookView} style={{marginBottom: '5rem'}} className='return-btn'>See All Books</button>}
-      {loading ? <h2 className='loading-message'>Loading...</h2> : <div className={`book-container ${bookData.length > 5 ? "display-search" : ""}`}>
+      {loading ? <AiOutlineLoading3Quarters className="loading"/> : <div className={`book-container ${bookData.length > 5 ? "display-search" : ""}`}>
         <div className="book-list">
           {bookList}
         </div>
