@@ -3,6 +3,7 @@ import { useQuery, gql, useMutation } from '@apollo/client'
 import { AiOutlineCloseCircle } from 'react-icons/ai'
 import { useParams, useNavigate } from 'react-router-dom'
 import './BookDetails.css'
+import SuccessMessage from "../SuccessMessage/SuccessMessage"
 
 const BOOK_DETAILS = gql `
   query BookDetails($id: ID!) {
@@ -94,7 +95,7 @@ const BookDetails = () => {
           }
         })
       if(result.data) {
-        navigate('/home')
+        setSuccessfulBorrow(true)
       }
     }
     catch (error) {
@@ -105,18 +106,19 @@ const BookDetails = () => {
   const borrowerOptions = () => {
     return bookDetails?.users?.map((user: any) => {
       return(
-      <option onClick={(event) => findID(event)} key={user.id} value={user.id}>{user.userName}</option>)
+      <option onClick={(event) => findID(event)} key={user.id} value={user.id}>{user.userName}: {user.location}</option>)
     })
   }
 
   return(
     <div className='details-page'>
       {detailsQuery.loading && <h3 id='loading'>Loading...</h3>}
+      {successfulBorrow && <SuccessMessage />}
       {!detailsQuery.loading && 
       <div className='details-container'>
         <img className='book-details-image' src={bookDetails?.imageUrl} alt='image of book cover'/>
         <div className='book-info'>
-        
+    
           <h2 id='title'>{bookDetails?.title} by {bookDetails?.author}</h2>
           <hr />
           <p id='summary'>Summary: <br/> {bookDetails?.summary}</p>
@@ -128,11 +130,13 @@ const BookDetails = () => {
               {borrowerOptions()}
           </select>
           <br />
-          <button className={successfulBorrow ? 'borrow-btn-disable' :'borrow-btn'} onClick={borrowBook}>Borrow Book</button>
+          {successfulBorrow ? <p className='pending-request-message'>Your request is pending!</p> :<button className='borrow-btn' onClick={borrowBook}>Borrow Book</button>}
           </div>
           }
         </div>
-        <AiOutlineCloseCircle onClick={() => navigate('/home')} className='close-details'/>
+        <div className='close-container'>
+          <AiOutlineCloseCircle onClick={() => navigate('/home')} className='close-details'/>
+        </div>
       </div>}
     </div>
   )
