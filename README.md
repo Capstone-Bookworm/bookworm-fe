@@ -7,7 +7,7 @@ This repo is the Front End part of a project built by students at [Turing School
 <br></br>
 
 Visit our Front End Site!
-- [Bookworm](https://bookworm-capstone.herokuapp.com/)
+- [Bookworm](https://bookworm-fe.vercel.app/)
 
 Our Back End is hosted here:
 - [Bookworm API](https://bookworm-be.herokuapp.com/graphql)
