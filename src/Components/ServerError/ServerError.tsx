@@ -2,12 +2,9 @@ import React from "react";
 import { GrAlert } from 'react-icons/gr'
 import { Link } from 'react-router-dom'
 import './ServerError.css'
+import { message } from '../../Interfaces'
 
-interface Props {
-  message?: string;
-}
-
-const ServerError = ({ message }: Props) => {
+const ServerError = ({ message }: message) => {
   return (
     <div className="overlay">
       <div className="error-modal">

@@ -31,7 +31,7 @@ const CREATE_USER = gql `
   }
 `
 
-const Login = ( { handleSetUser }: { handleSetUser: (user: User) => void}) => {
+const Login = ( { handleSetUser }: { handleSetUser: (user: any) => void}) => {
   const [ email, setEmail] = useState('')
   const [ login, setLogin ] = useState('')
   const [ activeAccount, setActiveAccount] = useState(true)

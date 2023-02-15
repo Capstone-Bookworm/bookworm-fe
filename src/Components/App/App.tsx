@@ -1,10 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import './App.css';
-import { Routes, Route, useLocation, useNavigate } from 'react-router-dom'
+import { Routes, Route, useLocation } from 'react-router-dom'
 import Navbar from '../Navbar/Navbar';
 import Login from '../Login/Login';
 import DashboardMenu from '../DashboardMenu/DashboardMenu'
-import { useQuery, gql } from '@apollo/client';
 import PendingRequests from '../PendingRequests/PendingRequests';
 import Home from '../Home/Home';
 import BookDetails from '../BookDetails/BookDetails';

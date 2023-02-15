@@ -7,7 +7,6 @@ import { User } from '../../Interfaces'
 import ServerError from '../ServerError/ServerError'
 import { bookProp } from '../../Interfaces'
 
-
 const BOOK_SEARCH = gql`
   query BookSearch($title: String!) {   
     bookSearch(title: $title) {

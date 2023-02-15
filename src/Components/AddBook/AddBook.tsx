@@ -3,7 +3,7 @@ import './AddBook.css'
 import { gql, useQuery } from '@apollo/client'
 import BookSearch from '../BookSearch/BookSearch'
 import ServerError from '../ServerError/ServerError'
-import { User, Books } from '../../Interfaces'
+// import { User } from '../../Interfaces'
 
 const GOOGLE_BOOKS = gql `
   query GoogleBooks($title: String!){

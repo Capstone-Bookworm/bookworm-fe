@@ -2,19 +2,6 @@ import { useState } from 'react'
 import './BookSearch.css'
 import { gql, useMutation } from '@apollo/client'
 import BookResult from '../BookResult/BookResult'
-
-interface Books {
-  searchResults: Book[],
-}
-
-interface Book {
-  isbn: string,
-  title: string,
-  author: string,
-  imageUrl: string,
-  summary: string,
-  pageCount: number
-}
 import { Books, Book } from '../../Interfaces'
 
 const ADD_BOOK = gql `
@@ -40,18 +27,15 @@ const ADD_BOOK = gql `
   }
 `
 
-const BookSearch = ({searchResults}: Books) => {
-
+const BookSearch = ({searchResults}: any) => {
   const currentUser : any = window.localStorage.getItem("currentUser")
   const [ user, setUser ] = useState(JSON.parse(currentUser))
-  // const [allBooks, setBooks] = useState(searchResults)
   const [savedBook, setSavedBook] = useState(false)
   const [saveMessage, setSaveMessage] = useState('')
-
   const [ addBook ] = useMutation(ADD_BOOK)
-    
+  
   const addToLibrary = (isbn: string) => {
-    let selectedBook = searchResults.find(book => {
+    let selectedBook = searchResults.find((book: any) => {
       return book.isbn === isbn
     })
     console.log(selectedBook)
@@ -85,8 +69,6 @@ const BookSearch = ({searchResults}: Books) => {
       )
 
     })}
-
-
 
   return (
     <div className='book-page-container'>

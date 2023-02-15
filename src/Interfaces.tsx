@@ -96,3 +96,33 @@ export interface UserBook {
   author: string,
   imageUrl: string
 }
+
+//SERVER ERROR COMPONENT
+export interface message {
+  message?: string;
+}
+
+
+//BOOK RESULT COMPONENT
+export interface bookResult {
+  imageUrl: string;
+  title: string;
+  isbn: string;
+  author: string;
+  pageCount: number;
+  addToLibrary: (isbn: string) => void
+}
+
+//REQUEST COMPONENT
+export interface RequestProps {
+  id: string;
+  title: string;
+  imageUrl: string;
+  borrower: string;
+  borrowerId: string;
+  borrowerLocation: string;
+  borrowerEmailAddress: string;
+  currentUser: User,
+  denyRequest: (bookId: string, borrowerId: string) => void;
+  acceptRequest: (bookId: string, borrowerId: string) => void
+}

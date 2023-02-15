@@ -4,7 +4,6 @@ import Request from "../Request/Request";
 import { User } from '../../Interfaces'
 import ServerError from "../ServerError/ServerError";
 
-
 const REQUESTS = gql `
 query user($id: ID!) {
   user(id: $id){
@@ -53,9 +52,7 @@ const CHANGE_TO_UNAVAILABLE = gql `
   }
 `
 
-
 const PendingRequests = () => {
-
   const currentUser : any = window.localStorage.getItem("currentUser")
   const [ user, setUser ] = useState(JSON.parse(currentUser))
   const { loading, error, data: requests, refetch } = useQuery(REQUESTS, {
@@ -73,8 +70,6 @@ const PendingRequests = () => {
   const [ changeToAvailable ] = useMutation(CHANGE_TO_AVAILABLE)
   const [ changeToUnavailable ] = useMutation(CHANGE_TO_UNAVAILABLE)
 
-
-
   useEffect(() => {
     if(requests) {
       setPendingRequests(requests.user.pendingRequested)
@@ -84,7 +79,6 @@ const PendingRequests = () => {
   useEffect(() => {
     refetch()
   }, [user])
-
 
   const denyRequest = async (bookId: string, borrowerId: string) => {
     try {
@@ -123,7 +117,6 @@ const PendingRequests = () => {
     console.log(error)  
     }
   }
-
 
   const getRequests = () => {
     if(requests) {

@@ -19,7 +19,6 @@ const BORROWED_BOOKS = gql `
   }
 `
 const BorrowedBooks = () => {
-
   const currentUser : any = window.localStorage.getItem("currentUser")
   const [ user, setUser ] = useState(JSON.parse(currentUser))
   const [borrowedBooks, setBorrowedBooks ] = useState([])
