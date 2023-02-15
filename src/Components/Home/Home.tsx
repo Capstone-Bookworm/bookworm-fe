@@ -63,7 +63,6 @@ const Home = ({currentUser}: {currentUser: User}) => {
 
   return(
     <div className='homepage-container'>
-      <h2 className='home-display'>My Home</h2>
       {error && <ServerError message={error.message}/>}
       {searchQuery.error && <ServerError message={searchQuery.error.message}/>}
       <form className='form-container'>
