@@ -1,9 +1,10 @@
 {
   "data": {
-    "patchUserBook": {
-      "userBook": {
-        "bookId": 3
-      }
+    "user": {
+      "id": "4",
+      "userName": "Lauren",
+      "pendingRequested": [
+      ]
     }
   }
 }

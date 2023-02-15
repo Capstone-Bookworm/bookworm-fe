@@ -33,14 +33,23 @@ describe('My Pending Requests Dashboard View flow', () => {
   })
   it('Should be able to accept pending request', () => {
     cy.intercept({ method: "POST", url: "https://bookworm-be.herokuapp.com/graphql" }, (req) => {
+      req.reply({ fixture: "pendingRequests.json"})
+    }).as('pendingRequests')
+    cy.intercept({ method: "POST", url: "https://bookworm-be.herokuapp.com/graphql" }, (req) => {
       req.reply({ fixture: "makeUnavailable.json"})
     }).as('accept')
+    cy.get('.book-request').should('have.length', '1')
     cy.get('#accept').click()
+    cy.get('.book-request').should('have.length', '0')
   })
-  it('Should be able to accept pending request', () => {
+  it('Should be able to deny pending request', () => {
     cy.intercept({ method: "POST", url: "https://bookworm-be.herokuapp.com/graphql" }, (req) => {
-      req.reply({ fixture: "makeAvailable.json"})
+      req.reply({ fixture: "pendingRequests.json"})
+    }).as('pendingRequests')
+    cy.intercept({ method: "POST", url: "https://bookworm-be.herokuapp.com/graphql" }, (req) => {
+      req.reply({ fixture: "makeunAvailable.json"})
     }).as('deny')
     cy.get('#deny').click()
+    cy.get('body').contains('No pending requests at this time')
   })
 })
