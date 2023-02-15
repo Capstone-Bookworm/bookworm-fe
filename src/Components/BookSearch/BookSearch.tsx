@@ -42,7 +42,7 @@ const BookSearch = ({searchResults}: Books) => {
 
   const currentUser : any = window.localStorage.getItem("currentUser")
   const [ user, setUser ] = useState(JSON.parse(currentUser))
-  const [allBooks, setBooks] = useState(searchResults)
+  const [allBooks, setAllBooks] = useState(searchResults)
   const [savedBook, setSavedBook] = useState(false)
   const [saveMessage, setSaveMessage] = useState('')
 
