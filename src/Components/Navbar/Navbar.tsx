@@ -33,7 +33,7 @@ const Navbar = () => {
         <h2 className='welcome-display'>Welcome {user.userName}!</h2>
       </div>
       <h1 className='title'>Bookworm</h1>
-      <nav>
+      <nav className='hamburger-menu-container'>
         <button onClick={handleClick}>{navbarOpen ? <RxCross2 style={style}/> : <RxHamburgerMenu style={style}/>}</button>
         <ul className={navbarOpen ? "showMenu menuNav" : "menuNav"}>
           {location.pathname === '/home' && <NavLink to='/dashboard'><li onClick={() => closeMenu()}>My Dashboard</li></NavLink>}

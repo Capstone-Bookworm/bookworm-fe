@@ -112,8 +112,8 @@
 @media screen and (max-width: 800px) {
   .details-container {
     flex-direction: column;
-    width: 90%;
-    height: 90%;
+    width: 80%;
+    height: 70%;
     align-items: center;
     overflow: hidden;
     overflow-y: scroll;
@@ -142,4 +142,10 @@
     width: 10%;
   }
   
+}
+
+@media screen and (max-width: 1200px) {
+  .details-container {
+    overflow: scroll;
+  }
 }
