@@ -1,3 +1,4 @@
+//APP COMPONENT
 export interface Location {
   pathname: string,
   search: string,
@@ -6,14 +7,7 @@ export interface Location {
   key: string
 }
 
-export interface User {
-  emailAddress: string;
-  id: string
-  location: string;
-  userName: string;
-  __typename: string;
-}
-
+//APP & LOGIN COMPONENT
 export interface currentUser {
   userLogin: {
     emailAddress: string;
@@ -23,14 +17,6 @@ export interface currentUser {
     __typename: string;
   }
 }
-
-// export interface CurrentUser {
-//   userName?: string ;
-//   location?: string;
-//   id?: string;
-//   emailAddress?: string;
-//   __typename?: string; 
-// }
 
 //ADDBOOK COMPONENT
 export interface Books {
@@ -55,8 +41,20 @@ export interface details {
     location: string
   }[]
 }
+export interface User {
+  emailAddress: string;
+  id: string
+  location: string;
+  userName: string;
+  __typename: string;
+}
+export interface Value {
+  userName: string
+  emailAddress: string
+  location: string
+}
 
-//BOOK SEARCH COMPONENT
+//BOOKSEARCH COMPONENT
 export interface Books {
   searchResults: Book[],
 }
@@ -70,7 +68,7 @@ export interface Book {
   pageCount: number
 }
 
-//CLICKABLE BOOK COMPONENT & HOME COMPONENT
+//CLICKABLEBOOK COMPONENT & HOME COMPONENT
 export interface bookProp {
   id: number
   imageUrl: string
@@ -89,32 +87,57 @@ export interface UserLibraryBook {
   returnSelectedBook: any
 }
 
-//MYBOOKS COMPONENT
+//MYBOOKS & BORROWEDBOOKS COMPONENT
 export interface UserBook {
-  id: number,
+  id: any
   title: string,
   author: string,
   imageUrl: string
 }
 
-//SERVER ERROR COMPONENT
-export interface message {
-  message?: string;
-}
-
-
-//BOOK RESULT COMPONENT
+//BOOKRESULT & BOOKSEARCH COMPONENT
 export interface bookResult {
   imageUrl: string;
   title: string;
   isbn: string;
   author: string;
   pageCount: number;
+  summary?: string
   addToLibrary: (isbn: string) => void
+}
+
+
+//MYBOOKS COMPONENT
+export interface IdMatch {
+  author: string
+  borrower: {
+    emailAddress: string
+    id: string
+    userName: string
+    location: string
+  }[] | any
+  id: string
+  imageUrl: string
+  title: string
+}
+
+//PENDING REQUEST COMPONENT
+export interface SpecificRequest {
+  author: string
+  borrower: {
+    emailAddress: string
+    id: string
+    userName: string
+    location: string
+  }
+  id: string
+  imageUrl: string
+  title: string
 }
 
 //REQUEST COMPONENT
 export interface RequestProps {
+  author?: string
   id: string;
   title: string;
   imageUrl: string;
@@ -126,3 +149,8 @@ export interface RequestProps {
   denyRequest: (bookId: string, borrowerId: string) => void;
   acceptRequest: (bookId: string, borrowerId: string) => void
 }
+
+//SERVER ERROR COMPONENT
+  export interface message {
+    message?: string;
+  }

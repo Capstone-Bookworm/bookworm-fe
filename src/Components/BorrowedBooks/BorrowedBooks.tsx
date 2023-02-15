@@ -3,6 +3,7 @@ import ServerError from '../ServerError/ServerError'
 import Book from '../Book/Book'
 import { useQuery, gql } from '@apollo/client'
 import "./BorrowedBooks.css"
+import { UserBook } from '../../Interfaces'
 
 const BORROWED_BOOKS = gql `
   query user ($id: ID!) {
@@ -37,8 +38,7 @@ const BorrowedBooks = () => {
   }, [user])
 
   const bookList = () => {
-    return borrowedBooks?.map((book: typeof Book | any) => {
-      console.log('BOOK', book)
+    return borrowedBooks?.map((book: UserBook, index: number, array: UserBook[]): JSX.Element => {
       return(
         <Book 
           key={book.id}

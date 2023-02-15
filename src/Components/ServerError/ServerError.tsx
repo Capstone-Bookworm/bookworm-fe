@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 import './ServerError.css'
 import { message } from '../../Interfaces'
 
-const ServerError = ({ message }: message) => {
+const ServerError: React.FC<message> = ({ message }) => {
   return (
     <div className="overlay">
       <div className="error-modal">

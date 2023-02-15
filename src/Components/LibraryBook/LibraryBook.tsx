@@ -1,7 +1,7 @@
 import './LibraryBook.css'
 import { UserLibraryBook } from '../../Interfaces'
 
-const LibraryBook = (props: UserLibraryBook) => {
+const LibraryBook: React.FC<UserLibraryBook> = (props) => {
   return(
     <div className="my-book-card">
       <img src={props.imageUrl} alt={`Image of ${props.title}`} className={props.availability ? 'book-available': 'book-unavailable'} />

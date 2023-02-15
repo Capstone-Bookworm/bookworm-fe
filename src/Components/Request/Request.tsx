@@ -2,7 +2,7 @@ import React from "react";
 import './Request.css'
 import { RequestProps } from "../../Interfaces";
 
-const Request = (props : RequestProps) => {
+const Request: React.FC<RequestProps> = (props) => {
   return (
     <div className="book-request">
       <img src={props.imageUrl}/>

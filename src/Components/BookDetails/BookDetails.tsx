@@ -3,7 +3,7 @@ import { useQuery, gql, useMutation } from '@apollo/client'
 import { AiOutlineCloseCircle } from 'react-icons/ai'
 import { useParams, useNavigate } from 'react-router-dom'
 import './BookDetails.css'
-import { details, currentUser, User } from '../../Interfaces'
+import { details, User, Value } from '../../Interfaces'
 import SuccessMessage from "../SuccessMessage/SuccessMessage"
 
 const BOOK_DETAILS = gql `
@@ -90,9 +90,7 @@ const BookDetails = () => {
   }
 
   const borrowerOptions = () => {
-    return bookDetails?.users?.map((user: User | any) => {
-      console.log('USER', user)
-      console.log('USER MY TYPE', typeof user)
+    return bookDetails?.users?.map((value: Value, index: number, array: Value[]): JSX.Element => {
       return(
       <option onClick={(event) => findID(event)} key={user.id} value={user.id}>{user.userName}: {user.location}</option>)
     })

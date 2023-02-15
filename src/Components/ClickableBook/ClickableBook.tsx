@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import './ClickableBook.css'
 import { NavLink } from 'react-router-dom'
-import BookDetails from '../BookDetails/BookDetails'
 import { bookProp } from '../../Interfaces'
 
 const Book: React.FC<bookProp> = ({ id, imageUrl }): JSX.Element => {

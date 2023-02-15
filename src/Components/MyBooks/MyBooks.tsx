@@ -3,7 +3,7 @@ import { useQuery, gql, useMutation } from "@apollo/client";
 import LibraryBook from '../LibraryBook/LibraryBook'
 import "./MyBooks.css"
 import ServerError from "../ServerError/ServerError";
-import { UserBook, Book } from '../../Interfaces'
+import { UserBook, IdMatch } from '../../Interfaces'
 
 const DELETE_BOOK = gql `
   mutation deleteBook ($userId: ID!, $bookId: ID!) {
@@ -107,9 +107,7 @@ const MyBooks = () => {
   }
 
   const returnSelectedBook = (id: string) => {
-    let matchId = data?.user.unavailableBooks.find((book: any) => {
-      console.log('BOOK', book)
-      console.log("In the Find ",book.id)
+    let matchId = data?.user.unavailableBooks.find((book: IdMatch, index: number, array: IdMatch[]) => {
       return book.id === id
     })
     let borrowerId = matchId.borrower.id
@@ -126,7 +124,7 @@ const MyBooks = () => {
 
   const getLibrary = (library:UserBook[], availability: boolean, unavailable: boolean, pending: boolean) => {
     if(pendingRequests) {
-      return library.map((book:any)=> {
+      return library.map((book: UserBook, index: number, array: UserBook[])=> {
        return <LibraryBook 
            key={book.id}
            id={book.id}

@@ -3,9 +3,8 @@ import ClickableBook from '../ClickableBook/ClickableBook'
 import './Home.css'
 import { RxCaretRight, RxCaretLeft } from "react-icons/rx"
 import { useQuery, gql } from '@apollo/client'
-import { User } from '../../Interfaces'
 import ServerError from '../ServerError/ServerError'
-import { bookProp } from '../../Interfaces'
+import { bookProp, User } from '../../Interfaces'
 
 const BOOK_SEARCH = gql`
   query BookSearch($title: String!) {   
@@ -24,7 +23,7 @@ const BOOKS_DATA = gql `
     }
 }`
 
-const Home = ({currentUser}: {currentUser: User | any}) => {
+const Home = ({currentUser}: {currentUser: User}) => {
   const [searchBook, setSearchBook] = useState<string>('')
   const [searchMessage, setSearchMessage] = useState<string>('')
   const style = { fontSize: "5em", cursor: 'pointer' }
