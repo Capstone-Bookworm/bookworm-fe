@@ -1,17 +1,17 @@
 const { createJSDocTypeExpression } = require("typescript");
-import Login from "src/Components/Login/Login";
-import App from "src/Components/App/App";
-import Home from "src/Components/Home/Home";
+// import Login from 'src/Components/Login/Login'
+// import App from "src/Components/App/App";
+// import Home from "src/Components/Home/Home";
 
 describe('Login Page spec', () => {
   it('Should be able to sign in', () => {
     cy.visit('http://localhost:3000/') 
     cy.intercept({ method: "POST", url: "https://bookworm-be.herokuapp.com/graphql" }, (req) => {
       if (req.body.operationName === "userLogin") {
-        req.reply({ fixture: "user.json" });
+        req.reply({ fixture: "../fixtures/user.json" });
       }
       if (req.body.operationName === "books") {
-        req.reply({ fixture: "bookData.json" });
+        req.reply({ fixture: "../fixtures/bookData.json" });
       }
     })
     cy.get('.login-container').should('have.text', 'Book Worm')
@@ -26,7 +26,7 @@ describe('Login Page spec', () => {
     cy.get('.create-acct').should('have.text', "Don't have an account? Create New Account")
       cy.get('.create-acct > .login-btn').click();
     cy.intercept({ method: "POST", url: "https://bookworm-be.herokuapp.com/graphql" }, (req) => {
-      req.reply({ fixture: "createUser.json"})
+      req.reply({ fixture: "../fixtures/createUser.json"})
     }).as('createUser')
       cy.get('.email-login').type('eleanor@gmail.com').should('have.value', 'eleanor@gmail.com')
       cy.get('.username-login').type('eleanor').should('have.value', 'eleanor')
