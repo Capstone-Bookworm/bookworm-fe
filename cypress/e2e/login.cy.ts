@@ -1,4 +1,7 @@
 const { createJSDocTypeExpression } = require("typescript");
+import Login from "src/Components/Login/Login";
+import App from "src/Components/App/App";
+import Home from "src/Components/Home/Home";
 
 describe('Login Page spec', () => {
   it('Should be able to sign in', () => {
