@@ -167,7 +167,7 @@ const MyBooks = () => {
     <div className="my-books-display">
       <h1 className="user-book-welcome">{user.userName}'s Books</h1>
       <div className="my-books-container">
-        {error && <ServerError />}
+        {error && <ServerError message={error.message}/>}
         {getLibrary(availLibrary, true, false, false)}
         {getLibrary(pendingRequests, false, false, true)}
         {getLibrary(unavailLibrary, false, true, false)}

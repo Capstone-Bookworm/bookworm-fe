@@ -4,6 +4,7 @@ import Request from "../Request/Request";
 import { User } from '../../Interfaces'
 import ServerError from "../ServerError/ServerError";
 
+
 const REQUESTS = gql `
 query user($id: ID!) {
   user(id: $id){
@@ -63,9 +64,16 @@ const PendingRequests = () => {
     }
   })
 
+  const getCachedRequests = useQuery(REQUESTS, {
+    fetchPolicy: 'cache-only'
+  })
+
   const [ pendingRequests, setPendingRequests ] = useState([])
+  const [ flag, setFlag ] = useState(true)
   const [ changeToAvailable ] = useMutation(CHANGE_TO_AVAILABLE)
   const [ changeToUnavailable ] = useMutation(CHANGE_TO_UNAVAILABLE)
+
+
 
   useEffect(() => {
     if(requests) {
@@ -78,33 +86,44 @@ const PendingRequests = () => {
   }, [user])
 
 
-  const denyRequest = (bookId: string, borrowerId: string) => {
-    changeToAvailable({
-      variables: {
+  const denyRequest = async (bookId: string, borrowerId: string) => {
+    try {
+      const result = await changeToAvailable({
+        variables: {
           userId: parseInt(user.id),
           bookId: parseInt(bookId),
           borrowerId: parseInt(borrowerId),
           status: 0
+        } 
+        })
+      if (result.data) {
+        refetch()
       }
-    })
-    refetch()
+    }
+    catch (error) {
+      console.log(error)
+    }
   }
 
-  const acceptRequest = (bookId: string, borrowerId: string) => {
-    changeToUnavailable({
-      variables: {
-        userId: parseInt(user.id),
-        bookId: parseInt(bookId),
-        borrowerId: parseInt(borrowerId),
-        status: 2
+  const acceptRequest = async (bookId: string, borrowerId: string) => {
+   try {
+     const result = await changeToUnavailable({
+        variables: {
+          userId: parseInt(user.id),
+          bookId: parseInt(bookId),
+          borrowerId: parseInt(borrowerId),
+          status: 2
+        }
+      })
+      if(result.data) {
+        refetch()
       }
-    })
-    refetch()
+   } 
+   catch (error) {
+    console.log(error)  
+    }
   }
 
-  useEffect(() => {
-    refetch()
-  }, [changeToAvailable, changeToUnavailable])
 
   const getRequests = () => {
     if(requests) {

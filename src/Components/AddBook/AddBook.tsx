@@ -57,7 +57,7 @@ const AddBook = () => {
     <section className='add-book-page'>
       <div className='search-form'>
         <h1 className='search-header'>Search For Book by Title: </h1>
-        {error && <ServerError />}
+        {error && <ServerError message={error.message}/>}
         <input
           type='title'
           className='search-input'

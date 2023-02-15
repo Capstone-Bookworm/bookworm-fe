@@ -54,7 +54,7 @@ const BorrowedBooks = () => {
 
   return (
     <div>
-      {error && <ServerError />}
+      {error && <ServerError message={error.message}/>}
       {loading && <h3>Loading...</h3>}
       {!loading && 
         <div className='borrowed-book-section'>
