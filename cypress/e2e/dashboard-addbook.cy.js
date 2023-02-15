@@ -44,7 +44,7 @@ describe('My Add a Book Dashboard View flow', () => {
     cy.intercept({ method: "POST", url: "https://bookworm-be.herokuapp.com/graphql" }, (req) => {
       req.reply({ fixture: "googleBooks.json"})
         }).as('googleBooks')
-        cy.get('.search-input').type(' ').should('have.value', ' ')
-        cy.get('.book-page-container').contains('Sorry we could not find any books. Try something more specific!')
+        cy.get('.search-input').should('have.value', '')
+        cy.get('.search-button').should('have.attr', 'disabled')
   })
 })

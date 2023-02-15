@@ -15,7 +15,7 @@ describe('Home page flow', () => {
   it('Should expect to see a title and a logo with a nav bar', () => {
     cy.get('.logo').should('have.attr', 'src', 'https://cdn-icons-png.flaticon.com/512/2789/2789786.png')
     cy.get('.title').should('have.text', 'Bookworm')
-    cy.get('.welcome-display > h2').should('have.text', 'Welcome Lauren!')
+    cy.get('.welcome-display').should('have.text', 'Welcome Lauren!')
     cy.get('nav > button').click()
     cy.get('.menuNav').should('contain', 'My Dashboard')
       .and('contain', 'Logout')
@@ -79,7 +79,7 @@ describe('Home page flow', () => {
       .find('img').should('have.attr', 'src', 'http://books.google.com/books/content?id=z2z_6hLoPmgC&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api')
       .and('have.css', 'opacity', '0.5')
   })
-  it('Shold be able to logout of account', () => {
+  it('Should be able to logout of account', () => {
     cy.get('nav > button').click()
     cy.get('[href="/"] > li').click()
     cy.location("pathname").should("eq", "/")

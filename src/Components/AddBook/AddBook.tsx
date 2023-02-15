@@ -65,7 +65,7 @@ const AddBook = () => {
           value={titleSearch}
           onChange={handleChange}
         />
-        <button className='search-button' onClick={handleClick}>Search</button>
+        <button className='search-button' disabled={!titleSearch} onClick={handleClick}>Search</button>
       </div>
       <div className='books-container'>
       {loading ? (

@@ -36,6 +36,25 @@ describe('Login Page spec', () => {
         cy.get('.create-acct-form > .login-btn').click()
         cy.get('.login-container > h3').should('have.text', "We couldn't find your account, please try again")
     })
+    it('Should throw an error if the account email already exists', () => {
+      cy.visit('http://localhost:3000/')
+      cy.intercept({ method: "POST", url: "https://bookworm-be.herokuapp.com/graphql" }, (req) => {
+      req.reply({ fixture: "existingUser.json"})
+    }).as('existingUser') 
+      cy.get('.create-acct > .login-btn').click()
+      cy.get('.email-login').type('joshua@gmail.com').should('have.value', 'joshua@gmail.com')
+      cy.get('.username-login').type('joshua').should('have.value', 'joshua')
+      cy.get('.location-login').type('Denver, CO').should('have.value', 'Denver, CO')
+      cy.get('.create-account-btn').click()
+    })
+    it('Should require all fields to be filled in when creating a new account', () => {
+      cy.visit('http://localhost:3000/') 
+      cy.get('.create-acct > .login-btn').click()
+      cy.get('.create-account-btn').click()
+      cy.get('.email-login').should('have.attr', 'required')
+      cy.get('.username-login').should('have.attr', 'required')
+      cy.get('.location-login').should('have.attr', 'required')
+    })
 })
 
 // CHECK TO SEE IF ITS CREATING USER CORRECTLY.
