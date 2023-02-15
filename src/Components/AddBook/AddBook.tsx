@@ -61,9 +61,10 @@ const AddBook = () => {
 
   return (
     <section className='add-book-page'>
+      <div className='search-container'>
+        <h2 className='search-header'>Search for a book by title to add your library </h2>
       <div className='search-form'>
-        <h1 className='search-header'>Search For Book by Title: </h1>
-        {error && <ServerError />}
+        {error && <ServerError message={error.message}/>}
         <input
           type='title'
           className='search-input'
@@ -72,6 +73,7 @@ const AddBook = () => {
           onChange={handleChange}
         />
         <button className='search-button' onClick={handleClick}>Search</button>
+      </div>
       </div>
       <div className='books-container'>
         {loading && <h1>Loading ...</h1> }
