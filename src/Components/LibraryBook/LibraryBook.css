@@ -11,7 +11,7 @@
   justify-content: space-between;
   border: solid 3px #0F4D92;
   box-shadow: 3px 3px 3px #0F4D92;
-  width: 18%;
+  width: 90%;
   height: 45vh;
   margin: 15px; 
 }
@@ -94,9 +94,14 @@
   }
 }
 
-@media screen and (min-width: 1375px) {
+@media screen and (min-width: 1075px) {
   .my-book-card {
-    width: 23%;
+    height: 60vh;
+  }
+}
+
+@media screen and (min-width: 1675px) {
+  .my-book-card {
     height: 70vh;
   }
 }
