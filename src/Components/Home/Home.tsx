@@ -69,9 +69,8 @@ const Home = ({currentUser}: {currentUser: User | any}) => {
 
   return(
     <div className='homepage-container'>
-      <h2 className='home-display'>My Home</h2>
-      {error && <ServerError message={error.message}/>}
-      {searchQuery.error && <ServerError message={searchQuery.error.message}/>}
+      {error && <ServerError />}
+      {searchQuery.error && <ServerError />}
       <form className='form-container'>
         <input 
           type='text'

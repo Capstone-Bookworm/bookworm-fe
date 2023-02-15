@@ -29,8 +29,10 @@ interface Books {
 const AddBook = () => {
   const currentUser : any = window.localStorage.getItem("currentUser")
   const [ user, setUser ] = useState(JSON.parse(currentUser))
+
   const [titleSearch, setTitleSearch] = useState('')
   const [submitTitle, setSubmitTitle] = useState('')
+  const [searchMessage, setSearchMessage] = useState(false)
   
   const {data, loading, error, refetch } = useQuery(GOOGLE_BOOKS, {
     variables: { title: submitTitle}
@@ -42,6 +44,7 @@ const AddBook = () => {
 
   const handleClick = () => {
     setSubmitTitle(titleSearch)
+    setSearchMessage(true)
   }
 
   useEffect(() => {    
@@ -73,8 +76,9 @@ const AddBook = () => {
       </div>
       </div>
       <div className='books-container'>
-      {loading && <h1>Loading ...</h1> }
-      {data && <BookSearch searchResults={data?.googleBooks}/>}
+        {loading && <h1>Loading ...</h1> }
+        {(data?.googleBooks.length === 0 && searchMessage) ? <h2>No results found. Please try a different search.</h2> : 
+        data?.googleBooks.length > 0 && <BookSearch searchResults={data?.googleBooks}/>}
       </div>
     </section>
   )
