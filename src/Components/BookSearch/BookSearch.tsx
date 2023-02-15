@@ -71,7 +71,6 @@ const BookSearch = ({searchResults}: Books) => {
     <div className='book-page-container'>
       {savedBook && <h2>{saveMessage}</h2>}
       <div className='book-card-container'>
-        {/* {allBooks.length === 0 ? <h2>No results found. Please try altering your search.</h2> : */}
         {allBooks.map((book: Book) => {
         return (
           <div key={book.isbn} className='book-card'>
