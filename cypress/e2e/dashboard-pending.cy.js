@@ -18,7 +18,7 @@ describe('My Pending Requests Dashboard View flow', () => {
   it('Should see a logo, title, welcome message, and navbar menu', () => {
     cy.get('.logo').should('have.attr', 'src', 'https://cdn-icons-png.flaticon.com/512/2789/2789786.png')
     cy.get('.title').should('have.text', 'Bookworm')
-    cy.get('.welcome-display > h2').should('have.text', 'Welcome Lauren!')
+    cy.get('.welcome-display').should('have.text', 'Welcome Lauren!')
     cy.get('nav > button').should('be.visible')
     cy.get('.user-dash-nav').should('contain', 'My Books')
       .and('contain', 'My borrowed books')

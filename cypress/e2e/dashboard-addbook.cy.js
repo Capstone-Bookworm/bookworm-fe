@@ -40,4 +40,11 @@ describe('My Add a Book Dashboard View flow', () => {
       cy.get('.add-btn').click()
       cy.get('.book-page-container').contains('Added Third Culture Kids 3rd Edition to Lauren\'s books')
   })
+  it('Should let the user know if their search returned no books', () => {
+    cy.intercept({ method: "POST", url: "https://bookworm-be.herokuapp.com/graphql" }, (req) => {
+      req.reply({ fixture: "googleBooks.json"})
+        }).as('googleBooks')
+        cy.get('.search-input').type(' ').should('have.value', ' ')
+        cy.get('.book-page-container').contains('Sorry we could not find any books. Try something more specific!')
+  })
 })

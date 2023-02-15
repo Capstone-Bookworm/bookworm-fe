@@ -17,7 +17,7 @@ describe('My Books Dashboard View flow', () => {
   it('Should see a logo, title, welcome message, and navbar menu', () => {
     cy.get('.logo').should('have.attr', 'src', 'https://cdn-icons-png.flaticon.com/512/2789/2789786.png')
     cy.get('.title').should('have.text', 'Bookworm')
-    cy.get('.welcome-display > h2').should('have.text', 'Welcome Lauren!')
+    cy.get('.welcome-display').should('have.text', 'Welcome Lauren!')
     cy.get('nav > button').should('be.visible')
     cy.get('.user-dash-nav').should('contain', 'My Books')
       .and('contain', 'My borrowed books')
@@ -48,7 +48,13 @@ describe('My Books Dashboard View flow', () => {
       req.reply({ fixture: "deleteBook.json"})
     }).as('deleteBook')
     cy.get(':nth-child(1) > .delete-btn').click()
+    cy.get('.my-books-container').should("not.contain", "The Seven Husbands of Evelyn HugoDelete From Library")
+  })
+  it('Should allow a user to declare when their book has been returned', () => {
+    cy.intercept({ method: "POST", url: "https://bookworm-be.herokuapp.com/graphql" }, (req) => {
+      req.reply({ fixture: "returnBook.json"})
+    }).as('returnBook')
+    cy.get(':nth-child(3) > .delete-btn').click()
+    cy.get('.my-books-container > :nth-child(2)').should('have.css', 'opacity', '1')
   })
 })
-
-//RETURN TO LIBRARY BUTTONS/STUB REQUEST
