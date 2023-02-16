@@ -23,6 +23,8 @@ describe('Home page flow', () => {
     cy.get('.menuNav').should('contain', 'My Dashboard')
       .and('contain', 'Logout')
     cy.get('nav > button').click()
+    cy.get('.subtitle').contains('Borrow books. Build community.')
+    cy.get('.instructions').contains('Browse and select a book you want to borrow')
   })
   it('Should be able to see the display of all available books', () => {
     cy.get('.book-list').should('be.visible').children().should('have.length', 2)
