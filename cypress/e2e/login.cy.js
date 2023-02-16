@@ -18,7 +18,7 @@ describe('Login Page spec', () => {
   })
   it('Should have an option to create an account if one doesnt exist', () => {
     cy.visit('http://localhost:3000/') 
-    cy.get('.create-acct').should('have.text', "Don't have an account? Create New Account")
+    cy.get('.create-acct-msg').contains("Don't have an account?")
       cy.get('.create-acct > .login-btn').click();
     cy.intercept({ method: "POST", url: "https://bookworm-be.herokuapp.com/graphql" }, (req) => {
       req.reply({ fixture: "createUser.json" })

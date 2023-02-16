@@ -57,7 +57,7 @@ describe('My Books Dashboard View flow', () => {
     cy.intercept({ method: "POST", url: "https://bookworm-be.herokuapp.com/graphql" }, (req) => {
       req.reply({ fixture: "returnBook.json"})
     }).as('returnBook')
-    cy.get(':nth-child(3) > .delete-btn').click()
+    cy.get('.return-book-btn').click()
     cy.get('.my-books-container > :nth-child(2)').should('have.css', 'opacity', '1')
   })
 })

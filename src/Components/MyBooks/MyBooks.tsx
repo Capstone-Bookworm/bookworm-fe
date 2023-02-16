@@ -114,7 +114,7 @@ const MyBooks = () => {
     } 
   }
 
-  const returnSelectedBook = (id: string) => {
+  const returnSelectedBook = async(id: string) => {
     let matchId = data?.user.unavailableBooks.find((book: IdMatch, index: number, array: IdMatch[]) => {
       return book.id === id
     })
