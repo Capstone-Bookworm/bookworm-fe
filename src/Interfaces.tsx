@@ -89,7 +89,7 @@ export interface UserLibraryBook {
   emailAddress?: string
   location?: string
   contactInfo?: string
-  borrowerUsername?: string
+  borrowerUsername?: string | undefined
 }
 
 //MYBOOKS & BORROWEDBOOKS COMPONENT
