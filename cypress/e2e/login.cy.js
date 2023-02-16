@@ -45,7 +45,7 @@ describe('Login Page spec', () => {
       cy.get('.username-login').type('joshua').should('have.value', 'joshua')
       cy.get('.location-login').type('Denver, CO').should('have.value', 'Denver, CO')
       cy.get('.create-account-btn').click()
-      cy.get('.login-container').contains('That username already exists please choose another one')
+      cy.get('.login-container').contains('That account already exists please choose another one')
     })
     it('Should require all fields to be filled in when creating a new account', () => {
       cy.visit('http://localhost:3000/') 

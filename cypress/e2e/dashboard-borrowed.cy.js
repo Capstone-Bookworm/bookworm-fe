@@ -39,4 +39,13 @@ describe('My Borrowed Books Dashboard View flow', () => {
     cy.get('.borrowed-book-section > :nth-child(3)').should('have.text', 'The Carnivore Diet')
       .find('img').should('have.attr', 'src', 'http://books.google.com/books/content?id=YUi4DwAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api')
   })
+  it('Should return the user to the home page in the event of a server error', () => {
+    cy.intercept({ method: "POST", url: "https://bookworm-be.herokuapp.com/graphql" }, (req) => {
+      req.reply({ error: 400 })
+        }).as('serverError')
+        cy.get('[href="/dashboard"]').click()
+        cy.get('.error-modal').contains('Oops! Something went wrong!')
+        cy.get('.error-modal').contains('Server response was missing for query \'user\'')
+        cy.get('.dismiss-button').click()
+  })
 })

@@ -129,7 +129,7 @@ const Login = ( { handleSetUser }: { handleSetUser: (user: currentUser) => void}
         {getError() && <h3>{errorMessage}</h3>}
 
         {accountCreation && <h3>Account created! Log in below</h3>}
-        {accountError && <h3 className='account-error'>That username already exists please choose another one</h3>}
+        {accountError && <h3 className='account-error'>That account already exists please choose another one</h3>}
         <form className='create-acct-form' onSubmit={event => handleSubmit(event)}>
           <input 
             type='email'

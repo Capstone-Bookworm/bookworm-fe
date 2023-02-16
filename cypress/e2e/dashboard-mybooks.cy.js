@@ -60,4 +60,13 @@ describe('My Books Dashboard View flow', () => {
     cy.get('.return-book-btn').click()
     cy.get('.my-books-container > :nth-child(2)').should('have.css', 'opacity', '1')
   })
+  it('Should return the user to the home page in the event of a server error', () => {
+    cy.intercept({ method: "POST", url: "https://bookworm-be.herokuapp.com/graphql" }, (req) => {
+      req.reply({ error: 400 })
+        }).as('serverError')
+        cy.get('[href="/dashboard/pending-requests"]').click()
+        cy.get('.error-modal').contains('Oops! Something went wrong!')
+        cy.get('.error-modal').contains('Please try again later')
+        cy.get('.dismiss-button').click()
+  })
 })
