@@ -1,42 +1,30 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import './App.css';
-import { Routes, Route, useLocation, useNavigate } from 'react-router-dom'
+import { Routes, Route, useLocation } from 'react-router-dom'
 import Navbar from '../Navbar/Navbar';
 import Login from '../Login/Login';
 import DashboardMenu from '../DashboardMenu/DashboardMenu'
-import { useQuery, gql } from '@apollo/client';
 import PendingRequests from '../PendingRequests/PendingRequests';
 import Home from '../Home/Home';
 import BookDetails from '../BookDetails/BookDetails';
 import MyBooks from '../MyBooks/MyBooks';
 import BorrowedBooks from '../BorrowedBooks/BorrowedBooks';
-import { User } from '../../Interfaces'
+import { currentUser, User, Location } from '../../Interfaces'
 import AddBook from '../AddBook/AddBook';
 import { PageNotFound } from '../PageNotFound/PageNotFound';
 
-
-interface Location {
-  pathname: string,
-  search: string,
-  hash: string,
-  state: null,
-  key: string
-}
-
-
 function App() {
   let location: Location = useLocation()
-  // const navigate = useNavigate()
-
   const [ currentUser, setCurrentUser ] = useState(localStorage.currentUser)
 
-  const handleSetUser = (user:any) => {
+  const handleSetUser = (user: currentUser) => {
     localStorage.setItem('currentUser', JSON.stringify(user.userLogin))
-    let newObject: any = window.localStorage.getItem("currentUser")
-    let newUser = JSON.parse(newObject)
-    setCurrentUser(newUser)
+    let newObject: string | null = window.localStorage.getItem("currentUser")
+    if(typeof newObject === 'string') {
+      let newUser: string | User = JSON.parse(newObject)
+      setCurrentUser(newUser)
+    }
   }
-
 
   const getDashboardDisplay = () => {
     if(location.pathname === '/dashboard/my-borrowed-books' || location.pathname === '/dashboard' || location.pathname === '/dashboard/add-book' || location.pathname === '/dashboard/pending-requests') {
@@ -54,7 +42,7 @@ function App() {
         <Route path='/dashboard/my-borrowed-books' element={< BorrowedBooks />}/>
         <Route path='/dashboard/pending-requests' element={<PendingRequests />}/>
         <Route path='/dashboard/add-book' element={<AddBook/>}/>
-        <Route path='/home' element={<Home currentUser={currentUser}/>} />
+        <Route path='/home' element={<Home />} />
         <Route path='/details/:id' element={<BookDetails key={location.key}/>}/>
         <Route path="*" element={<PageNotFound />} />
       </Routes>

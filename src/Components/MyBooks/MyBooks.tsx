@@ -4,7 +4,7 @@ import LibraryBook from '../LibraryBook/LibraryBook'
 import "./MyBooks.css"
 import ServerError from "../ServerError/ServerError";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
-
+import { UserBook, IdMatch, User, SpecificRequest } from '../../Interfaces'
 
 const DELETE_BOOK = gql `
   mutation deleteBook ($userId: ID!, $bookId: ID!) {
@@ -69,17 +69,9 @@ const MY_BOOKS = gql `
   }
 `
 
-interface UserBook {
-  id: number,
-  title: string,
-  author: string,
-  imageUrl: string
-}
-
 const MyBooks = () => {
-
-  const currentUser : any = window.localStorage.getItem("currentUser")
-  const [ user, setUser ] = useState(JSON.parse(currentUser))
+  const currentUser: string = window.localStorage.getItem("currentUser")!
+  const [ user, setUser ] = useState<User>(JSON.parse(currentUser))
   const [ availLibrary, setAvailLibrary ] = useState([])
   const [ unavailLibrary, setUnavailLibrary ] = useState([])
   const [ pendingRequests, setPendingRequests ] = useState([])
@@ -115,9 +107,8 @@ const MyBooks = () => {
     refetch()
   }
 
-  const returnSelectedBook = (id: any) => {
-    let matchId = data?.user.unavailableBooks.find((book: any) => {
-      console.log("In the Find ",book.id)
+  const returnSelectedBook = (id: string) => {
+    let matchId = data?.user.unavailableBooks.find((book: IdMatch, index: number, array: IdMatch[]) => {
       return book.id === id
     })
     let borrowerId = matchId.borrower.id
@@ -133,8 +124,9 @@ const MyBooks = () => {
   }
 
   const getLibrary = (library:UserBook[], availability: boolean, unavailable: boolean, pending: boolean) => {
+    console.log('LIBRARY', library)
     if(pendingRequests) {
-      return library.map((book: any)=> {
+      return library.map((book: SpecificRequest, index: number, array: SpecificRequest[])=> {
           return <LibraryBook 
             key={book.id}
             id={book.id}

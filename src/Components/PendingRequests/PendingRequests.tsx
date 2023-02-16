@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { gql, useQuery, useMutation } from '@apollo/client'
 import Request from "../Request/Request";
-import { User } from '../../Interfaces'
+import { User, SpecificRequest, RequestProps } from '../../Interfaces'
 import ServerError from "../ServerError/ServerError";
 import "./PendingRequests.css"
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
-
 
 const REQUESTS = gql `
 query user($id: ID!) {
@@ -55,11 +54,9 @@ const CHANGE_TO_UNAVAILABLE = gql `
   }
 `
 
-
 const PendingRequests = () => {
-
-  const currentUser : any = window.localStorage.getItem("currentUser")
-  const [ user, setUser ] = useState(JSON.parse(currentUser))
+  const currentUser: string = window.localStorage.getItem("currentUser")!
+  const [ user, setUser ] = useState<User>(JSON.parse(currentUser))
   const { loading, error, data: requests, refetch } = useQuery(REQUESTS, {
     variables: {
       id: user.id
@@ -75,8 +72,6 @@ const PendingRequests = () => {
   const [ changeToAvailable ] = useMutation(CHANGE_TO_AVAILABLE)
   const [ changeToUnavailable ] = useMutation(CHANGE_TO_UNAVAILABLE)
 
-
-
   useEffect(() => {
     if(requests) {
       setPendingRequests(requests.user.pendingRequested)
@@ -86,7 +81,6 @@ const PendingRequests = () => {
   useEffect(() => {
     refetch()
   }, [user])
-
 
   const denyRequest = async (bookId: string, borrowerId: string) => {
     try {
@@ -126,10 +120,9 @@ const PendingRequests = () => {
     }
   }
 
-
   const getRequests = () => {
     if(requests) {
-      return pendingRequests.map((request:any) => {
+      return pendingRequests.map((request: RequestProps, index: number, array: RequestProps[]) => {
       return <Request 
         key={request.id}
         id={request.id}

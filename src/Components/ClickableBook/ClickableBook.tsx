@@ -1,14 +1,9 @@
 import React, { useState } from 'react'
 import './ClickableBook.css'
 import { NavLink } from 'react-router-dom'
-import BookDetails from '../BookDetails/BookDetails'
+import { bookProp } from '../../Interfaces'
 
-interface book {
-    id: number
-    imageUrl: string
-}
-
-const Book: React.FC<book> = ({ id, imageUrl }): JSX.Element => {
+const Book: React.FC<bookProp> = ({ id, imageUrl }): JSX.Element => {
   return (
     <div className='book-item'>
       <NavLink to={`/details/${id}`} key={id}>

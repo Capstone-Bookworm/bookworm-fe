@@ -1,23 +1,8 @@
 import React from "react";
 import './Request.css'
-import { User } from "../../Interfaces";
+import { RequestProps } from "../../Interfaces";
 
-interface Props {
-  id: string;
-  title: string;
-  imageUrl: string;
-  borrower: string;
-  borrowerId: string;
-  borrowerLocation: string;
-  borrowerEmailAddress: string;
-  currentUser: User,
-  denyRequest: (bookId: string, borrowerId: string) => void;
-  acceptRequest: (bookId: string, borrowerId: string) => void
-}
-
-
-const Request = (props : Props) => {
-
+const Request: React.FC<RequestProps> = (props) => {
   return (
     <div className="book-request">
       <img className="pending-book-img" src={props.imageUrl}/>

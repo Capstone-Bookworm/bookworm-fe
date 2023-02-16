@@ -8,10 +8,8 @@ const Navbar = () => {
   const [navbarOpen, setNavbarOpen] = useState<boolean>(false)
   const style = { fontSize: "2em", cursor: 'pointer' }
   const location = useLocation()
-
-  const currentUser : any = window.localStorage.getItem("currentUser")
-  const [ user, setUser ] = useState(JSON.parse(currentUser))
-
+  const currentUser: string = window.localStorage.getItem("currentUser")!
+  const [ user, setUser ] = useState<User>(JSON.parse(currentUser))
 
   const handleClick = () => {
     setNavbarOpen(!navbarOpen)
