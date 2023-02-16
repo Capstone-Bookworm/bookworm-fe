@@ -126,7 +126,7 @@ const MyBooks = () => {
   const getLibrary = (library:UserBook[], availability: boolean, unavailable: boolean, pending: boolean) => {
     if(pendingRequests) {
       return library.map((book: SpecificRequest, index: number, array: SpecificRequest[])=> {
-       return <LibraryBook 
+        return <LibraryBook 
           key={book.id}
           id={book.id}
           title={book.title}
@@ -135,10 +135,11 @@ const MyBooks = () => {
           availability={availability}
           unavailable={unavailable}
           pending={pending}
+          borrowerUsername={book.borrower?.userName}
           deleteSelectedBook={deleteSelectedBook}
           returnSelectedBook={returnSelectedBook}
-          emailAddress={book.borrower?.emailAddress || ''}
-          location={book.borrower?.location || ''}
+          emailAddress={book.borrower?.emailAddress}
+          location={book.borrower?.location}
          />
      })
     }
