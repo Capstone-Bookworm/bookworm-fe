@@ -122,7 +122,7 @@ const Login = ( { handleSetUser }: { handleSetUser: (user: currentUser) => void}
     <main> 
       <section className='login-page'>
         <div className='login-container'>
-          <div className='title-container'>
+          <div className='login-title-container'>
             <img src='https://cdn-icons-png.flaticon.com/512/2789/2789786.png' alt='Logo' className='logo'/>
             <h1 className='page-title'>Book Worm</h1>
           </div>

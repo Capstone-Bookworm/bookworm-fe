@@ -93,7 +93,6 @@ describe('Home page flow', () => {
     cy.intercept({ method: "POST", url: "https://bookworm-be.herokuapp.com/graphql" }, (req) => {
       req.reply({ error: 400 })
         }).as('serverError')
-        cy.get('nav > button').click()
         cy.get('.error-modal').contains('Oops! Something went wrong!')
         cy.get('.error-modal').contains('Please try again later')
         cy.get('.dismiss-button').click()
