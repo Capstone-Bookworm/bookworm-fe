@@ -97,9 +97,6 @@ const Login = ( { handleSetUser }: { handleSetUser: (user: currentUser) => void}
       setAccountError(true)
       setTimeout(() => {
         setAccountError(false)
-        setEmail('')
-        setUsername('')
-        setUserLocation('')
       }, 2000)
     }
   }
@@ -109,9 +106,13 @@ const Login = ( { handleSetUser }: { handleSetUser: (user: currentUser) => void}
     if(activeAccount) {
       setActiveAccount(false)
       setEmail('')
+      setUsername('')
+      setUserLocation('')
     } else {
       setActiveAccount(true)
       setEmail('')
+      setUsername('')
+      setUserLocation('')
     }
   }
 
