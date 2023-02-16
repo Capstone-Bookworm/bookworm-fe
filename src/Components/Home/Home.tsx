@@ -3,6 +3,7 @@ import ClickableBook from '../ClickableBook/ClickableBook'
 import './Home.css'
 import { useQuery, gql } from '@apollo/client'
 import ServerError from '../ServerError/ServerError'
+import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import { bookProp, User } from '../../Interfaces'
 
 const BOOK_SEARCH = gql`
@@ -75,7 +76,7 @@ const Home = () => {
       </form>
       <h2 className='search-message'>{searchMessage}</h2>
       {searchMessage && <button onClick={returnAllBookView} style={{marginBottom: '5rem'}} className='return-btn'>See All Books</button>}
-      {loading ? <h2 className='loading-message'>Loading...</h2> : <div className={`book-container ${bookData.length > 5 ? "display-search" : ""}`}>
+      {loading ? <AiOutlineLoading3Quarters className="loading"/> : <div className={`book-container ${bookData.length > 5 ? "display-search" : ""}`}>
         <div className="book-list">
           {bookList}
         </div>

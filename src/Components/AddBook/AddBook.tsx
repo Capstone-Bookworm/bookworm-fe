@@ -3,6 +3,7 @@ import './AddBook.css'
 import { gql, useQuery } from '@apollo/client'
 import BookSearch from '../BookSearch/BookSearch'
 import ServerError from '../ServerError/ServerError'
+import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import { User } from '../../Interfaces'
 
 const GOOGLE_BOOKS = gql `
@@ -67,7 +68,7 @@ const AddBook = () => {
       </div>
       </div>
       <div className='books-container'>
-        {loading && <h1>Loading ...</h1> }
+        {loading && <AiOutlineLoading3Quarters className="loading"/> }
         {(data?.googleBooks.length === 0 && searchMessage) ? <h2>No results found. Please try a different search.</h2> : 
         data?.googleBooks.length > 0 && <BookSearch searchResults={data?.googleBooks}/>}
       </div>

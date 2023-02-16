@@ -57,7 +57,7 @@ nav {
 }
 
 ul.menuNav.menuNav.showMenu {
-  height: 15vh;
+  height: fit-content;
   width: 15vw;
   list-style: none;
   width: max-content;
@@ -95,6 +95,7 @@ h1 {
 .title {
   left: calc(50% - 13vh);
   position: absolute;
+  font-family: 'Eczar', serif;
 }
 
 @media screen and (max-width: 650px) {

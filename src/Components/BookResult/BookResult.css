@@ -41,3 +41,10 @@
   cursor: pointer;
   width: 80%;
 }
+
+
+@media screen and (max-width: 800px) {
+  .book-card {
+    width: 70%
+  }
+}
