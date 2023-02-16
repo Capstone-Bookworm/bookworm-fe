@@ -13,8 +13,9 @@
   cursor: pointer;
   border-radius: 5px;
   border-style: ridge;
-  font-size: medium;
+  font-size: 20px;
   margin: 15px;
+  box-shadow: 1px 1px 1px #000000;
 }
 
 .nav-button-mybooks:hover{
@@ -27,4 +28,18 @@
   background-color:white;
   text-decoration: underline;
   border: none;
+  box-shadow: none;
+}
+
+@media screen and (max-width: 800px) {
+  .nav-button-mybooks {
+    font-size: 14px;
+    margin: 7px;
+  }
+
+  .user-dash-nav {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    justify-items: center;
+  }
 }

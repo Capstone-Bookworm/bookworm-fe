@@ -3,6 +3,8 @@ import { gql, useQuery, useMutation } from '@apollo/client'
 import Request from "../Request/Request";
 import { User, RequestProps } from '../../Interfaces'
 import ServerError from "../ServerError/ServerError";
+import "./PendingRequests.css"
+import { AiOutlineLoading3Quarters } from "react-icons/ai";
 
 const REQUESTS = gql `
 query user($id: ID!) {
@@ -140,7 +142,7 @@ const PendingRequests = () => {
 
   const errorMessaging = () => {
      if (loading && !error) {
-      return <h3>loading...</h3>
+      return <AiOutlineLoading3Quarters className="loading"/>
     } else if (!loading && !error && pendingRequests.length === 0) {
       return <h3>No pending requests at this time</h3>
     }

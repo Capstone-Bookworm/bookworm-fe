@@ -1,10 +1,27 @@
 .borrowed-book-section {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  align-items:center;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
   justify-content: space-evenly;
-  height: 100vh;
-  width: 100vw;
+  width: 90vw;
+  margin-left: 5%;
+  margin-right: 5%;
 }
 
+.borrowed-books-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+
+@media screen and (max-width: 920px) {
+  .borrowed-book-section{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: fit-content;
+    align-items: center;
+  }
+
+
+}
