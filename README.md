@@ -26,7 +26,7 @@ Find Database endpoints and other documentation [here](https://github.com/Capsto
 
 ### Future Iterations
 - Implement OAuth for secure and simplistic user experience while making and account and logging in
-- Implement messaging stystem within app to allow for a more fluid borrowing functionality
+- Implement messaging system within app to allow for a more fluid borrowing functionality
 - Add ability to edit a user's profile and add ability for other user's to view each other's profiles
 - Add ability to leave reviews for books and users
 - Allow users to search books by location of the lender
