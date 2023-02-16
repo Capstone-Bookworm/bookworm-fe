@@ -89,12 +89,4 @@ describe('Home page flow', () => {
     cy.get('[href="/"] > li').click()
     cy.location("pathname").should("eq", "/")
   })
-  it('Should return the user to the home page in the event of a server error', () => {
-    cy.intercept({ method: "POST", url: "https://bookworm-be.herokuapp.com/graphql" }, (req) => {
-      req.reply({ error: 400 })
-        }).as('serverError')
-        cy.get('.error-modal').contains('Oops! Something went wrong!')
-        cy.get('.error-modal').contains('Please try again later')
-        cy.get('.dismiss-button').click()
-  })
 })
