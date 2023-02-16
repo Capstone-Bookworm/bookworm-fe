@@ -18,6 +18,7 @@
 
 .form-container {
   margin: 1rem;
+  display: flex;
 }
 
 button {
@@ -38,6 +39,10 @@ button {
   flex-direction: row;
   overflow-x: scroll;
   width: 100%;
+}
+
+.instructions {
+  text-align: center;
 }
 
 .home-page-title {
@@ -81,6 +86,10 @@ button {
   .display-search {
     width: 60%;
   }
+
+  .instructions {
+    font-size: 20px;
+  }
 }
 
 
@@ -104,4 +113,5 @@ button {
   background-color: #5c5c5c;
   color: white;
 }
+
 

@@ -87,7 +87,7 @@ ul.menuNav.menuNav.showMenu {
 }
 
 .title-container {
-  left: calc(50% - 13vh);
+  left: calc(50% - 14vh);
   position: absolute;
   font-family: 'Eczar', serif;
   display: flex;
@@ -115,7 +115,7 @@ ul.menuNav.menuNav.showMenu {
 @media screen and (max-width: 650px) {
   .title-container {
     font-size: 30px;
-    left: 15%
+    left: 25%
   }
 
   .logo {
@@ -125,6 +125,21 @@ ul.menuNav.menuNav.showMenu {
 
   .welcome-display {
     display: none
+  }
+
+  .subtitle {
+    font-size: 12px;
+  }
+
+  .hamburger-menu-container {
+    margin-right: 2%;
+    width: 15%;
+  }
+}
+
+@media screen and (max-height: 900px) {
+  .title {
+    font-size: 28px;
   }
 }
 
