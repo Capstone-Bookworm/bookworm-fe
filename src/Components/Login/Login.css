@@ -25,9 +25,9 @@
   border-radius: 5px;
   cursor: pointer;
   border: none;
-  background-color: white;
+  background-color: rgb(70, 112, 130);
   font-size: large;
-  color: #0F4D92;
+  color: white;
   height: 4vh;
 }
 
@@ -36,9 +36,21 @@
   color: white;
 }
 
+.title-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
 .page-title {
-  color: black;
+  color: rgb(70, 112, 130);
   font-size: x-large;
+  text-align: center;
+}
+
+.logo {
+  width: auto;
+  height: 5vh;
 }
 
 .create-acct {
@@ -58,8 +70,8 @@
 .create-account-btn {
   border: none;
   border-radius: 3px;
-  background-color: white;
-  color: #0F4D92;
+  background-color: rgb(70, 112, 130);
+  color: white;
   cursor: pointer;
   font-size: large;
 }
@@ -79,6 +91,7 @@
 }
 
 .create-acct-msg {
+  width: 14vw;
   size: x-large;
   text-align: center;
   color: #0F4D92;
@@ -106,3 +119,4 @@
     width: 50%;
   }
 }
+
