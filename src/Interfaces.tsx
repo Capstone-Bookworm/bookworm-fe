@@ -49,9 +49,10 @@ export interface User {
   __typename: string;
 }
 export interface Value {
-  userName: string
-  emailAddress: string
-  location: string
+  userName: string | any
+  emailAddress: string | any
+  location: string | any
+  id: string | any
 }
 
 //BOOKSEARCH COMPONENT

@@ -42,7 +42,6 @@ const Login = ( { handleSetUser }: { handleSetUser: (user: currentUser) => void}
   const [ accountCreation, setAccountCreation] = useState(false)
   const navigate = useNavigate()
 
-
   const [userQuery, { loading, error, data }] = useLazyQuery(GET_USER, {
     variables: { emailAddress: login }
   })
@@ -98,20 +97,24 @@ const Login = ( { handleSetUser }: { handleSetUser: (user: currentUser) => void}
     }
     catch (error) {
       setAccountError(true)
+      setTimeout(() => {
+        setAccountError(false)
+      }, 2000)
     }
   }
-
   }
 
   const handleChange = () => {
     if(activeAccount) {
       setActiveAccount(false)
       setEmail('')
-      setAccountError(false)
+      setUsername('')
+      setUserLocation('')
     } else {
       setActiveAccount(true)
       setEmail('')
-      setAccountError(false)
+      setUsername('')
+      setUserLocation('')
     }
   }
 
@@ -124,6 +127,7 @@ const Login = ( { handleSetUser }: { handleSetUser: (user: currentUser) => void}
             <h1 className='page-title'>Book Worm</h1>
           </div>
         {getError() && <h3>{errorMessage}</h3>}
+
         {accountCreation && <h3>Account created! Log in below</h3>}
         {accountError && <h3 className='account-error'>That username already exists please choose another one</h3>}
         <form className='create-acct-form' onSubmit={event => handleSubmit(event)}>

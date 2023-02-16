@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { gql, useQuery, useMutation } from '@apollo/client'
 import Request from "../Request/Request";
-import { User, SpecificRequest, RequestProps } from '../../Interfaces'
+import { User, RequestProps } from '../../Interfaces'
 import ServerError from "../ServerError/ServerError";
 import "./PendingRequests.css"
 import { AiOutlineLoading3Quarters } from "react-icons/ai";

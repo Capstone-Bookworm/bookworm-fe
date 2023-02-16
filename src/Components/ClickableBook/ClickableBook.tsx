@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import './ClickableBook.css'
 import { NavLink } from 'react-router-dom'
 import { bookProp } from '../../Interfaces'

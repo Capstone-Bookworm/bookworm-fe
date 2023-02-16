@@ -37,6 +37,7 @@ const AddBook = () => {
   const handleClick = () => {
     setSubmitTitle(titleSearch)
     setSearchMessage(true)
+    setTitleSearch('')
   }
 
   useEffect(() => {    
