@@ -38,7 +38,6 @@ const BookSearch = ({ searchResults }: {searchResults: bookResult[]}) => {
     let selectedBook = searchResults.find((book: any) => {
       return book.isbn === isbn
     })
-    console.log(selectedBook)
     addBook({
       variables: {
         userId: user.id,

@@ -41,7 +41,6 @@ const Login = ( { handleSetUser }: { handleSetUser: (user: currentUser) => void}
   const [ accountError, setAccountError ] = useState(false)
   const navigate = useNavigate()
 
-
   const [userQuery, { loading, error, data }] = useLazyQuery(GET_USER, {
     variables: { emailAddress: login }
   })
@@ -96,18 +95,24 @@ const Login = ( { handleSetUser }: { handleSetUser: (user: currentUser) => void}
     }
     catch (error) {
       setAccountError(true)
+      setTimeout(() => {
+        setAccountError(false)
+      }, 2000)
     }
   }
-
   }
 
   const handleChange = () => {
     if(activeAccount) {
       setActiveAccount(false)
       setEmail('')
+      setUsername('')
+      setUserLocation('')
     } else {
       setActiveAccount(true)
       setEmail('')
+      setUsername('')
+      setUserLocation('')
     }
   }
 
