@@ -104,7 +104,6 @@ const BookDetails = () => {
       <div className='details-container'>
         <img className='book-details-image' src={bookDetails?.imageUrl} alt='image of book cover'/>
         <div className='book-info'>
-    
           <h2 id='title'>{bookDetails?.title} by {bookDetails?.author}</h2>
           <hr />
           <p id='summary'>Summary: <br/> {bookDetails?.summary}</p>
