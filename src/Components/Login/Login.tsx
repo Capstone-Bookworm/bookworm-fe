@@ -114,7 +114,10 @@ const Login = ( { handleSetUser }: { handleSetUser: (user: any) => void}) => {
     <main> 
       <section className='login-page'>
         <div className='login-container'>
-        <h1 className='page-title'>Book Worm</h1>
+          <div className='title-container'>
+            <img src='https://cdn-icons-png.flaticon.com/512/2789/2789786.png' alt='Logo' className='logo'/>
+            <h1 className='page-title'>Book Worm</h1>
+          </div>
         {getError() && <h3>{errorMessage}</h3>}
         {accountError && <h3 className='account-error'>That username already exists please choose another one</h3>}
         <form className='create-acct-form' onSubmit={event => handleSubmit(event)}>
@@ -144,12 +147,12 @@ const Login = ( { handleSetUser }: { handleSetUser: (user: any) => void}) => {
             value={userLocation}
             onChange={event => setUserLocation(event.target.value)}
             />}
-          {activeAccount === true && <input type="submit" value="Submit" className='login-btn' />}
-          {activeAccount === false && <input type="submit" value="Submit" className='create-account-btn' />}
+          {activeAccount === true && <input type="submit" value="Log In" className='login-btn' />}
+          {activeAccount === false && <input type="submit" value="Create Account" className='create-account-btn' />}
         </form>
         </div>
         <div className='create-acct'>
-          {activeAccount === true && <p className='create-acct-msg'>Don't have an account? </p>}
+          {activeAccount === true && <p className='create-acct-msg'>Don't have an account?</p>}
           {activeAccount === true && <button className='login-btn' onClick={handleChange}>Create New Account</button>}
           {activeAccount === false && <button className='login-btn' onClick={handleChange}>Return to Login</button>}
         </div>
