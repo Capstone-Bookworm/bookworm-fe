@@ -90,7 +90,7 @@ const BookDetails = () => {
   }
 
   const borrowerOptions = () => {
-    return bookDetails?.users?.map((value: Value, index: number, array: Value[]): JSX.Element => {
+    return bookDetails?.users?.map((user: any): JSX.Element => {
       return(
       <option onClick={(event) => findID(event)} key={user.id} value={user.id}>{user.userName}: {user.location}</option>)
     })
