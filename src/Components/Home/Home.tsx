@@ -3,7 +3,7 @@ import ClickableBook from '../ClickableBook/ClickableBook'
 import './Home.css'
 import { useQuery, gql } from '@apollo/client'
 import ServerError from '../ServerError/ServerError'
-import { bookProp, User } from '../../Interfaces'
+import { bookProp } from '../../Interfaces'
 
 const BOOK_SEARCH = gql`
   query BookSearch($title: String!) {   

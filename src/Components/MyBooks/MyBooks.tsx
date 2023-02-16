@@ -123,10 +123,8 @@ const MyBooks = () => {
   }
 
   const getLibrary = (library:UserBook[], availability: boolean, unavailable: boolean, pending: boolean) => {
-    console.log('LIBRARY', library)
     if(pendingRequests) {
       return library.map((book: SpecificRequest, index: number, array: SpecificRequest[])=> {
-        console.log('BOOK', book)
        return <LibraryBook 
           key={book.id}
           id={book.id}
