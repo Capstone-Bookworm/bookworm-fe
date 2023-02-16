@@ -95,6 +95,12 @@ const Login = ( { handleSetUser }: { handleSetUser: (user: currentUser) => void}
     }
     catch (error) {
       setAccountError(true)
+      setTimeout(() => {
+        setAccountError(false)
+        setEmail('')
+        setUsername('')
+        setUserLocation('')
+      }, 2000)
     }
   }
   }
