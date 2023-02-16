@@ -3,7 +3,8 @@ import ServerError from '../ServerError/ServerError'
 import Book from '../Book/Book'
 import { useQuery, gql } from '@apollo/client'
 import "./BorrowedBooks.css"
-
+import { AiOutlineLoading3Quarters } from "react-icons/ai";
+import { UserBook, User } from '../../Interfaces'
 
 
 const BORROWED_BOOKS = gql `
@@ -21,9 +22,8 @@ const BORROWED_BOOKS = gql `
   }
 `
 const BorrowedBooks = () => {
-
-  const currentUser : any = window.localStorage.getItem("currentUser")
-  const [ user, setUser ] = useState(JSON.parse(currentUser))
+  const currentUser: string = window.localStorage.getItem("currentUser")!
+  const [ user, setUser ] = useState<User>(JSON.parse(currentUser))
   const [borrowedBooks, setBorrowedBooks ] = useState([])
   const { loading, error, data, refetch } = useQuery(BORROWED_BOOKS, {
     variables: { id: user.id }
@@ -40,7 +40,7 @@ const BorrowedBooks = () => {
   }, [user])
 
   const bookList = () => {
-    return borrowedBooks?.map((book: any) => {
+    return borrowedBooks?.map((book: UserBook, index: number, array: UserBook[]): JSX.Element => {
       return(
         <Book 
           key={book.id}
@@ -53,12 +53,12 @@ const BorrowedBooks = () => {
   }
 
   return (
-    <div>
+    <div className='borrowed-books-container'>
       {error && <ServerError message={error.message}/>}
-      {loading && <h3>Loading...</h3>}
+      {loading && <AiOutlineLoading3Quarters className="loading"/>}
+      {!loading && borrowedBooks.length === 0 && <h3>You are currently not borrowing any books.</h3>}
       {!loading && 
         <div className='borrowed-book-section'>
-          {borrowedBooks.length === 0 && <h2>You are currently not borrowing any books.</h2>}
          {bookList()}
         </div>
       }

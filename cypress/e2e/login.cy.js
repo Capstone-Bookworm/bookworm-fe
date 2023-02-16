@@ -1,5 +1,3 @@
-const { createJSDocTypeExpression, createSuper } = require("typescript");
-
 describe('Login Page spec', () => {
   it('Should be able to sign in', () => {
     cy.visit('http://localhost:3000/') 
