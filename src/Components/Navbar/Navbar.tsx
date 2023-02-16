@@ -30,7 +30,10 @@ const Navbar = () => {
         <img src='https://cdn-icons-png.flaticon.com/512/2789/2789786.png' alt='Logo' className='logo' />
         <h2 className='welcome-display'>Welcome {user.userName}!</h2>
       </div>
-      <h1 className='title'>Bookworm</h1>
+      <div className='title-container'>
+        <h1 className='title'>Bookworm</h1>
+        <p className='subtitle'>Borrow books. Build community.</p>
+      </div>
       <nav className='hamburger-menu-container'>
         <button onClick={handleClick}>{navbarOpen ? <RxCross2 style={style}/> : <RxHamburgerMenu style={style}/>}</button>
         <ul className={navbarOpen ? "showMenu menuNav" : "menuNav"}>

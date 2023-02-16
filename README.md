@@ -11,6 +11,9 @@ Visit our Front End Site!
 
 Our Back End is hosted here:
 - [Bookworm API](https://bookworm-be.herokuapp.com/graphql)
+
+Find Database endpoints and other documentation [here](https://github.com/Capstone-Bookworm/bookworm-be).
+
 <br></br>
 ## Built With
  ![JavaScript](https://img.shields.io/badge/javascript-%23323330.svg?style=for-the-badge&logo=javascript&logoColor=%23F7DF1E)
@@ -127,3 +130,15 @@ Juliet Eyraud
 
 ### Mentor
 Taylor Pridgen
+
+###Context:
+- This project was the Capstone project for the 8-month Software Engineering program at Turing School of Software and Design. It was the first time the Back End and Front End cohorts worked together to create a full-stack project.
+- Our main learning goal as a group was learning GraphQL. In this project, we utilized the CRUD methods with GraphQL and look forward to adding to this project so that our use of GraphQL is more realistic to how it would be used in a long term project.
+
+### Future Iterations:
+- Implement OAuth for secure and simplistic user experience while making and account and logging in
+- Implement messaging stystem within app to allow for a more fluid borrowing functionality
+- Add ability to edit a user's profile and add ability for other user's to view each other's profiles
+- Add ability to leave reviews for books and users
+- Allow users to search books by location of the lender
+

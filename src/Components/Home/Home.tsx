@@ -65,6 +65,7 @@ const Home = () => {
     <div className='homepage-container'>
       {error && <ServerError />}
       {searchQuery.error && <ServerError />}
+      <h2 className='instructions'>Browse and select a book you want to borrow</h2>
       <form className='form-container'>
         <input 
           type='text'

@@ -11,7 +11,7 @@ const LibraryBook: React.FC<UserLibraryBook> = (props) => {
         <h4 className='borrower-intro'>{props.borrowerUsername} is borrowing this book</h4>
         <h5 className='borrower-intro'>Borrower's information:</h5>
         <h6 className='borrower-info'>Location: {props.location}</h6>
-        <h6 className='borrower-info'>Email: {props.contactInfo}</h6>
+        <h6 className='borrower-info'>Email: {props.emailAddress}</h6>
         <button className="return-book-btn" onClick={() => props.returnSelectedBook(props.id)}>Mark book as returned</button>
         </div>}
       {props.pending && <p className='pending-message'>Book in pending</p>}
