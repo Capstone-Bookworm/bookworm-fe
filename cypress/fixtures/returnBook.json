@@ -1,0 +1,36 @@
+{
+  "data": {
+    "user": {
+      "id": "4",
+      "userName": "Lauren",
+      "availableBooks": [
+        {
+          "id": "9",
+          "title": "The Seven Husbands of Evelyn Hugo",
+          "author": "Taylor Jenkins Reid",
+          "imageUrl": "http://books.google.com/books/content?id=5KlizgEACAAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api"
+        },
+        {
+          "id": "11",
+          "title": "Tuesdays with Morrie",
+          "author": "Mitch Albom",
+          "imageUrl": "http://books.google.com/books/content?id=z2z_6hLoPmgC&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api"
+        }
+      ],
+      "unavailableBooks": [],
+      "pendingRequested": [
+        {
+          "id": "10",
+          "title": "Sins and Cigarettes",
+          "imageUrl": "http://books.google.com/books/content?id=XU4WxwEACAAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api",
+          "borrower": {
+            "id": "1",
+            "userName": "Adelle",
+            "location": "Maine",
+            "emailAddress": "adelle@gmail.com"
+          }
+        }
+      ]
+    }
+  }
+}

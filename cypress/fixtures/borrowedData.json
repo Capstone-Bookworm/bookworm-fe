@@ -1,0 +1,28 @@
+{
+  "data": {
+    "user": {
+      "id": "5",
+      "userName": "Naomi",
+      "borrowedBooks": [
+        {
+          "id": "6",
+          "title": "Practical Object-oriented Design in Ruby",
+          "author": "Sandi Metz",
+          "imageUrl": "http://books.google.com/books/content?id=rk9sAQAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api"
+        },
+        {
+          "id": "9",
+          "title": "The Seven Husbands of Evelyn Hugo",
+          "author": "Taylor Jenkins Reid",
+          "imageUrl": "http://books.google.com/books/content?id=5KlizgEACAAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api"
+        },
+        {
+          "id": "15",
+          "title": "The Carnivore Diet",
+          "author": "Shawn Baker",
+          "imageUrl": "http://books.google.com/books/content?id=YUi4DwAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api"
+        }
+      ]
+    }
+  }
+}

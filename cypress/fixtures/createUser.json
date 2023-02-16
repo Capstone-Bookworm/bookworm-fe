@@ -1,0 +1,12 @@
+{
+  "data": {
+    "createUser": {
+      "user": {
+        "id": "12",
+        "userName": "courtney",
+        "emailAddress": "courtney@gmail.com",
+        "location": "Boulder, CO"
+      }
+    }
+  }
+}

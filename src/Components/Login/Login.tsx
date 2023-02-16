@@ -39,6 +39,7 @@ const Login = ( { handleSetUser }: { handleSetUser: (user: currentUser) => void}
   const [ userLocation, setUserLocation ] = useState('')
   const [ errorMessage, setMessage ] = useState("We couldn't find your account, please try again")
   const [ accountError, setAccountError ] = useState(false)
+  const [ accountCreation, setAccountCreation] = useState(false)
   const navigate = useNavigate()
 
   const [userQuery, { loading, error, data }] = useLazyQuery(GET_USER, {
@@ -91,6 +92,7 @@ const Login = ( { handleSetUser }: { handleSetUser: (user: currentUser) => void}
       if (result.data) {
         setActiveAccount(true)
         setAccountError(false)
+        setAccountCreation(true)  
       }
     }
     catch (error) {
@@ -120,12 +122,14 @@ const Login = ( { handleSetUser }: { handleSetUser: (user: currentUser) => void}
     <main> 
       <section className='login-page'>
         <div className='login-container'>
-          <div className='title-container'>
+          <div className='login-title-container'>
             <img src='https://cdn-icons-png.flaticon.com/512/2789/2789786.png' alt='Logo' className='logo'/>
             <h1 className='page-title'>Book Worm</h1>
           </div>
         {getError() && <h3>{errorMessage}</h3>}
-        {accountError && <h3 className='account-error'>That username already exists please choose another one</h3>}
+
+        {accountCreation && <h3>Account created! Log in below</h3>}
+        {accountError && <h3 className='account-error'>That account already exists please choose another one</h3>}
         <form className='create-acct-form' onSubmit={event => handleSubmit(event)}>
           <input 
             type='email'

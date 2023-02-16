@@ -1,0 +1,12 @@
+{
+  "data": {
+    "createUser": {
+      "user": {
+        "id": "3",
+        "userName": "joshua",
+        "emailAddress": "joshua@gmail.com",
+        "location": "Colorado"
+      }
+    }
+  }
+}
