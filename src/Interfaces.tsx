@@ -87,6 +87,8 @@ export interface UserLibraryBook {
   returnSelectedBook: any
   emailAddress?: string
   location?: string
+  contactInfo?: string
+  borrowerUsername?: string
 }
 
 //MYBOOKS & BORROWEDBOOKS COMPONENT
